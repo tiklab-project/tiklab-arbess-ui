@@ -370,7 +370,10 @@ const History = props =>{
                                         <HistoryOutlined />
                                     </span>
                                 </Tooltip>
-                                <ListAction del={()=>delHistory(record)}/>
+                                <ListAction
+                                    del={()=>delHistory(record)}
+                                    isMore={true}
+                                />
                             </Space>
                         )
                 }

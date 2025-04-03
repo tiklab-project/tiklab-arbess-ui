@@ -12,7 +12,6 @@ import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 import FormsAuth from "../FormsAuth";
 import {ArtifactHadess} from "./ArtifactCommon";
-import {hadess, nexus} from "../../../../../../../common/utils/Constant";
 
 const ArtifactPushDocker = props =>{
 
@@ -40,12 +39,12 @@ const ArtifactPushDocker = props =>{
                 label={"推送方式"}
                 onChange={e=>onChange(e,'artifactType')}
             >
-                <Select.Option value={hadess}>Hadess</Select.Option>
-                <Select.Option value={nexus}>Nexus</Select.Option>
+                <Select.Option value={'hadess'}>Hadess</Select.Option>
+                <Select.Option value={'nexus'}>Nexus</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.artifactType===hadess &&
+                dataItem.task?.artifactType==='hadess' &&
                 <ArtifactHadess
                     label={'推送仓库'}
                     dataItem={dataItem}

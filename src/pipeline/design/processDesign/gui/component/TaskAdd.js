@@ -27,13 +27,14 @@ import {
     mvn,
     nodejs,
     build_docker,
-    pull_maven,
-    pull_nodejs,
-    pull_docker,
-    artifact_maven,
-    artifact_nodejs,
-    artifact_docker,
-    docker, k8s, liunx,
+    docker,
+    k8s,
+    liunx,
+    script,
+    upload_hadess,
+    upload_ssh,
+    download_hadess,
+    download_ssh,
 } from '../../../../../common/utils/Constant';
 import "./TaskAdd.scss";
 
@@ -89,21 +90,19 @@ const TaskAdd = props =>{
             ]
         },
         {
-            id:"artifact_pull",
-            title: "拉取制品",
+            id:"upload",
+            title: "上传",
             desc: [
-                {type: pull_maven},
-                {type: pull_nodejs},
-                {type: pull_docker}
+                {type: upload_hadess},
+                {type: upload_ssh},
             ]
         },
         {
-            id:"artifact_push",
-            title: "推送制品",
+            id:"download",
+            title: "下载",
             desc: [
-                {type: artifact_maven},
-                {type: artifact_nodejs},
-                {type: artifact_docker}
+                {type: download_hadess},
+                {type: download_ssh},
             ]
         },
         {
@@ -115,6 +114,13 @@ const TaskAdd = props =>{
                 {type: k8s},
             ]
         },
+        {
+            id:"tool",
+            title: "工具",
+            desc: [
+                {type: script},
+            ]
+        }
     ]
 
     /**
@@ -151,35 +157,13 @@ const TaskAdd = props =>{
         if(data.code===0){
             setDataItem({
                 taskId:data.data,
-                taskType:type,
+                taskType: type,
                 formType:'task',
-                taskName:taskTitle(type),
-                task: taskObj(type)
+                taskName: '',
+                task: {}
             })
             setTaskFormDrawer(true)
         }
-    }
-
-    /**
-     * 添加任务时的默认字段
-     * @param type
-     */
-    const taskObj = type => {
-        const configMap = {
-            [git]: { authType: 'userPass' },
-            [svn]: { svnFile: '/', authType: 'userPass' },
-            [liunx]: { authType: 1 },
-            [k8s]: { k8sNamespace: 'default' },
-            [build_docker]: { dockerFile: '${DEFAULT_CODE_ADDRESS}', dockerOrder:'docker image build -t default .' },
-            [artifact_maven]: { artifactType: 'nexus', transitive: true },
-            [artifact_docker]: { artifactType: 'nexus', transitive: true },
-            [pull_maven]: { pullType: 'nexus', transitive: true },
-            [pull_docker]: { pullType: 'nexus', transitive: true },
-            [spotbugs]: { openAssert: false, openDebug: false, scanPath: "${DEFAULT_CODE_ADDRESS}", scanGrade: "default", errGrade: "default" },
-            [maventest]: { address: "${DEFAULT_CODE_ADDRESS}", testOrder: "mvn test" },
-            [mvn]: { buildAddress: "${DEFAULT_CODE_ADDRESS}", buildOrder: "mvn clean package" }
-        };
-        return configMap[type] || {};
     }
 
     /**
@@ -218,6 +202,8 @@ const TaskAdd = props =>{
         }
         setTaskType(ids.id)
     }
+
+    const taskBanList = [upload_hadess,upload_ssh,download_hadess,download_ssh];
 
     return (
         <PipelineDrawer
@@ -260,8 +246,8 @@ const TaskAdd = props =>{
                                             {
                                                 group.desc && group.desc.map((item,index)=>{
                                                     return(
-                                                        <div key={index} className={`group-desc ${(item.type===artifact_nodejs || item.type===pull_nodejs)?"group-desc-ban":""}`}
-                                                             onClick={()=> (item.type===artifact_nodejs || item.type===pull_nodejs) ? null : addTask(item)}
+                                                        <div key={index} className={`group-desc ${taskBanList.includes(item.type) ? 'group-desc-ban' : ''}`}
+                                                             onClick={()=> taskBanList.includes(item.type) ? undefined : addTask(item)}
                                                         >
                                                             <div className='group-desc-icon'>
                                                                 <TaskIcon

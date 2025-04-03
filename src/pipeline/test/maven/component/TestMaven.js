@@ -155,6 +155,7 @@ const TestMaven = props => {
             render:(_,record)=> (
                 <ListAction
                     del={()=>delMavenTest(record)}
+                    isMore={true}
                 />
             )
         }

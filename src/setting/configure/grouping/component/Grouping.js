@@ -121,6 +121,7 @@ const Grouping = props =>{
                 <ListAction
                     edit={()=>editAuth(record)}
                     del={()=>delAuth(record)}
+                    isMore={true}
                 />
             )
         }

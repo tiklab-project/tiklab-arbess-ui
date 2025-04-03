@@ -96,6 +96,7 @@ const Variable = props =>{
                 <ListAction
                     edit={()=>editVariable(record)}
                     del={()=>delVariable(record)}
+                    isMore={true}
                 />
             )
         } : {width:0},

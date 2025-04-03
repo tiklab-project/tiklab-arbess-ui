@@ -18,7 +18,7 @@ import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 
 const FormsMirror = props =>{
 
-    const {isRequire,name,label,placeholder,taskStore} = props
+    const {isRequire,name,label,placeholder,taskStore,language='shell'} = props
 
     const {updateTask,dataItem,taskPermissions} = taskStore
 
@@ -91,7 +91,7 @@ const FormsMirror = props =>{
         }
     }
 
-    const mirrorClass = taskUpdate ? bordered ? "gui-mirror-has-focus":"gui-mirror-has" : 'gui-mirror-disable'
+    const mirrorClass = taskUpdate ? bordered ? "gui-mirror-has-focus":"gui-mirror-has" : 'gui-mirror-disable';
 
     return  (
         <Form.Item label={label} name={name}>
@@ -103,7 +103,7 @@ const FormsMirror = props =>{
                         onFocus={e=>onFocus(e)}
                         className={mirrorClass}
                         options={{
-                            mode: name==='k8sJson'? 'yaml':'shell',
+                            mode: language,
                             theme:'default',
                             placeholder: bordered ? placeholder : '未设置',
                             styleActiveLine: bordered,
@@ -138,7 +138,7 @@ const FormsMirror = props =>{
                             mirrorRef={expandMirrorRef}
                             mirrorValue={narrowMirrorRef?.current?.editor.getValue()}
                             options={{
-                                mode: name==='k8sJson'? 'yaml':'shell',
+                                mode: language,
                                 theme:'dracula',
                                 lineNumbers: true,
                                 autofocus: taskUpdate,

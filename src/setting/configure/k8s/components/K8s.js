@@ -162,6 +162,7 @@ const K8s = props => {
                     <ListAction
                         edit={()=>editK8s(record)}
                         del={()=>delK8s(record)}
+                        isMore={true}
                     />
                 )
             }

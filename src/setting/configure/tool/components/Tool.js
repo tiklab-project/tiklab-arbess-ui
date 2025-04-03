@@ -110,6 +110,7 @@ const Tool = props =>{
                     <ListAction
                         edit={()=>editTool(record)}
                         del={()=>delTool(record)}
+                        isMore={true}
                     />
                 )
             }

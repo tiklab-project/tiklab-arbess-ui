@@ -7,32 +7,32 @@
  */
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
-import {Select, Divider, Space} from "antd";
+import {Select, Divider} from "antd";
 import ServerAddBtn from "../../../../../../setting/configure/server/components/ServerAddBtn";
-import AuthAddBtn from "../../../../../../setting/configure/auth/components/AuthAddBtn";
 import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
 import K8sAddBtn from "../../../../../../setting/configure/k8s/components/K8sAddBtn";
-import authStore from "../../../../../../setting/configure/auth/store/AuthStore";
 import hostStore from "../../../../../../setting/configure/host/store/HostStore";
 import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
 import serverStore from "../../../../../../setting/configure/server/store/ServerStore";
 import k8sStore from "../../../../../../setting/configure/k8s/store/K8sStore";
 import FormsSelect from "./FormsSelect";
 import {
-    artifact_docker,
-    artifact_maven,
     docker,
-    git,
     gitee,
     github,
     gitlab,
-    gitpuk, hadess, k8s,
-    liunx, nexus,
+    gitpuk,
+    k8s,
+    liunx,
     pri_gitlab,
-    pull_docker, pull_maven,
-    sonar, ssh,
-    svn,
-    testhubo
+    sonar,
+    testhubo,
+    upload_ssh,
+    upload_hadess,
+    upload_nexus,
+    download_hadess,
+    download_ssh,
+    download_nexus,
 } from "../../../../../../common/utils/Constant";
 import {taskTitle} from "../TaskTitleIcon";
 
@@ -40,21 +40,11 @@ const FormsAuth = props =>{
 
     const {taskStore}=props;
 
-    const {findAllAuth} = authStore;
     const {findAuthServerList} = serverStore;
     const {findAuthHostList} = hostStore;
     const {findHostGroupList} = hostGroupStore;
     const {findAuthHostK8sList} = k8sStore;
-    const {
-        updateTask,
-        dataItem: {
-            taskType = '',
-            task: {
-                artifactType = null,
-                pullType = null
-            } = {}
-        } = {} ,dataItem
-    } = taskStore;
+    const {updateTask, dataItem: {taskType = ''} = {}} = taskStore;
 
     //弹出框
     const [visible,setVisible] = useState(false);
@@ -66,16 +56,23 @@ const FormsAuth = props =>{
     useEffect(()=>{
         //获取服务列表
         findAuth()
-    },[artifactType,pullType])
+    },[])
 
     /**
      * 获取选择框list
      */
     const findAuth = () =>{
         switch (taskType) {
-            case git:
-            case svn:
-                findCommonAuth()
+            case liunx:
+            case docker:
+                findAllHost()
+                break
+            case upload_ssh:
+            case download_ssh:
+                findHost()
+                break
+            case k8s:
+                findK8sHost()
                 break
             case gitee:
             case github:
@@ -86,43 +83,36 @@ const FormsAuth = props =>{
             case sonar:
                 finsServer(taskType)
                 break
-            case liunx:
-            case docker:
-                findHost()
+            case upload_hadess:
+            case download_hadess:
+                finsServer('hadess')
                 break
-            case k8s:
-                findK8sHost()
-                break
-            case artifact_maven:
-            case artifact_docker:
-                artifactType===ssh ? findHost() : finsServer(artifactType)
-                break
-            case pull_maven:
-            case pull_docker:
-                pullType===ssh ? findHost() : finsServer(pullType)
+            case upload_nexus:
+            case download_nexus:
+                finsServer('nexus')
         }
     }
 
     /**
-     * 获取认证
+     * 获取主机和主机组
      */
-    const findCommonAuth = () =>{
-        findAllAuth().then(res=>{
-            if(res.code===0){
-                setList(res.data)
-            }
+    const findAllHost = async () => {
+        const hostGroupRes = await findHostGroupList();
+        const hostRes = await findAuthHostList({});
+        Promise.all([hostGroupRes,hostRes]).then(res=>{
+            const filterRes = res.filter(item=>item.code ===0).map(li => li.data).flat();
+            setList(filterRes)
         })
     }
 
     /**
      * 获取主机
      */
-    const findHost = async () => {
-        const hostGroupRes = await findHostGroupList();
-        const hostRes = await findAuthHostList({});
-        Promise.all([hostGroupRes,hostRes]).then(res=>{
-            const filterRes = res.filter(item=>item.code ===0).map(li => li.data).flat();
-            setList(filterRes)
+    const findHost = () => {
+        findAuthHostList({}).then(res=>{
+            if(res.code===0){
+                setList(res.data)
+            }
         })
     }
 
@@ -163,9 +153,6 @@ const FormsAuth = props =>{
     const label = () => {
         const title = taskTitle(taskType);
         switch (taskType) {
-            case git:
-            case svn:
-                return "凭证"
             case gitee:
             case github:
             case gitlab:
@@ -173,20 +160,23 @@ const FormsAuth = props =>{
                 return `${title}授权信息`
             case gitpuk:
             case sonar:
-                return `${title}服务地址`
+                return `${title}服务`
             case testhubo:
-                return 'TestHubo服务地址'
+                return 'TestHubo服务'
             case liunx:
             case docker:
                 return "主机地址"
             case k8s:
                 return "集群地址"
-            case artifact_maven:
-            case artifact_docker:
-                return artifactType===ssh ? '远程地址' : '推送地址'
-            case pull_maven:
-            case pull_docker:
-                return pullType===ssh ? '远程地址' : '拉取地址'
+            case upload_hadess:
+            case download_hadess:
+                return 'Hadess服务'
+            case upload_ssh:
+            case upload_nexus:
+                return "上传地址"
+            case download_ssh:
+            case download_nexus:
+                return '下载地址'
         }
     }
 
@@ -197,9 +187,6 @@ const FormsAuth = props =>{
      */
     const setKey = item =>{
         switch (taskType) {
-            case git:
-            case svn:
-                return item.authId
             case gitee:
             case github:
             case gitlab:
@@ -207,21 +194,18 @@ const FormsAuth = props =>{
             case gitpuk:
             case testhubo:
             case sonar:
+            case upload_hadess:
+            case upload_nexus:
+            case download_hadess:
+            case download_nexus:
                 return item.serverId
             case liunx:
             case docker:
                 return item?.groupId ? item.groupId : item.hostId
             case k8s:
+            case upload_ssh:
+            case download_ssh:
                 return item.hostId
-            case artifact_maven:
-            case artifact_docker:
-            case pull_maven:
-            case pull_docker:
-                const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if(type!==ssh){
-                    return item.serverId
-                }
-                return item?.groupId ? item.groupId : item.hostId
         }
     }
 
@@ -236,35 +220,28 @@ const FormsAuth = props =>{
             findAuth: findAuth
         };
         switch (taskType) {
-            case git:
-            case svn:
-                return <AuthAddBtn {...commonProps}/>
-            case gitpuk:
-            case testhubo:
-                return version === 'cloud' ? null : <ServerAddBtn type={taskType} {...commonProps}/>;
+            case liunx:
+            case docker:
+            case upload_ssh:
+            case download_ssh:
+                return <HostAddBtn {...commonProps}/>
+            case k8s:
+                return <K8sAddBtn {...commonProps}/>
             case gitee:
             case github:
             case gitlab:
             case pri_gitlab:
             case sonar:
                 return <ServerAddBtn type={taskType} {...commonProps}/>;
-            case liunx:
-            case docker:
-                return <HostAddBtn {...commonProps}/>
-            case k8s:
-                return <K8sAddBtn {...commonProps}/>
-            case artifact_maven:
-            case artifact_docker:
-            case pull_maven:
-            case pull_docker:
-                const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if(type===ssh){
-                    return <HostAddBtn {...commonProps}/>
-                }
-                if((type===hadess && version!=='cloud') || type===nexus){
-                    return <ServerAddBtn type={type} {...commonProps}/>
-                }
-                return null
+            case gitpuk:
+            case testhubo:
+                return version === 'cloud' ? null : <ServerAddBtn type={taskType} {...commonProps}/>;
+            case upload_hadess:
+            case download_hadess:
+                return version === 'cloud' ? null : <ServerAddBtn type={'hadess'} {...commonProps}/>
+            case upload_nexus:
+            case download_nexus:
+                return version === 'cloud' ? null : <ServerAddBtn type={'nexus'} {...commonProps}/>
             default: return null
         }
     }
@@ -275,12 +252,13 @@ const FormsAuth = props =>{
      */
     const selectLabel = item => {
         switch (taskType) {
-            case git:
-            case svn:
-                return `${item.name}(${item.authType === 1 ? item.username : "私钥"})`;
             case gitpuk:
             case testhubo:
             case sonar:
+            case upload_hadess:
+            case upload_nexus:
+            case download_hadess:
+            case download_nexus:
                 return `${item.name}(${item.serverAddress})`;
             case gitee:
             case gitlab:
@@ -291,16 +269,9 @@ const FormsAuth = props =>{
             case docker:
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
             case k8s:
+            case upload_ssh:
+            case download_ssh:
                 return `${item.name}(${item.ip})`
-            case artifact_maven:
-            case artifact_docker:
-            case pull_maven:
-            case pull_docker:
-                const type = taskType.startsWith('artifact') ? artifactType : pullType;
-                if (type !== ssh) {
-                    return `${item.name}(${item.serverAddress})`;
-                }
-                return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
             default:
                 return '';
         }
@@ -313,10 +284,12 @@ const FormsAuth = props =>{
     const rules = () => {
         let rule = [{required:false}];
         switch (taskType) {
-            case pull_maven:
-            case pull_docker:
-            case artifact_maven:
-            case artifact_docker:
+            case upload_ssh:
+            case upload_hadess:
+            case upload_nexus:
+            case download_hadess:
+            case download_ssh:
+            case download_nexus:
             case liunx:
             case docker:
             case k8s:
@@ -340,6 +313,7 @@ const FormsAuth = props =>{
             name={"authId"}
             label={label()}
             rules={rules()}
+            placeholder={`请选择${label()}`}
             open={open}
             isSpin={false}
             onChange={changeAuthSelect}

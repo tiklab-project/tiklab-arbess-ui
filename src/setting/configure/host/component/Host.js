@@ -183,6 +183,7 @@ const Host = props =>{
                     <ListAction
                         edit={()=>editHost(record)}
                         del={()=>delHost(record)}
+                        isMore={true}
                     />
                 )
             }

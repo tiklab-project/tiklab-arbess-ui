@@ -1,10 +1,9 @@
-import React,{useState,useEffect,useRef} from "react";
-import {Form, Select, Checkbox, Table, Space, Tooltip, message, Input} from "antd";
+import React,{useState,useEffect} from "react";
+import {Form, Select, Checkbox, Table, Space, Tooltip, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
 import {getUser} from "tiklab-core-ui";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Modals from "../../../../common/component/modal/Modal";
-import TaskMirror from "../../../../common/component/editor/CodeMirror";
 import Profile from "../../../../common/component/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 import {Validation} from "../../../../common/utils/Client";
@@ -18,10 +17,6 @@ const PostprocessAddEdit = props =>{
 
     const [form] = Form.useForm()
     const user = getUser()
-    const mirrorRefs = useRef(null)
-
-    // 代码块行高亮
-    const [styleActiveLine,setStyleActiveLine] = useState(false)
 
     // 选中的通知人员
     const [yUserList,setYUserList] = useState([])
@@ -48,7 +43,6 @@ const PostprocessAddEdit = props =>{
         }
         return ()=>{
             setYUserList([])
-            setStyleActiveLine(false)
         }
      },[postprocessVisible])
 
@@ -75,13 +69,6 @@ const PostprocessAddEdit = props =>{
     }
 
     /**
-     * 执行脚本高亮
-     */
-    const onFocus = () =>{
-        setStyleActiveLine(true)
-    }
-
-    /**
      * 消息通知方式是否禁止
      * @param type
      * @returns {boolean}
@@ -93,22 +80,15 @@ const PostprocessAddEdit = props =>{
      */
     const onOk = () => {
         form.validateFields().then((value)=>{
-            const {taskType,postName,type} = value
             let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
             let params = {
                 pipelineId:pipeline.id,
-                taskType: taskType,
-                postName: postName,
-                values: taskType==='message' ?
-                    {
-                        typeList:value.typeList,
-                        userList
-                    }
-                    :
-                    {
-                        scriptOrder: mirrorRefs.current.editor.getValue(),
-                        type,
-                    }
+                taskType: 'message',
+                postName: value.postName,
+                values: {
+                    typeList:value.typeList,
+                    userList
+                }
             }
             if(formValue){
                  params = {
@@ -118,16 +98,17 @@ const PostprocessAddEdit = props =>{
                 updatePost(params).then(res=>{
                     if(res.code===0){
                         findPost()
+                        setPostprocessVisible(false)
                     }
                 })
-            }else {
+            } else {
                 createPost(params).then(res=>{
                     if(res.code===0){
                         findPost()
+                        setPostprocessVisible(false)
                     }
                 })
             }
-            setPostprocessVisible(false)
         })
     }
 
@@ -138,12 +119,12 @@ const PostprocessAddEdit = props =>{
             key: ["user","nickname"],
             width:"50%",
             ellipsis:true,
-            render:(text,record)=>{
-                return  <Space>
-                            <Profile userInfo={record.user}/>
-                            { text }
-                        </Space>
-            }
+            render:(text,record)=> (
+                <Space>
+                    <Profile userInfo={record.user}/>
+                    { text }
+                </Space>
+            )
         },
         {
             title: "通知事件",
@@ -172,11 +153,12 @@ const PostprocessAddEdit = props =>{
             ellipsis:true,
             render: (text,record) => {
                 if (record.user.id !== user.userId) {
-                    return  <DeleteOutlined onClick={()=>remove(record)}/>
+                    return (
+                        <DeleteOutlined
+                            onClick={()=>remove(record)}
+                        />
+                    )
                 }
-                return  <span className="title-user-ban">
-                             <DeleteOutlined />
-                        </span>
             }
         },
     ]
@@ -202,87 +184,49 @@ const PostprocessAddEdit = props =>{
                     form={form}
                     layout={"vertical"}
                     autoComplete={'off'}
-                    initialValues={{taskType:'message',typeList:["site"],type:'shell'}}
+                    initialValues={{typeList:["site"],type:'shell'}}
                 >
-                    <Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"类型不能为空"}]}>
-                        <Select disabled={formValue && formValue} placeholder='类型'>
-                            <Select.Option value={'message'}>消息通知</Select.Option>
-                            <Select.Option value={'script'}>执行脚本</Select.Option>
-                        </Select>
+                    {/*<Form.Item name={"taskType"} label={"类型"} rules={[{required:true, message:"类型不能为空"}]}>*/}
+                    {/*    <Select disabled={formValue && formValue} placeholder='类型'>*/}
+                    {/*        <Select.Option value={'message'}>消息通知</Select.Option>*/}
+                    {/*        <Select.Option value={'script'}>执行脚本</Select.Option>*/}
+                    {/*    </Select>*/}
+                    {/*</Form.Item>*/}
+                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
+                        <Input placeholder='名称'/>
                     </Form.Item>
-                    <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, currentValues) => prevValues.taskType !== currentValues.taskType}
-                    >
-                        {({ getFieldValue }) =>
-                            getFieldValue('taskType') === 'message' ?
-                                <>
-                                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
-                                        <Input placeholder='名称'/>
-                                    </Form.Item>
-                                    <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
-                                        <Checkbox.Group>
-                                            {
-                                                typeList.map(item=>{
-                                                    if(version!=='cloud' && item.value==='sms') return;
-                                                    return (
-                                                        <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
-                                                        </Tooltip>
-                                                    )
-                                                })
-                                            }
-                                        </Checkbox.Group>
-                                    </Form.Item>
-                                    <div className="post-pose-user">
-                                        <div className="post-pose-title">
-                                            <div className="title-user">消息通知人员</div>
-                                            <PostprocessUserAdd
-                                                pipelineStore={pipelineStore}
-                                                yUserList={yUserList}
-                                                setYUserList={setYUserList}
-                                            />
-                                        </div>
-                                        <Table
-                                            bordered={false}
-                                            columns={columns}
-                                            dataSource={yUserList}
-                                            rowKey={(record) => record.user.id}
-                                            pagination={false}
-                                            locale={{emptyText: <ListEmpty/>}}
-                                        />
-                                    </div>
-                                </>
-                                :
-                                <>
-                                    <Form.Item name="type" label={"脚本类型"} rules={[{required:true, message:"类型不能为空"}]}>
-                                        <Select placeholder='脚本类型'>
-                                            <Select.Option value={"shell"}>shell脚本</Select.Option>
-                                            <Select.Option value={"bat"}>bat脚本</Select.Option>
-                                        </Select>
-                                    </Form.Item>
-                                    <Form.Item name="postName" label={"名称"} rules={[{required:true, message:"名称不能为空"},Validation("名称")]}>
-                                        <Input placeholder='名称'/>
-                                    </Form.Item>
-                                    <Form.Item label={'脚本命令'}>
-                                        <TaskMirror
-                                            mirrorValue={formValue ? formValue.task?.values.scriptOrder:""}
-                                            mirrorRef={mirrorRefs}
-                                            options={{
-                                                mode: getFieldValue('type') ,
-                                                lineNumbers: true,
-                                                lineWrapping:true,
-                                                styleActiveLine:styleActiveLine,
-                                                foldGutter: true,
-                                                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-                                            }}
-                                        />
-
-                                    </Form.Item>
-                                </>
-                        }
+                    <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
+                        <Checkbox.Group>
+                            {
+                                typeList.map(item=>{
+                                    if(version!=='cloud' && item.value==='sms') return;
+                                    return (
+                                        <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
+                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                        </Tooltip>
+                                    )
+                                })
+                            }
+                        </Checkbox.Group>
                     </Form.Item>
-
+                    <div className="post-pose-user">
+                        <div className="post-pose-title">
+                            <div className="title-user">消息通知人员</div>
+                            <PostprocessUserAdd
+                                pipelineStore={pipelineStore}
+                                yUserList={yUserList}
+                                setYUserList={setYUserList}
+                            />
+                        </div>
+                        <Table
+                            bordered={false}
+                            columns={columns}
+                            dataSource={yUserList}
+                            rowKey={(record) => record.user.id}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty/>}}
+                        />
+                    </div>
                 </Form>
             </div>
         </Modals>

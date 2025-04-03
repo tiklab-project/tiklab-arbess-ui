@@ -101,6 +101,7 @@ const Trigger = props =>{
                 <ListAction
                     edit={()=>editTrigger(record)}
                     del={()=>delTrigger(record)}
+                    isMore={true}
                 />
             )
         } : {width: 0}

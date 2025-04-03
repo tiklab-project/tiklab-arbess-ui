@@ -13,16 +13,10 @@
         width: 100%;
         padding: 0 15px;
         .body-taskForm{
-            .input-hover {
-                .ant-input{
-                    background: transparent;
-                }
-                .ant-select-selector{
-                    border-color: #efeded;
-                    background: transparent;
-                }
+            .input-hover .ant-input{
+                background: transparent;
             }
-            .input-hover{
+            .input-hover,.input-hover .ant-select-selector{
                 border-color: #efeded;
                 &:hover{
                     background-color: #f2f2f2;

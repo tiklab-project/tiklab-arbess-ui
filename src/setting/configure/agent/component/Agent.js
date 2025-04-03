@@ -147,6 +147,7 @@ const Agent = (props) => {
                    }
                    <ListAction
                        del={record?.connect ? undefined:()=>delAgent(record.id)}
+                       isMore={record?.connect ? false : true}
                    />
                </Space>
             )

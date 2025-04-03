@@ -120,6 +120,7 @@ const Env = props =>{
                 <ListAction
                     edit={()=>editAuth(record)}
                     del={()=>delAuth(record)}
+                    isMore={true}
                 />
             )
         }

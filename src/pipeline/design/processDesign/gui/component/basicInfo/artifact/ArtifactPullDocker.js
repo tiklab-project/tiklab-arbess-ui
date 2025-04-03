@@ -12,7 +12,6 @@ import {observer} from "mobx-react";
 import FormsInput from "../FormsInput";
 import FormsAuth from "../FormsAuth";
 import {ArtifactHadess} from "./ArtifactCommon";
-import {hadess, nexus} from "../../../../../../../common/utils/Constant";
 
 const ArtifactPullDocker = props => {
 
@@ -40,12 +39,12 @@ const ArtifactPullDocker = props => {
                 label={"拉取方式"}
                 onChange={e=>onChange(e,'pullType')}
             >
-                <Select.Option value={hadess}>Hadess</Select.Option>
-                <Select.Option value={nexus}>Nexus</Select.Option>
+                <Select.Option value={'hadess'}>Hadess</Select.Option>
+                <Select.Option value={'nexus'}>Nexus</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.pullType===hadess &&
+                dataItem.task?.pullType==='hadess' &&
                 <ArtifactHadess
                     label={'拉取仓库'}
                     dataItem={dataItem}

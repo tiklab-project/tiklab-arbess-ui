@@ -22,27 +22,38 @@ import BuildDocker from "./build/BuildDocker";
 import DeployLinux from "./deploy/DeployLinux";
 import DeployDocker from "./deploy/DeployDocker";
 import DeployK8s from "./deploy/DeployK8s";
-import ArtifactPushMaven from "./artifact/ArtifactPushMaven";
-import ArtifactPushDocker from "./artifact/ArtifactPushDocker";
-import ArtifactPullMaven from "./artifact/ArtifactPullMaven";
-import ArtifactPullDocker from "./artifact/ArtifactPullDocker";
 import {
-    artifact_docker,
-    artifact_maven,
-    build_docker, docker,
+    pipeline_task_update,
+    build_docker,
+    docker,
     git,
     gitee,
     github,
     gitlab,
-    gitpuk, k8s,
+    gitpuk,
+    k8s,
     liunx,
     maventest,
     mvn,
-    nodejs, pipeline_task_update,
-    pri_gitlab, pull_docker, pull_maven, sonar, spotbugs, ssh,
+    nodejs,
+    pri_gitlab,
+    sonar,
+    spotbugs,
     svn,
-    testhubo
+    testhubo,
+    script,
+    upload_hadess,
+    upload_ssh,
+    upload_nexus,
+    download_hadess,
+    download_ssh,
+    download_nexus,
 } from "../../../../../../common/utils/Constant";
+import ToolScript from "./tool/ToolScript";
+import UploadHadess from "./upload/UploadHadess";
+import UploadSsh from "./upload/UploadSsh";
+import DownloadHadess from "./download/DownloadHadess";
+import DownloadSsh from "./download/DownloadSsh";
 
 const BasicInfo = props => {
 
@@ -87,21 +98,19 @@ const BasicInfo = props => {
             case k8s:
             case sonar:
             case spotbugs:
-            case artifact_maven:
-            case artifact_docker:
-            case pull_maven:
-            case pull_docker:
+            case upload_hadess:
+            case upload_ssh:
+            case upload_nexus:
+            case download_hadess:
+            case download_ssh:
+            case download_nexus:
             case maventest:
-                form.setFieldsValue({
-                    ...task,
-                    taskName: taskName,
-                    putAddress: task?.artifactType===ssh ? task?.putAddress : task?.repository?.name,
-                })
-                break
+            case script:
             case testhubo:
                 form.setFieldsValue({
                     ...task,
-                    taskName:taskName,
+                    authId: task?.authId || null,
+                    taskName: taskName,
                 })
                 break
             default:
@@ -109,7 +118,7 @@ const BasicInfo = props => {
                     taskName: taskName
                 })
         }
-        form.validateFields().then()
+        form.validateFields().then();
     },[dataItem?.task,dataItem?.stageName])
 
     /**
@@ -147,14 +156,16 @@ const BasicInfo = props => {
                 return <ScanSonarQuebe {...props}/>
             case spotbugs:
                 return <ScanSpotbugs {...props}/>
-            case artifact_maven:
-                return <ArtifactPushMaven {...props}/>
-            case artifact_docker:
-                return <ArtifactPushDocker {...props}/>
-            case pull_maven:
-                return <ArtifactPullMaven {...props}/>
-            case pull_docker:
-                return <ArtifactPullDocker {...props}/>
+            case upload_hadess:
+                return <UploadHadess {...props}/>
+            case upload_ssh:
+                return <UploadSsh {...props}/>
+            case download_hadess:
+                return <DownloadHadess {...props}/>
+            case download_ssh:
+                return <DownloadSsh {...props}/>
+            case script:
+                return <ToolScript {...props}/>
         }
     }
 
@@ -167,7 +178,7 @@ const BasicInfo = props => {
         const value = e.target.value
         if(dataItem.formType==="task"){
             if(WhetherChange(value,dataItem.taskName)){
-                return updateTaskName(value)
+                updateTaskName(value)
             }
             return
         }

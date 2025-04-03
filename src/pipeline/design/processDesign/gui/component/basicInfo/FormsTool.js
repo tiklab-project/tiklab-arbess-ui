@@ -53,7 +53,7 @@ const FormsTool = (props) => {
     //名称
     const nameSuffix = `tool${title[scmType]}`;
     //标签
-    const label = `${title[scmType]}安装地址`;
+    const label = `${title[scmType]}版本`;
 
     /**
      * 更新程序地址
@@ -67,6 +67,7 @@ const FormsTool = (props) => {
         <FormsSelect
             name={[nameSuffix,'scmId']}
             label={label}
+            placeholder={`请选择${label}`}
             open={open}
             onDropdownVisibleChange={(visible)=>setOpen(visible)}
             dropdownRender={menu=> (

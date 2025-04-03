@@ -133,6 +133,7 @@ const TestHubo = props => {
             render:(_,record)=> (
                 <ListAction
                     del={()=>delTestHubo(record)}
+                    isMore={true}
                 />
             )
         }

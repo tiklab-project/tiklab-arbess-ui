@@ -124,6 +124,7 @@ const HostGroup = (props) => {
                     <ListAction
                         edit={()=>editHostGroup(record)}
                         del={()=>delHostGroup(record)}
+                        isMore={true}
                     />
                 )
             }

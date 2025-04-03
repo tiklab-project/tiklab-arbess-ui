@@ -135,6 +135,7 @@ const Scan = (props) => {
             render:(_,record)=> (
                 <ListAction
                     del={()=>del(record)}
+                    isMore={true}
                 />
             )
         }

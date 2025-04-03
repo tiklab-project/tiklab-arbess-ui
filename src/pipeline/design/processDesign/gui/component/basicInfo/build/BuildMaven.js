@@ -10,6 +10,7 @@ import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
 import FormsTool from "../FormsTool";
 import {toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
+import {observer} from "mobx-react";
 
 const BuildMaven = props =>{
 
@@ -38,4 +39,4 @@ const BuildMaven = props =>{
     )
 }
 
-export default BuildMaven
+export default observer(BuildMaven)

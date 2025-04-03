@@ -112,6 +112,7 @@ const Postprocess = props =>{
                     <ListAction
                         edit={()=>editPostprocess(record)}
                         del={()=>delPostprocess(record)}
+                        isMore={true}
                     />
                 )
             }

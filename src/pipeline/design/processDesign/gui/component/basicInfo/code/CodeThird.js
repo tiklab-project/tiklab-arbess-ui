@@ -71,20 +71,19 @@ const CodeThird = props =>{
         if(!dataItem.task?.authId) return;
         setSpin(true)
         const authId = dataItem.task.authId;
-        let rpyRes;
-        if(dataItem.taskType===gitpuk){
-            rpyRes = await findGittokRpy(authId)
-        } else if(dataItem.taskType===gitee){
-            rpyRes = await findGiteeRpy(authId)
-        } else if(dataItem.taskType===github){
-            rpyRes = await findGithubRpy(authId)
-        } else if(dataItem.taskType===gitlab){
-            rpyRes = await findGitlabRpy(authId)
-        } else if(dataItem.taskType===pri_gitlab){
-            rpyRes = await findPriGitlabRpy(authId)
-        }
-        if(rpyRes.code===0){
-            setCodeRpy(rpyRes.data)
+        const repoFinders = {
+            [gitpuk]: findGittokRpy,
+            [gitee]: findGiteeRpy,
+            [github]: findGithubRpy,
+            [gitlab]: findGitlabRpy,
+            [pri_gitlab]: findPriGitlabRpy
+        };
+        const finder = repoFinders[dataItem.taskType];
+        if (finder) {
+            const rpyRes = await finder(authId);
+            if (rpyRes.code === 0) {
+                setCodeRpy(rpyRes.data);
+            }
         }
         setSpin(false)
     }
@@ -99,20 +98,19 @@ const CodeThird = props =>{
             houseId:dataItem.task?.houseId,
             authId:dataItem.task?.authId,
         };
-        let branchRes;
-        if(dataItem.taskType===gitpuk){
-            branchRes = await findGittokBranch(authId)
-        } else if(dataItem.taskType===gitee){
-            branchRes = await findGiteeBranch(authId)
-        } else if(dataItem.taskType===github){
-            branchRes = await findGithubBranch(authId)
-        } else if(dataItem.taskType===gitlab){
-            branchRes = await findGitlabBranch(authId)
-        } else if(dataItem.taskType===pri_gitlab){
-            branchRes = await findPriGitlabBranch(authId)
-        }
-        if(branchRes.code===0){
-            setCodeBranch(branchRes.data)
+        const repoFinders = {
+            [gitpuk]: findGittokBranch,
+            [gitee]: findGiteeBranch,
+            [github]: findGithubBranch,
+            [gitlab]: findGitlabBranch,
+            [pri_gitlab]: findPriGitlabBranch
+        };
+        const finder = repoFinders[dataItem.taskType];
+        if(finder){
+            const branchRes = await finder(authId);
+            if(branchRes.code===0){
+                setCodeBranch(branchRes.data)
+            }
         }
         setBranchSpin(false)
     }

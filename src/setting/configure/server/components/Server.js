@@ -146,7 +146,9 @@ const Server = props =>{
         if(type===serverGitpuk || type===serverHadess || type===serverTesthubo){
             if(version ==='cloud'){
                 return (
-                    <ListAction edit={()=>editServer(record)}/>
+                    <ListAction
+                        edit={()=>editServer(record)}
+                    />
                 )
             }
         }
@@ -154,6 +156,7 @@ const Server = props =>{
             <ListAction
                 edit={()=>editServer(record)}
                 del={()=>delServer(record)}
+                isMore={true}
             />
         )
     }

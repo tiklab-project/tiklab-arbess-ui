@@ -13,7 +13,7 @@ import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
 import {ArtifactHadess} from "./ArtifactCommon";
 import FormsTool from "../FormsTool";
-import {hadess, nexus, ssh, toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
+import {toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
 
 const ArtifactPullMaven = props => {
 
@@ -41,13 +41,13 @@ const ArtifactPullMaven = props => {
                 label={"拉取方式"}
                 onChange={e=>onChange(e,'pullType')}
             >
-                <Select.Option value={hadess}>Hadess</Select.Option>
-                <Select.Option value={nexus}>Nexus</Select.Option>
-                <Select.Option value={ssh}>SSH</Select.Option>
+                <Select.Option value={'hadess'}>Hadess</Select.Option>
+                <Select.Option value={'nexus'}>Nexus</Select.Option>
+                <Select.Option value={'ssh'}>SSH</Select.Option>
             </FormsSelect>
             <FormsAuth />
             {
-                dataItem.task?.pullType===ssh ?
+                dataItem.task?.pullType==='ssh' ?
                 <>
                     <FormsInput
                         name={"remoteAddress"}
@@ -71,7 +71,7 @@ const ArtifactPullMaven = props => {
                         scmType={toolMaven}
                     />
                     {
-                        dataItem.task?.pullType===hadess &&
+                        dataItem.task?.pullType==='hadess' &&
                         <ArtifactHadess
                             label={'拉取仓库'}
                             dataItem={dataItem}

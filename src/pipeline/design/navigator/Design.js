@@ -125,7 +125,7 @@ const Design = props =>{
         },
         {
             id:`postprocess`,
-            title:"后置处理",
+            title:"消息通知",
             long: postprocessData?.length || '0'
         }
     ]

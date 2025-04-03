@@ -15,8 +15,9 @@ import pip_message from "../../../../../assets/images/svg/pip_message.svg";
 import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
-import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
+import pip_ssh from "../../../../../assets/images/svg/pip_ssh.svg";
 import pip_jdk from "../../../../../assets/images/svg/pip_jdk.svg";
+import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
 import {productImg} from "tiklab-core-ui";
 import {
     git,
@@ -33,14 +34,19 @@ import {
     mvn,
     nodejs,
     build_docker,
-    pull_maven,
-    pull_nodejs,
-    pull_docker,
-    artifact_maven,
-    artifact_nodejs,
-    artifact_docker,
-    docker, k8s, liunx,
-    message, jdk, post, script, nexus, hadess
+    docker,
+    k8s,
+    liunx,
+    message,
+    jdk,
+    post,
+    script,
+    upload_hadess,
+    upload_ssh,
+    upload_nexus,
+    download_hadess,
+    download_ssh,
+    download_nexus,
 } from '../../../../../common/utils/Constant';
 
 
@@ -69,16 +75,15 @@ export const taskTitle = type =>{
         case k8s: return "Kubernetes部署"
         case sonar: return "SonarQuebe"
         case spotbugs: return "spotBugs-Java代码扫描"
-        case artifact_maven: return "Maven推送"
-        case artifact_docker: return "Docker推送"
-        case artifact_nodejs: return "Node.Js推送"
-        case pull_maven: return "Maven拉取"
-        case pull_nodejs: return "Node.Js拉取"
-        case pull_docker: return "Docker拉取"
-        case message: return "消息通知"
+        case upload_hadess: return "Hadesss上传"
+        case upload_ssh: return "Ssh上传"
+        case upload_nexus: return "Nexus上传"
+        case download_hadess: return "Hadesss下载"
+        case download_ssh: return "Ssh下载"
+        case download_nexus: return "Nexus下载"
         case script: return "执行脚本"
+        case message: return "消息通知"
         case post: return "后置处理"
-        case jdk: return "JDK"
     }
 }
 
@@ -109,17 +114,15 @@ export const TaskIcon = props =>{
             case k8s: return pip_k8s
             case sonar: return pip_sonar
             case spotbugs: return pip_spotbugs
-            case artifact_maven: return maven
-            case artifact_docker: return pip_docker
-            case artifact_nodejs: return pip_nodejs
-            case pull_maven: return maven
-            case pull_nodejs: return pip_nodejs
-            case pull_docker: return pip_docker
-            case message: return pip_message
+            case upload_hadess : return productImg.hadess
+            case upload_ssh : return pip_ssh
+            case upload_nexus : return pip_nexus
+            case download_hadess: return productImg.hadess
+            case download_ssh: return pip_ssh
+            case download_nexus: return pip_nexus
             case script: return pip_shell
+            case message: return pip_message
             case post: return pip_post
-            case hadess: return productImg.hadess
-            case nexus: return pip_nexus
             case jdk: return pip_jdk
         }
     }
@@ -156,17 +159,19 @@ export const HeadlineTitle = type =>{
         case nodejs:
         case build_docker:
             return '构建'
-        case artifact_maven:
-        case artifact_nodejs:
-        case artifact_docker:
-            return '推送制品'
-        case pull_maven:
-        case pull_nodejs:
-        case pull_docker:
-            return '拉取制品'
+        case upload_hadess:
+        case upload_ssh:
+        case upload_nexus:
+            return '上传'
+        case download_hadess:
+        case download_ssh:
+        case download_nexus:
+            return '下载'
         case liunx:
         case docker:
             return '部署'
+        case script:
+            return '工具'
         default :
             return "阶段名称"
     }

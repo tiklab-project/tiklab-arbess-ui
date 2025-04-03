@@ -25,15 +25,17 @@ const FormsSelect = props => {
     //下拉框聚焦
     const [bordered,setBordered] = useState(false)
 
-    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty/>
+    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty />
+
+    const placeholder = res.placeholder || label;
 
     return (
         <Form.Item name={name} label={label} rules={rules}>
             <Select
-                {...res}
                 showSearch
-                placeholder={bordered ? label:"未选择"}
-                className={bordered?'':'input-hover'}
+                {...res}
+                placeholder={bordered ? placeholder : "未选择"}
+                className={bordered ? '':'input-hover'}
                 showArrow={showArrow}
                 onMouseEnter={()=>setShoeArrow(true)}
                 onMouseLeave={()=>setShoeArrow(false)}

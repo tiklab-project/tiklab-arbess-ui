@@ -25,6 +25,7 @@ const DeployK8s = props =>{
                 label={"配置文件"}
                 placeholder={"配置文件"}
                 isRequire={true}
+                language={'yaml'}
             />
         </>
     )
