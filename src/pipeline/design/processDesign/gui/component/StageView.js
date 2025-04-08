@@ -8,7 +8,7 @@
 import React,{Fragment} from "react";
 import {EditOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
-import {TaskIcon} from "./TaskTitleIcon";
+import {TaskIcon} from "./TaskCommon";
 import ListEmpty from "../../../../../common/component/list/ListEmpty";
 
 const StageView = props =>{

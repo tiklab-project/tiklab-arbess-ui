@@ -10,7 +10,7 @@ import {Popconfirm, Spin, Tooltip} from "antd";
 import {DeleteOutlined, ExclamationCircleOutlined, PlusOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
-import {TaskIcon} from "./TaskTitleIcon";
+import {TaskIcon} from "./TaskCommon";
 
 const Task = props => {
 

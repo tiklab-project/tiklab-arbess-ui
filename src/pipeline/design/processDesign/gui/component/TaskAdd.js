@@ -11,7 +11,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
-import {taskTitle, TaskIcon} from "./TaskTitleIcon";
+import {taskTitle, TaskIcon} from "./TaskCommon";
 import {
     git,
     gitee,
@@ -34,7 +34,7 @@ import {
     upload_hadess,
     upload_ssh,
     download_hadess,
-    download_ssh,
+    download_ssh, build_go,
 } from '../../../../../common/utils/Constant';
 import "./TaskAdd.scss";
 
@@ -47,7 +47,7 @@ const TaskAdd = props =>{
 
     const scrollRef = useRef();
 
-    const [taskType,setTaskType] = useState("code")
+    const [taskType,setTaskType] = useState("code");
 
     // task类型
     const lis=[
@@ -87,6 +87,7 @@ const TaskAdd = props =>{
                 {type: mvn},
                 {type: nodejs},
                 {type: build_docker},
+                {type: build_go},
             ]
         },
         {

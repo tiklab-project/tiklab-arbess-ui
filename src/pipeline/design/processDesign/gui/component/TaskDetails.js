@@ -12,7 +12,7 @@ import {inject,observer} from "mobx-react";
 import Btn from "../../../../../common/component/btn/Btn";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import BasicInfo from "./basicInfo/BasicInfo";
-import {HeadlineTitle} from "./TaskTitleIcon";
+import {HeadlineTitle} from "./TaskCommon";
 import "./TaskDetails.scss";
 
 const TaskDetails = props =>{

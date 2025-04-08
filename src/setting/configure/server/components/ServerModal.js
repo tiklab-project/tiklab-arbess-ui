@@ -186,13 +186,19 @@ const ServerModal = props =>{
                                     message:"请输入正确的服务地址"
                                 }
                             ]}
-                        ><Input disabled={serverAddressDisabled()} type={"url"} placeholder={'服务器地址'}/>
+                        >
+                            <Input disabled={serverAddressDisabled()} type={"url"} placeholder={'服务器地址'}/>
                         </Form.Item>
                         <AuthType/>
                     </>
                 )
         }
     }
+
+    const authTypeList = version==='cloud' ?
+        [serverGitee,serverGithub,serverGitlab,serverPriGitlab,serverSonar,serverNexus]
+        :
+        [serverGitee,serverGithub,serverGitlab,serverPriGitlab,serverGitpuk,serverTesthubo,serverSonar,serverNexus,serverHadess];
 
     return(
         <Modals
@@ -210,35 +216,20 @@ const ServerModal = props =>{
                         initialValues={{type:type,authWay:1,authType:1}}
                     >
                         <Form.Item name="type" label="授权类型">
-                            {
-                                version==='cloud'?
-                                    <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                        <Select.Option value={serverGitee}>{serverTitle[serverGitee]}</Select.Option>
-                                        <Select.Option value={serverGithub}>{serverTitle[serverGithub]}</Select.Option>
-                                        <Select.Option value={serverGitlab}>{serverTitle[serverGitlab]}</Select.Option>
-                                        <Select.Option value={serverPriGitlab}>{serverTitle[serverPriGitlab]}</Select.Option>
-                                        <Select.Option value={serverSonar}>{serverTitle[serverSonar]}</Select.Option>
-                                        <Select.Option value={serverNexus}>{serverTitle[serverNexus]}</Select.Option>
-                                    </Select>
-                                    :
-                                    <Select onChange={changeServerWay} disabled={formValue || isConfig}>
-                                        <Select.Option value={serverGitee}>{serverTitle[serverGitee]}</Select.Option>
-                                        <Select.Option value={serverGithub}>{serverTitle[serverGithub]}</Select.Option>
-                                        <Select.Option value={serverGitlab}>{serverTitle[serverGitlab]}</Select.Option>
-                                        <Select.Option value={serverPriGitlab}>{serverTitle[serverPriGitlab]}</Select.Option>
-                                        <Select.Option value={serverGitpuk}>{serverTitle[serverGitpuk]}</Select.Option>
-                                        <Select.Option value={serverTesthubo}>{serverTitle[serverTesthubo]}</Select.Option>
-                                        <Select.Option value={serverSonar}>{serverTitle[serverSonar]}</Select.Option>
-                                        <Select.Option value={serverNexus}>{serverTitle[serverNexus]}</Select.Option>
-                                        <Select.Option value={serverHadess}>{serverTitle[serverHadess]}</Select.Option>
-                                    </Select>
-                            }
+                            <Select onChange={changeServerWay} disabled={formValue || isConfig}>
+                                {
+                                    authTypeList.map(code=>(
+                                        <Select.Option value={code} key={code}>{serverTitle[code]}</Select.Option>
+                                    ))
+                                }
+                            </Select>
                         </Form.Item>
                         <Form.Item
                             name="name"
                             label="名称"
                             rules={[{required:true,message:`名称不能空`},Validation("名称")]}
-                        ><Input placeholder={'名称'}/>
+                        >
+                            <Input placeholder={'名称'}/>
                         </Form.Item>
                         { serverWayHtml() }
                     </Form>

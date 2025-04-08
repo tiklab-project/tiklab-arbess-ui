@@ -1,26 +1,22 @@
 /**
- * @Description: maven构建
+ * @Description: go构建
  * @Author: gaomengyuan
- * @Date:
+ * @Date: 2025/4/8
  * @LastEditors: gaomengyuan
- * @LastEditTime: 2025/3/28
+ * @LastEditTime: 2025/4/8
  */
 import React from "react";
-import FormsMirror from "../FormsMirror";
 import FormsInput from "../FormsInput";
+import FormsMirror from "../FormsMirror";
+import {toolGo} from "../../../../../../../common/utils/Constant";
 import FormsTool from "../FormsTool";
-import {toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
-import {observer} from "mobx-react";
 
-const BuildMaven = props =>{
+const BuildGo = () => {
 
-    return(
+    return (
         <>
             <FormsTool
-                scmType={toolJdk}
-            />
-            <FormsTool
-                scmType={toolMaven}
+                scmType={toolGo}
             />
             <FormsInput
                 name={"buildAddress"}
@@ -37,4 +33,4 @@ const BuildMaven = props =>{
     )
 }
 
-export default observer(BuildMaven)
+export default BuildGo

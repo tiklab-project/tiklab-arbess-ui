@@ -10,7 +10,7 @@ import {Popconfirm, Tooltip,Spin} from "antd";
 import {PlusOutlined, EditOutlined, ExclamationCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {observer,inject} from "mobx-react";
 import pip_zengjia from "../../../../../assets/images/svg/pip_zengjia.svg";
-import {TaskIcon} from "./TaskTitleIcon";
+import {TaskIcon} from "./TaskCommon";
 import StageView from "./StageView";
 import {pipeline_task_update} from "../../../../../common/utils/Constant";
 
@@ -50,7 +50,7 @@ const Stage = props =>{
      */
     const newTask = () =>{
         setCreateValue({
-            stageSort:stageList && stageList.length>0?stageList.length+1:1,
+            stageSort: stageList && stageList.length>0 ? stageList.length+1 : 1,
         })
         addTask()
     }

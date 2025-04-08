@@ -11,12 +11,13 @@ import {Divider, Select} from "antd";
 import {inject, observer} from "mobx-react";
 import toolStore from "../../../../../../setting/configure/tool/store/ToolStore";
 import ToolAddBtn from "../../../../../../setting/configure/tool/components/ToolAddBtn";
+import {scmTitle} from "../../../../../../setting/configure/tool/components/ToolCommon";
 
 const FormsTool = (props) => {
 
     const {taskStore,scmType}=props;
 
-    const {updateTask,dataItem} = taskStore;
+    const {updateTask} = taskStore;
     const {findPipelineScmList} = toolStore;
 
     //地址数据
@@ -42,18 +43,10 @@ const FormsTool = (props) => {
         })
     }
 
-    //标题
-    const title = {
-        git:"Git",
-        svn:"Svn",
-        maven:"Maven",
-        jdk:"Jdk",
-        nodejs:"Nodejs",
-    }
     //名称
-    const nameSuffix = `tool${title[scmType]}`;
+    const nameSuffix = `tool${scmTitle[scmType]}`;
     //标签
-    const label = `${title[scmType]}版本`;
+    const label = `${scmTitle[scmType]}版本`;
 
     /**
      * 更新程序地址

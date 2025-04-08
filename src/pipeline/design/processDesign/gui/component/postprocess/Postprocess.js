@@ -20,7 +20,7 @@ import {Validation} from "../../../../../../common/utils/Client";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
 import PostprocessUserAdd from "../../../../postprocess/components/PostprocessUserAdd";
-import {TaskIcon, taskTitle} from "../TaskTitleIcon";
+import {TaskIcon, taskTitle} from "../TaskCommon";
 import "./Postprocess.scss";
 
 

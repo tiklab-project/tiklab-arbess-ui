@@ -9,7 +9,7 @@ import React,{useState,useEffect} from "react";
 import {Col, Row, Table} from "antd";
 import {inject,observer} from "mobx-react";
 import PostprocessAddEdit from "./PostprocessAddEdit";
-import {TaskIcon, taskTitle} from "../../processDesign/gui/component/TaskTitleIcon";
+import {TaskIcon, taskTitle} from "../../processDesign/gui/component/TaskCommon";
 import Btn from "../../../../common/component/btn/Btn";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";

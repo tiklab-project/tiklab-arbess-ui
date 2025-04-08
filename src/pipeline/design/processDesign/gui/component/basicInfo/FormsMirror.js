@@ -12,7 +12,7 @@ import {ExpandOutlined} from "@ant-design/icons";
 import Modals from "../../../../../../common/component/modal/Modal";
 import Btn from "../../../../../../common/component/btn/Btn";
 import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
-import {WhetherChange} from "../Common";
+import {WhetherChange} from "../TaskCommon";
 import "./FormsMirror.scss";
 import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 

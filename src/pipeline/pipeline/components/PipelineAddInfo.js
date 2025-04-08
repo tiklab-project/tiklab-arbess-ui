@@ -285,7 +285,7 @@ const PipelineAddInfo = props =>{
                         <Input allowClear placeholder={'流水线名称'}/>
                     </Form.Item>
                     <Form.Item label={"流水线分组"} name={['group','id']}>
-                        <Select  placeholder={'流水线分组'}>
+                        <Select placeholder={'流水线分组'}>
                             {
                                 groupList && groupList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>

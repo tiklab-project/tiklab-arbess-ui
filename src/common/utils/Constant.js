@@ -21,6 +21,7 @@ export const testhubo = 'testhubo'; //TestHubo自动化测试
 export const mvn = 'maven'; //Maven构建
 export const nodejs = 'nodejs'; //Node.Js构建
 export const build_docker = 'build_docker'; //Docker构建
+export const build_go = 'build_go'; //GO构建
 export const liunx = 'liunx'; //主机部署
 export const docker = 'docker'; //Docker部署
 export const k8s = 'k8s'; //Kubernetes部署
@@ -58,6 +59,7 @@ export const toolGit = 'git';
 export const toolSvn = 'svn';
 export const toolMaven = 'maven';
 export const toolNode = 'nodejs';
+export const toolGo = 'go';
 
 /**
  * 权限

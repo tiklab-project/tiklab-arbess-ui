@@ -8,7 +8,7 @@
 import React,{useState,useRef,useEffect} from "react";
 import {Form,Input} from "antd";
 import {inject,observer} from "mobx-react";
-import {WhetherChange} from "../Common";
+import {WhetherChange} from "../TaskCommon";
 import {Validation} from "../../../../../../common/utils/Client";
 import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 

@@ -34,7 +34,7 @@ import {
     download_ssh,
     download_nexus,
 } from "../../../../../../common/utils/Constant";
-import {taskTitle} from "../TaskTitleIcon";
+import {taskTitle} from "../TaskCommon";
 
 const FormsAuth = props =>{
 
@@ -265,13 +265,13 @@ const FormsAuth = props =>{
             case pri_gitlab:
             case github:
                 return `${item.name}(${item.accessToken})`;
-            case liunx:
-            case docker:
-                return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
             case k8s:
             case upload_ssh:
             case download_ssh:
                 return `${item.name}(${item.ip})`
+            case liunx:
+            case docker:
+                return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
             default:
                 return '';
         }

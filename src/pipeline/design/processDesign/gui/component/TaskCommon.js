@@ -16,8 +16,8 @@ import pip_shell from "../../../../../assets/images/svg/pip_shell.svg";
 import pip_post from "../../../../../assets/images/svg/pip_post.svg";
 import pip_spotbugs from "../../../../../assets/images/svg/pip_spotbugs.svg";
 import pip_ssh from "../../../../../assets/images/svg/pip_ssh.svg";
-import pip_jdk from "../../../../../assets/images/svg/pip_jdk.svg";
 import pip_nexus from "../../../../../assets/images/svg/pip_nexus.svg";
+import pip_go from "../../../../../assets/images/svg/pip_go.svg";
 import {productImg} from "tiklab-core-ui";
 import {
     git,
@@ -38,7 +38,6 @@ import {
     k8s,
     liunx,
     message,
-    jdk,
     post,
     script,
     upload_hadess,
@@ -46,9 +45,8 @@ import {
     upload_nexus,
     download_hadess,
     download_ssh,
-    download_nexus,
+    download_nexus, build_go,
 } from '../../../../../common/utils/Constant';
-
 
 /**
  * task的标题
@@ -70,15 +68,16 @@ export const taskTitle = type =>{
         case mvn: return "Maven构建"
         case nodejs: return "Node.Js构建"
         case build_docker: return "Docker构建"
+        case build_go: return "Go构建"
         case liunx: return "主机部署"
         case docker: return "Docker部署"
         case k8s: return "Kubernetes部署"
         case sonar: return "SonarQuebe"
         case spotbugs: return "spotBugs-Java代码扫描"
-        case upload_hadess: return "Hadesss上传"
+        case upload_hadess: return "Hadess上传"
         case upload_ssh: return "Ssh上传"
         case upload_nexus: return "Nexus上传"
-        case download_hadess: return "Hadesss下载"
+        case download_hadess: return "Hadess下载"
         case download_ssh: return "Ssh下载"
         case download_nexus: return "Nexus下载"
         case script: return "执行脚本"
@@ -109,6 +108,7 @@ export const TaskIcon = props =>{
             case mvn: return maven
             case nodejs: return pip_nodejs
             case build_docker: return pip_docker
+            case build_go: return pip_go
             case liunx: return pip_liunx
             case docker: return pip_docker
             case k8s: return pip_k8s
@@ -123,7 +123,6 @@ export const TaskIcon = props =>{
             case script: return pip_shell
             case message: return pip_message
             case post: return pip_post
-            case jdk: return pip_jdk
         }
     }
 
@@ -158,6 +157,7 @@ export const HeadlineTitle = type =>{
         case mvn:
         case nodejs:
         case build_docker:
+        case build_go:
             return '构建'
         case upload_hadess:
         case upload_ssh:
@@ -175,4 +175,14 @@ export const HeadlineTitle = type =>{
         default :
             return "阶段名称"
     }
+}
+
+export const WhetherChange = (newValue,lastValue) => {
+    if (newValue == null){
+        return false
+    }
+    if (newValue === ""  && lastValue == null){
+        return false
+    }
+    return newValue !== lastValue
 }

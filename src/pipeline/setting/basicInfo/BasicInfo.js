@@ -75,14 +75,16 @@ const BasicInfo = props =>{
             desc: "更新流水线信息",
             icon: <EditOutlined />,
             enCode:"pipeline_update",
-            content: <div className="bottom-rename">
-                        <PipelineAddInfo
-                            {...props}
-                            set={true}
-                            setIsLoading={setIsLoading}
-                            onClick={()=>setOpenOrClose(1)}
-                        />
-                    </div>
+            content: (
+                <div className="bottom-rename">
+                    <PipelineAddInfo
+                        {...props}
+                        set={true}
+                        setIsLoading={setIsLoading}
+                        onClick={()=>setOpenOrClose(1)}
+                    />
+                </div>
+            )
         },
         {
             key:2,
@@ -90,23 +92,25 @@ const BasicInfo = props =>{
             desc: "删除流水线",
             icon: <DeleteOutlined />,
             enCode:"pipeline_delete",
-            content: <div className="bottom-delete">
-                        <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
-                            此操作无法恢复！请慎重操作！
-                        </div>
-                        <Btn
-                            onClick={()=>setOpenOrClose(2)}
-                            title={"取消"}
-                            isMar={true}
-                        />
-                        <PrivilegeProjectButton code={"pipeline_delete"} domainId={pipeline && pipeline.id}>
-                            <Btn
-                                onClick={()=>setDelVisible(true)}
-                                type={"dangerous"}
-                                title={"删除"}
-                            />
-                        </PrivilegeProjectButton>
+            content: (
+                <div className="bottom-delete">
+                    <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
+                        此操作无法恢复！请慎重操作！
                     </div>
+                    <Btn
+                        onClick={()=>setOpenOrClose(2)}
+                        title={"取消"}
+                        isMar={true}
+                    />
+                    <PrivilegeProjectButton code={"pipeline_delete"} domainId={pipeline && pipeline.id}>
+                        <Btn
+                            onClick={()=>setDelVisible(true)}
+                            type={"dangerous"}
+                            title={"删除"}
+                        />
+                    </PrivilegeProjectButton>
+                </div>
+            )
         }
     ]
 

@@ -11,11 +11,10 @@ import toolStore from "../store/ToolStore";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
-import {TaskIcon} from "../../../../pipeline/design/processDesign/gui/component/TaskTitleIcon";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import "../../../common/Common.scss";
 import ToolAddBtn from "./ToolAddBtn";
-import {scmTypeName} from "./ToolModal";
+import {scmTitle,scmImage} from "./ToolCommon";
 
 const Tool = props =>{
 
@@ -87,8 +86,8 @@ const Tool = props =>{
             ellipsis:true,
             render:text =>(
                 <Space size={'small'}>
-                    <TaskIcon type={text} width={20} height={20}/>
-                    <span>{ scmTypeName[text] }</span>
+                    <img src={scmImage[text]} alt="" width={20} height={20}/>
+                    <span>{ scmTitle[text] }</span>
                 </Space>
             )
         },

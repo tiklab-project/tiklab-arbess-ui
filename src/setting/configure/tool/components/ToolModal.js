@@ -5,20 +5,14 @@
  * @LastEditors: gaomengyuan
  * @LastEditTime: 2025/3/12
  */
-import React,{useEffect,useState} from "react";
-import {Form, Select, Input} from "antd";
+import React, {useEffect, useState} from "react";
+import {Form, Input, Select, Upload} from "antd";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
 import toolStore from "../store/ToolStore";
-import {toolGit, toolJdk, toolMaven, toolNode, toolSvn} from "../../../../common/utils/Constant";
-
-export const scmTypeName = {
-    [toolJdk]: 'JDK',
-    [toolGit]: 'Git',
-    [toolSvn]: 'Svn',
-    [toolMaven]: 'Maven',
-    [toolNode]: 'Node',
-};
+import {scmList, scmPlaceholder, scmTitle,} from "./ToolCommon";
+import {getUser} from "tiklab-core-ui";
+import Btn from "../../../../common/component/btn/Btn";
 
 const ToolModal = props =>{
 
@@ -26,8 +20,12 @@ const ToolModal = props =>{
 
     const {updatePipelineScm} = toolStore;
 
+    const user = getUser();
     const [form] = Form.useForm()
+    //环境配置类型
     const [scmType,setScmType] = useState("jdk");
+    //本地上传二进制包
+    const [fileList, setFileList] = useState([]);
 
     useEffect(()=>{
         if(visible){
@@ -47,7 +45,25 @@ const ToolModal = props =>{
      * @param value
      */
     const changScmType = value => {
-        setScmType(value)
+        setScmType(value);
+    }
+
+    /**
+     * 更改添加方式
+     */
+    const changeAddType = (value) => {
+        if(value==='local'){
+            form.setFieldsValue({
+                scmAddress: null
+            })
+        }
+        if(value==='pkg'){
+            form.setFieldsValue({
+                scmAddress: null,
+                pkg: []
+            })
+        }
+        setFileList([])
     }
 
     /**
@@ -55,11 +71,11 @@ const ToolModal = props =>{
      */
     const onOk = () =>{
         form.validateFields().then((values) => {
-            const params = {
+            const {pkg,...rest} = values;
+            updatePipelineScm({
                 scmId: formValue && formValue.scmId,
-                ...values
-            }
-            updatePipelineScm(params).then(res=>{
+                ...rest
+            }).then(res=>{
                 if(res.code===0){
                     findAllScm()
                     onCancel()
@@ -72,19 +88,12 @@ const ToolModal = props =>{
      * 关闭弹出框
      */
     const onCancel = () => {
-        form.resetFields()
-        setVisible(false)
+        form.resetFields();
+        setVisible(false);
+        setFileList([]);
     }
 
-    const scmList = [toolJdk,toolGit,toolSvn,toolMaven,toolNode];
-
-    const addressPlaceholder = {
-        [toolJdk]: '请输入JDK安装路径，如 D:\\jdk-16.0.2\\bin',
-        [toolGit]: '请输入Git安装路径，如 D:\\Git\\bin',
-        [toolSvn]: '请输入Svn安装路径，如 D:\\SVN-1.14\\bin',
-        [toolMaven]: '请输入Maven安装路径，如 D:\\apache-maven-3.9.9\\bin',
-        [toolNode]: '请输入Node安装路径，如 D:\\Node-v18.20.7\\bin',
-    };
+    const uploadUrl = base_url === '/' ? window.location.origin : base_url;
 
     return(
         <Modals
@@ -94,13 +103,19 @@ const ToolModal = props =>{
             title={formValue?"修改":"添加"}
         >
             <div className="resources-modal">
-                <Form form={form} layout="vertical" name="userForm" autoComplete="off">
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="userForm"
+                    autoComplete="off"
+                    initialValues={{addType:'local'}}
+                >
                     <Form.Item name="scmType" label="环境配置类型" rules={[{required:true,message:`请选择环境配置类型`}]}>
                         <Select onChange={changScmType} disabled={formValue || isConfig} placeholder={'环境配置类型'}>
                             {
                                 scmList.map(item=>(
                                     <Select.Option value={item} key={item}>
-                                        {scmTypeName[item]}
+                                        { scmTitle[item] }
                                     </Select.Option>
                                 ))
                             }
@@ -117,14 +132,96 @@ const ToolModal = props =>{
                         <Input placeholder={`名称`}/>
                     </Form.Item>
                     <Form.Item
-                        label={`${scmTypeName[scmType]}安装路径`}
-                        name="scmAddress"
-                        rules={[
-                            {required:true,message:`请输入${scmTypeName[scmType]}安装路径`},
-                            Validation(`${scmTypeName[scmType]}安装路径`)
-                        ]}
+                        label={'安装方式'}
+                        name={'addType'}
                     >
-                        <Input placeholder={addressPlaceholder[scmType]}/>
+                        <Select onChange={changeAddType}>
+                            <Select.Option value={'local'}>本地安装</Select.Option>
+                            <Select.Option value={'pkg'}>安装包</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        noStyle
+                        shouldUpdate={(prevValues, currentValues) => prevValues.addType !== currentValues.addType}
+                    >
+                        {({ getFieldValue }) =>
+                            getFieldValue('addType') === 'pkg' ? (
+                                <>
+                                    <Form.Item
+                                        label={"二进制包"}
+                                        name="pkg"
+                                        valuePropName="fileList"
+                                        getValueFromEvent={e => Array.isArray(e) ? e : e?.fileList}
+                                        rules={[
+                                            { required: true, message: `请上传二进制包` },
+                                            {
+                                                validator: (_, files) => {
+                                                    // 检查是否有上传失败的文件
+                                                    if (files?.some(f => f.status === 'error')) {
+                                                        return Promise.reject('存在上传失败的文件');
+                                                    }
+                                                    // 检查文件格式
+                                                    const invalidFiles = files?.filter(file => !file.name?.endsWith('.tar.gz'));
+                                                    if (invalidFiles?.length > 0) {
+                                                        return Promise.reject('只能上传 .tar.gz 格式的文件');
+                                                    }
+                                                    return Promise.resolve();
+                                                }
+                                            }
+                                        ]}
+                                    >
+                                        <Upload
+                                            action={uploadUrl + '/scm/file/upload'}
+                                            name={"uploadFile"}
+                                            headers={{
+                                                ticket: user.ticket
+                                            }}
+                                            accept={'.gz'}
+                                            maxCount={1}
+                                            fileList={fileList}
+                                            onChange={({ fileList }) => {
+                                                setFileList(fileList);
+                                                if(fileList.length > 0 && fileList[0]?.status === 'done'){
+                                                    const response = fileList[0].response
+                                                    form.setFieldsValue({
+                                                        scmAddress: response?.data
+                                                    })
+                                                }
+                                            }}
+                                            beforeUpload={(file) => {
+                                                return file.name.endsWith('.tar.gz');
+                                            }}
+                                        >
+                                            {fileList.length < 1 && <Btn>上传</Btn>}
+                                        </Upload>
+                                    </Form.Item>
+                                    {
+                                        fileList.length > 0 && fileList[0]?.response?.code === 0 &&
+                                        <Form.Item
+                                            label={`${scmTitle[scmType]}安装路径`}
+                                            name="scmAddress"
+                                            rules={[
+                                                {required:true,message:`请输入${scmTitle[scmType]}安装路径`},
+                                                Validation(`${scmTitle[scmType]}安装路径`)
+                                            ]}
+                                        >
+                                            <Input placeholder={scmPlaceholder[scmType]} disabled/>
+                                        </Form.Item>
+                                    }
+                                </>
+                            ) : (
+                                <Form.Item
+                                    label={`${scmTitle[scmType]}安装路径`}
+                                    name="scmAddress"
+                                    rules={[
+                                        {required:true,message:`请输入${scmTitle[scmType]}安装路径`},
+                                        Validation(`${scmTitle[scmType]}安装路径`)
+                                    ]}
+                                >
+                                    <Input placeholder={scmPlaceholder[scmType]}/>
+                                </Form.Item>
+                            )
+                        }
                     </Form.Item>
                 </Form>
             </div>

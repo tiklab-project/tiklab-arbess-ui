@@ -8,7 +8,7 @@
 import React,{useState,useEffect} from "react";
 import {observer} from "mobx-react";
 import {Form, Input} from "antd";
-import {WhetherChange} from "../Common";
+import {WhetherChange} from "../TaskCommon";
 import CodeGit from "./code/CodeGit";
 import CodeSvn from "./code/CodeSvn";
 import CodeThird from "./code/CodeThird";
@@ -47,13 +47,14 @@ import {
     upload_nexus,
     download_hadess,
     download_ssh,
-    download_nexus,
+    download_nexus, build_go,
 } from "../../../../../../common/utils/Constant";
 import ToolScript from "./tool/ToolScript";
 import UploadHadess from "./upload/UploadHadess";
 import UploadSsh from "./upload/UploadSsh";
 import DownloadHadess from "./download/DownloadHadess";
 import DownloadSsh from "./download/DownloadSsh";
+import BuildGo from "./build/BuildGo";
 
 const BasicInfo = props => {
 
@@ -75,51 +76,20 @@ const BasicInfo = props => {
 
     useEffect(()=>{
         // 初始化表单内容
-        const {formType,taskType,task,taskName,stageName} = dataItem;
+        const {formType,task,taskName,stageName} = dataItem;
         if(formType==="stage"){
             form.setFieldsValue({taskName: stageName});
             return;
         }
         console.log(dataItem)
         if(!task) return;
-        switch(taskType){
-            case git:
-            case gitlab:
-            case pri_gitlab:
-            case svn:
-            case gitee:
-            case github:
-            case gitpuk:
-            case mvn:
-            case nodejs:
-            case build_docker:
-            case liunx:
-            case docker:
-            case k8s:
-            case sonar:
-            case spotbugs:
-            case upload_hadess:
-            case upload_ssh:
-            case upload_nexus:
-            case download_hadess:
-            case download_ssh:
-            case download_nexus:
-            case maventest:
-            case script:
-            case testhubo:
-                form.setFieldsValue({
-                    ...task,
-                    authId: task?.authId || null,
-                    taskName: taskName,
-                })
-                break
-            default:
-                form.setFieldsValue({
-                    taskName: taskName
-                })
-        }
+        form.setFieldsValue({
+            ...task,
+            authId: task?.authId || null,
+            taskName: taskName,
+        })
         form.validateFields().then();
-    },[dataItem?.task,dataItem?.stageName])
+    },[dataItem?.task, dataItem?.stageName])
 
     /**
      * 渲染表单
@@ -146,6 +116,8 @@ const BasicInfo = props => {
                 return <BuildMaven {...props}/>
             case build_docker:
                 return <BuildDocker {...props}/>
+            case build_go:
+                return <BuildGo {...props} />
             case liunx:
                 return <DeployLinux {...props}/>
             case docker:
@@ -183,7 +155,7 @@ const BasicInfo = props => {
             return
         }
         if(WhetherChange(value,dataItem.stageName)){
-            return updateStageName({stageId:dataItem.stageId,stageName:value}).then(res=>{
+            updateStageName({stageId:dataItem.stageId,stageName:value}).then(res=>{
                 if(res.code===0){
                     setDataItem({
                         ...dataItem,
@@ -196,7 +168,7 @@ const BasicInfo = props => {
 
     return (
         <div className='taskForm-forms'>
-            <Form form={form} layout="vertical" autoComplete="off">
+            <Form form={form} layout="vertical" autoComplete="off" >
                 <Form.Item
                     name={"taskName"}
                     label={dataItem?.formType==='task'? "任务名称":"阶段名称"}

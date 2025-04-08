@@ -17,6 +17,8 @@
             .gui-drawer-content-left{
                 border-right: 1px solid var(--tiklab-gray-200);
                 .drawerLeft{
+                    height: 100%;
+                    overflow-y: auto;
                     .item{
                         padding: 5px var(--tiklab-padding);
                         cursor: pointer;

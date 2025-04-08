@@ -1,11 +1,12 @@
+/**
+ * @Description: 懒加载
+ * @Author: gaomengyuan
+ * @Date: 2025/3/20
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/4/07
+ */
 import React,{Component} from "react";
 
-/**
- * 懒加载
- * @param importComponent
- * @returns {LazyComponent}
- * @constructor
- */
 export default function AsyncComponent (importComponent) {
     class LazyComponent extends Component{
         constructor(props) {

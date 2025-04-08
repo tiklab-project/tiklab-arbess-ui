@@ -7,7 +7,7 @@
  */
 import React, {useEffect, useState} from "react";
 import {CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import {TaskIcon} from "../../design/processDesign/gui/component/TaskTitleIcon";
+import {TaskIcon} from "../../design/processDesign/gui/component/TaskCommon";
 import {runStatusIcon,getTime} from "./HistoryCommon";
 
 const HistoryDetailTree = props =>{
