@@ -33,8 +33,8 @@ const CodeSvn = props =>{
             />
             <FormsInput
                 name={"codeName"}
-                placeholder={"Svn仓库地址"}
-                label={"Svn仓库地址"}
+                placeholder={"SVN仓库地址"}
+                label={"SVN仓库地址"}
                 isRequire={true}
             />
             <FormsInput

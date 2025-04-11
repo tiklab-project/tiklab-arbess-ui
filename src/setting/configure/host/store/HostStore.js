@@ -13,9 +13,9 @@ class HostStore {
     createAuthHost = async value =>{
         const data = await Axios.post("/authHost/createAuthHost",value)
         if(data.code===0){
-            message.info(`添加成功`)
+            message.success(`添加成功`)
         } else {
-            message.info(`添加失败`)
+            message.error(`添加失败`)
         }
         return data
     }
@@ -51,9 +51,9 @@ class HostStore {
         param.append("hostId",value)
         const data = await Axios.post("/authHost/deleteAuthHost",param)
         if(data.code===0){
-            message.info(`删除成功`)
+            message.success(`删除成功`)
         } else {
-            message.info(`删除失败`)
+            message.error(`删除失败`)
         }
         return data
     }
@@ -67,9 +67,9 @@ class HostStore {
     updateAuthHost =async value =>{
         const data = await Axios.post("/authHost/updateAuthHost",value)
         if(data.code===0){
-            message.info(`修改成功`)
+            message.success(`修改成功`)
         } else {
-            message.info(`修改失败`)
+            message.error(`修改失败`)
         }
         return data
     }

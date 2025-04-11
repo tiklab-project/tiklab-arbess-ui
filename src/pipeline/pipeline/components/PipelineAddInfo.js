@@ -12,7 +12,7 @@ import {observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
 import {PrivilegeProjectButton} from "tiklab-privilege-ui";
 import Profile from "../../../common/component/profile/Profile";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import PipelineUserAdd from "./PipelineUserAdd";
 import envStore from "../../../setting/configure/env/store/EnvStore";
@@ -304,9 +304,9 @@ const PipelineAddInfo = props =>{
                     </Form.Item>
                     { renderPowerType }
                 </Form>
-                <Btn onClick={onClick} title={"取消"} isMar={true}/>
+                <Button onClick={onClick} title={"取消"} isMar={true}/>
                 <PrivilegeProjectButton code={"pipeline_update"} domainId={pipeline && pipeline.id}>
-                    <Btn type={"primary"} title={"确定"} onClick={onOk}/>
+                    <Button type={"primary"} title={"确定"} onClick={onOk}/>
                 </PrivilegeProjectButton>
             </>
         )
@@ -374,7 +374,7 @@ const PipelineAddInfo = props =>{
                             placement={'bottomRight'}
                             overlayStyle={{width:240}}
                         >
-                            <Btn
+                            <Button
                                 type={"link-nopadding"}
                                 title={"添加成员"}
                             />
@@ -393,8 +393,8 @@ const PipelineAddInfo = props =>{
                 </Form.Item>
             }
             </Form>
-            <Btn onClick={()=>props.history.push("/pipeline")} title={"取消"} isMar={true}/>
-            <Btn type={"primary"} title={"下一步"} onClick={onOk}/>
+            <Button onClick={()=>props.history.push("/pipeline")} title={"取消"} isMar={true}/>
+            <Button type={"primary"} title={"下一步"} onClick={onOk}/>
         </>
     )
 }

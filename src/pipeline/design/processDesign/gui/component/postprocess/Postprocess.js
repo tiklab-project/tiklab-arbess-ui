@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../../../../common/component/btn/Btn";
+import Button from "../../../../../../common/component/button/Button";
 import {Validation} from "../../../../../../common/utils/Client";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
@@ -26,9 +26,10 @@ import "./Postprocess.scss";
 
 const Postprocess = props =>{
 
-    const {pipelineStore,postprocessStore,dataItem} = props
+    const {postprocessStore,dataItem} = props
 
-    const {deletePost,createPost,findTaskPost,updatePost,findMessageSendType,mesSendData
+    const {
+        deletePost,createPost,findTaskPost,updatePost,findMessageSendType,mesSendData
     } = postprocessStore
 
     const userId = getUser().userId;
@@ -244,7 +245,6 @@ const Postprocess = props =>{
                                         type={'task'}
                                         yUserList={poseObj}
                                         setYUserList={setPoseObj}
-                                        pipelineStore={pipelineStore}
                                     />
                                 </div>
                                 {
@@ -304,8 +304,8 @@ const Postprocess = props =>{
                     }
                 </Form>
                 <div className="post-pose-btn">
-                    <Btn title={"取消"} isMar={true} onClick={onCancel}/>
-                    <Btn title={"保存"} type={"primary"} onClick={onOk}/>
+                    <Button title={"取消"} isMar={true} onClick={onCancel}/>
+                    <Button title={"保存"} type={"primary"} onClick={onOk}/>
                 </div>
             </div>
         )
@@ -371,7 +371,7 @@ const Postprocess = props =>{
                     onVisibleChange={visible => setAddVisible(visible)}
                     overlayStyle={{width:140}}
                 >
-                    <Btn
+                    <Button
                         title={"添加后置处理"}
                         type={"link-nopadding"}
                     />
@@ -390,4 +390,4 @@ const Postprocess = props =>{
     )
 }
 
-export default inject("pipelineStore","postprocessStore")(observer(Postprocess))
+export default inject("postprocessStore")(observer(Postprocess))

@@ -14,7 +14,7 @@ import {
     DeleteOutlined
 } from "@ant-design/icons";
 import ListEmpty from "../component/list/ListEmpty";
-import Btn from "../component/btn/Btn";
+import Button from "../component/button/Button";
 import messageStore from "../../home/store/MessageStore"
 import Profile from "../component/profile/Profile";
 import "./PortalMessage.scss";
@@ -186,7 +186,7 @@ const PortalMessage = props =>{
                         <span className="messageModal-up-icon"><BellOutlined/></span>
                         <span>消息</span>
                     </div>
-                    <Btn title={<CloseOutlined />} type="text" onClick={onClose}/>
+                    <Button title={<CloseOutlined />} type="text" onClick={onClose}/>
                 </div>
                 <div className="messageModal-content">
                     <div className="messageModal-title">

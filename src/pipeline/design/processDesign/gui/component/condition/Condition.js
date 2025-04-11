@@ -14,7 +14,7 @@ import {
     CaretRightOutlined
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
-import Btn from "../../../../../../common/component/btn/Btn";
+import Button from "../../../../../../common/component/button/Button";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import {Validation} from "../../../../../../common/utils/Client";
 import condStore from "../../store/ConditionStore";
@@ -183,8 +183,8 @@ const Condition = props =>{
                 <Input/>
             </Form.Item>
             <div className="inputs-condition-btn">
-                <Btn onClick={()=>onCancel()} title={"取消"} isMar={true}/>
-                <Btn onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
+                <Button onClick={()=>onCancel()} title={"取消"} isMar={true}/>
+                <Button onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
             </div>
         </Form>
     )
@@ -235,7 +235,7 @@ const Condition = props =>{
                     <span style={{paddingRight:5}}>条件</span>
                     <span style={{fontSize:13}}>({condData && condData.length?condData.length:0}个)</span>
                 </div>
-                <Btn
+                <Button
                     title={"添加条件"}
                     type={"link-nopadding"}
                     onClick={()=>addCondition()}

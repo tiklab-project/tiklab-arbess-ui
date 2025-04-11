@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React from "react";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import HostModal from "./HostModal";
 
 const HostAddBtn = props =>{
@@ -26,7 +26,7 @@ const HostAddBtn = props =>{
 
     return(
         <>
-            <Btn
+            <Button
                 onClick={addHostBtn}
                 type={isConfig?"row":"primary"}
                 title={isConfig?"添加":"添加主机"}

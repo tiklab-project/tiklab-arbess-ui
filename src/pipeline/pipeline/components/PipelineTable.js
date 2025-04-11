@@ -81,10 +81,10 @@ const PipelineTable = props =>{
      */
     const collectMessage = (res,info) =>{
         if(res.code===0){
-            message.info(`${info}成功`)
+            message.success(`${info}成功`)
             changFresh()
-        }else {
-            message.info(res.msg)
+        } else {
+            message.error(res.msg)
         }
     }
 
@@ -142,11 +142,11 @@ const PipelineTable = props =>{
                 pipelineName:value.name
             }).then(res=>{
                 if(res.code===0){
-                    message.info("克隆成功")
+                    message.success("克隆成功")
                     onCancel()
                     changFresh()
                 } else {
-                    message.info("克隆失败")
+                    message.error("克隆失败")
                 }
                 setCopyStatus(false)
             })
@@ -183,7 +183,7 @@ const PipelineTable = props =>{
                 // 释放内存
                 window.URL.revokeObjectURL(url);
             }else {
-                message.info(response.msg)
+                message.error(response.msg)
             }
         })
     }

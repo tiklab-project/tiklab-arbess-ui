@@ -9,7 +9,7 @@ import React,{useState,useEffect} from 'react';
 import {Modal} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {autoHeight} from "../../utils/Client";
-import Btn from "../btn/Btn";
+import Button from "../button/Button";
 import "./Modal.scss";
 
 const Modals = props => {
@@ -31,8 +31,8 @@ const Modals = props => {
 
     const modalFooter = (
         <>
-            <Btn onClick={res.onCancel} title={res.cancelText || "取消"} isMar={true}/>
-            <Btn onClick={res.onOk} title={res.okText ||  "确定"} type={res.okType || "primary"}/>
+            <Button onClick={res.onCancel} title={res.cancelText || "取消"} isMar={true}/>
+            <Button onClick={res.onOk} title={res.okText ||  "确定"} type={res.okType || "primary"}/>
         </>
     )
 
@@ -47,7 +47,7 @@ const Modals = props => {
         >
             <div className='arbess-modal-up'>
                 <div>{title}</div>
-                <Btn
+                <Button
                     title={<CloseOutlined style={{fontSize:16}}/>}
                     type="text"
                     onClick={res.onCancel}

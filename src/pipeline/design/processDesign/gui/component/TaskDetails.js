@@ -9,7 +9,7 @@ import React, {useEffect,useState} from "react";
 import {Skeleton} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/component/btn/Btn";
+import Button from "../../../../../common/component/button/Button";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import BasicInfo from "./basicInfo/BasicInfo";
 import {HeadlineTitle} from "./TaskCommon";
@@ -49,7 +49,7 @@ const TaskDetails = props =>{
         >
             <div className="task-details-up">
                 <div className="wrapper-head-title">{HeadlineTitle(dataItem?.taskType)}</div>
-                <Btn onClick={onClose} title={<CloseOutlined />} type="text"/>
+                <Button onClick={onClose} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-details-bottom">
                 <div className="body-taskForm">

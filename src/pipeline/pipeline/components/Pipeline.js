@@ -10,7 +10,7 @@ import {Select, Space, Row, Col, Spin} from "antd";
 import {getUser} from "tiklab-core-ui";
 import PipelineTable from "./PipelineTable";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import Tabs from "../../../common/component/tabs/Tabs";
 import SearchInput from "../../../common/component/search/SearchInput";
 import SearchSelect from "../../../common/component/search/SearchSelect";
@@ -193,7 +193,7 @@ const Pipeline = props =>{
                             {title:'流水线'}
                         ]}
                     >
-                        <Btn onClick={onClick} type={"primary"} title={"新建流水线"}/>
+                        <Button onClick={onClick} type={"primary"} title={"新建流水线"}/>
                     </BreadCrumb>
                     <div className="pipeline-flex">
                         <Tabs type={listType} tabLis={[

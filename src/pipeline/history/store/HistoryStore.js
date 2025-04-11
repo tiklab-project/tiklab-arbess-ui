@@ -38,7 +38,7 @@ class HistoryStore {
         }
         const data = await Axios.post("/exec/rollBackStart", params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -57,7 +57,7 @@ class HistoryStore {
         }
         const data = await Axios.post("/exec/start", params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -121,7 +121,7 @@ class HistoryStore {
         param.append("instanceId", value)
         const data = await Axios.post("/instance/deleteInstance",param)
         if(data.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
         }
         return data
     }

@@ -15,7 +15,7 @@ class TestHuboStore {
         param.append('authId',value)
         const data = await Axios.post('/testOnAuthorize/findAllRepository',param)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -33,7 +33,7 @@ class TestHuboStore {
         param.append('env',value.env)
         const data = await Axios.post('/testOnAuthorize/findAllEnv',param)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -50,7 +50,7 @@ class TestHuboStore {
         param.append('rpyId',value.rpyId)
         const data = await Axios.post('/testOnAuthorize/findAllTestPlan',param)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -77,9 +77,9 @@ class TestHuboStore {
         param.append('relevanceId',value)
         const data = await Axios.post('/testOnRelevance/deleteRelevance',param)
         if(data.code===0){
-            message.info('删除成功')
+            message.success('删除成功')
         } else {
-            message.info('删除失败')
+            message.error('删除失败')
         }
         return data
     }

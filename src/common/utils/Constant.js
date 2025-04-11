@@ -36,7 +36,6 @@ export const download_nexus = 'download_nexus'; //nexus下载
 export const script = 'script'; //执行脚本
 export const message = 'message'; //消息通知
 export const post = 'post'; //后置处理
-export const jdk = 'jdk'; //JDK
 
 /**
  * 服务常量

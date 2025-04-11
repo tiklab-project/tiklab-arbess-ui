@@ -32,9 +32,9 @@ class ToolStore {
         param.append("scmId",value)
         const data = await Axios.post("/scm/deletePipelineScm",param)
         if(data.code===0){
-            message.info(`删除成功`)
+            message.success(`删除成功`)
         } else {
-            message.info(`删除失败`)
+            message.error(`删除失败`)
         }
         return data
     }
@@ -48,7 +48,7 @@ class ToolStore {
     updatePipelineScm = async values=>{
         const data = await Axios.post("/scm/updatePipelineScm",values)
         if(data.code === 0){
-            message.info(`${values.scmId?'修改':'添加'}成功`)
+            message.success(`${values.scmId?'修改':'添加'}成功`)
         } else if(data.code===40000){
             message.error(data.msg);
         } else {

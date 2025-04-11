@@ -15,7 +15,7 @@ class HadessStore {
         param.append('authId',value)
         const data = await Axios.post('/xpackAuthorize/findAllRepository',param)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }

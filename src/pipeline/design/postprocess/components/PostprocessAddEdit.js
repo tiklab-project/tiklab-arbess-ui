@@ -1,3 +1,10 @@
+/**
+ * @Description: 后置处理添加或编辑
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/4/09
+ */
 import React,{useState,useEffect} from "react";
 import {Form, Select, Checkbox, Table, Space, Tooltip, Input} from "antd";
 import {DeleteOutlined} from "@ant-design/icons";
@@ -8,18 +15,32 @@ import Profile from "../../../../common/component/profile/Profile";
 import PostprocessUserAdd from "./PostprocessUserAdd";
 import {Validation} from "../../../../common/utils/Client";
 
+export const messageList = [
+    "site",
+    "email",
+    "sms",
+    "qywechat",
+];
+
+export const messageTitle = {
+    site: "站内信",
+    email: "邮箱通知",
+    sms: "短信通知",
+    qywechat: "企业微信机器人",
+}
+
 const PostprocessAddEdit = props =>{
 
-    const {findPost,postprocessVisible,setPostprocessVisible,formValue,postprocessStore,pipelineStore} = props
+    const {findPost,postprocessVisible,setPostprocessVisible,formValue,postprocessStore,match:{params}} = props
 
-    const {pipeline} = pipelineStore
-    const {createPost,updatePost,mesSendData} = postprocessStore
+    const {createPost,updatePost,mesSendData} = postprocessStore;
 
-    const [form] = Form.useForm()
-    const user = getUser()
+    const [form] = Form.useForm();
+    const user = getUser();
+    const pipelineId = params.id;
 
     // 选中的通知人员
-    const [yUserList,setYUserList] = useState([])
+    const [yUserList,setYUserList] = useState([]);
 
     useEffect(()=>{
         if(postprocessVisible){
@@ -82,7 +103,7 @@ const PostprocessAddEdit = props =>{
         form.validateFields().then((value)=>{
             let userList = yUserList && yUserList.map(item=>({receiveType:item.receiveType, user: {id:item.user.id}}))
             let params = {
-                pipelineId:pipeline.id,
+                pipelineId: pipelineId,
                 taskType: 'message',
                 postName: value.postName,
                 values: {
@@ -91,10 +112,10 @@ const PostprocessAddEdit = props =>{
                 }
             }
             if(formValue){
-                 params = {
-                     ...params,
-                     postId:formValue.postId,
-                 }
+                params = {
+                    ...params,
+                    postId:formValue.postId,
+                }
                 updatePost(params).then(res=>{
                     if(res.code===0){
                         findPost()
@@ -163,14 +184,6 @@ const PostprocessAddEdit = props =>{
         },
     ]
 
-    const typeList = [
-        {value:"site", title:"站内信"},
-        {value:"email", title:"邮箱通知"},
-        {value:"sms", title:"短信通知"},
-        {value:"qywechat", title:"企业微信机器人"},
-        // {value:"dingding", title:"钉钉机器人"},
-    ]
-
     return(
         <Modals
             visible={postprocessVisible}
@@ -198,11 +211,13 @@ const PostprocessAddEdit = props =>{
                     <Form.Item label={"消息发送方式"} name={"typeList"} rules={[{required:true, message:"消息发送方式不能为空"}]}>
                         <Checkbox.Group>
                             {
-                                typeList.map(item=>{
-                                    if(version!=='cloud' && item.value==='sms') return;
+                                messageList.map(value=>{
+                                    if(version!=='cloud' && value==='sms') return;
                                     return (
-                                        <Tooltip title={isType(item.value) && `未配置${item.title}`} key={item.value}>
-                                            <Checkbox value={item.value} disabled={isType(item.value)}>{item.title}</Checkbox>
+                                        <Tooltip title={isType(value) && `未配置${messageTitle[value]}`} key={value}>
+                                            <Checkbox value={value} disabled={isType(value)}>
+                                                {messageTitle[value]}
+                                            </Checkbox>
                                         </Tooltip>
                                     )
                                 })
@@ -213,7 +228,6 @@ const PostprocessAddEdit = props =>{
                         <div className="post-pose-title">
                             <div className="title-user">消息通知人员</div>
                             <PostprocessUserAdd
-                                pipelineStore={pipelineStore}
                                 yUserList={yUserList}
                                 setYUserList={setYUserList}
                             />

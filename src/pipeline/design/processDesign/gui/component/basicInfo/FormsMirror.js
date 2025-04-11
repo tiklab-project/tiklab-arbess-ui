@@ -10,7 +10,7 @@ import {inject,observer} from "mobx-react";
 import {Tooltip,Form} from "antd";
 import {ExpandOutlined} from "@ant-design/icons";
 import Modals from "../../../../../../common/component/modal/Modal";
-import Btn from "../../../../../../common/component/btn/Btn";
+import Button from "../../../../../../common/component/button/Button";
 import TaskMirror from "../../../../../../common/component/editor/CodeMirror";
 import {WhetherChange} from "../TaskCommon";
 import "./FormsMirror.scss";
@@ -122,8 +122,8 @@ const FormsMirror = props =>{
                 {
                     bordered &&
                     <div style={{paddingTop:8}}>
-                        <Btn title={"取消"} isMar={true} onClick={()=>onCancel('narrow')}/>
-                        <Btn title={"保存"} type={"primary"} onClick={()=>onOk('narrow',narrowMirrorRef)}/>
+                        <Button title={"取消"} isMar={true} onClick={()=>onCancel('narrow')}/>
+                        <Button title={"保存"} type={"primary"} onClick={()=>onOk('narrow',narrowMirrorRef)}/>
                     </div>
                 }
                 <Modals

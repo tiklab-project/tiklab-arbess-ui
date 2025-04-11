@@ -13,7 +13,7 @@ import {message, Table} from "antd";
 import ListEmpty from "../list/ListEmpty";
 import Page from "../page/Page";
 import './ChangeRootUser.scss';
-import Btn from "../btn/Btn";
+import Button from "../button/Button";
 
 const pageSize = 5;
 
@@ -172,7 +172,7 @@ const ChangeRootUser = (props) => {
             title={'当前流水线负责人被删除，请更换流水线负责人'}
             width={700}
             onCancel={onCancel}
-            footer={<Btn onClick={onOk} title={"确定"} type={"primary"}/>}
+            footer={<Button onClick={onOk} title={"确定"} type={"primary"}/>}
         >
             <SearchInput
                 placeholder={"搜索姓名"}

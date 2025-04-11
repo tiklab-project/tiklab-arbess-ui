@@ -23,7 +23,7 @@ class StageStore {
             this.stageFresh=!this.stageFresh
         }
         if(data.code===58001){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -94,7 +94,7 @@ class StageStore {
             this.stageFresh = !this.stageFresh
         }
         if(data.code===58001){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -110,7 +110,7 @@ class StageStore {
         param.append("taskId",value)
         const data = await Axios.post("/stage/deleteStage",param)
         if(data.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
             this.stageFresh=!this.stageFresh
         }
         return data

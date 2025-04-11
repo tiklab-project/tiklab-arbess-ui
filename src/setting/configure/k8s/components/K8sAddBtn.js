@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React from "react";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import K8sModal from "./K8sModal";
 
 const K8sAddBtn = props =>{
@@ -25,7 +25,7 @@ const K8sAddBtn = props =>{
 
     return(
         <>
-            <Btn
+            <Button
                 onClick={addK8sBtn}
                 type={isConfig?"row":"primary"}
                 title={isConfig?"添加":"添加Kubernetes"}

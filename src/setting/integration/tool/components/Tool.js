@@ -129,7 +129,7 @@ const Tool = props =>{
                 <div className='arbess-home-limited'>
                     <BreadCrumb
                         crumbs={[
-                            {title:'工具'}
+                            {title:'工具集成'}
                         ]}
                     >
                         <ToolAddBtn

@@ -32,7 +32,7 @@ class AuthorizeStore {
             message.success("授权成功")
         } else {
             this.skin = false
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -48,7 +48,7 @@ class AuthorizeStore {
         params.append("authId",value)
         const data = await Axios.post("/codeAuthorize/findAllStorehouse",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }

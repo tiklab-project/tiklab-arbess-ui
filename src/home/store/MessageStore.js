@@ -42,7 +42,7 @@ class MessageStore {
         param.append("id",value)
         const data = await Axios.post("/message/messageItem/deleteMessageItem",param)
         if(data.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
         }
         return data
     }

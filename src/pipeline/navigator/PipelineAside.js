@@ -21,24 +21,26 @@ const PipelineAside= (props)=>{
 
     const {match,systemRoleStore,route}=props;
 
-    const {findOnePipeline,updateOpen,pipeline} = pipelineStore
-    const {getInitProjectPermissions} = systemRoleStore
+    const {findOnePipeline,updateOpen,pipeline} = pipelineStore;
+    const {getInitProjectPermissions} = systemRoleStore;
 
-    const id = match.params.id;
+    const pipelineId = match.params.id;
     const userId = getUser().userId;
 
     //弹出框状态
     const [visible,setVisible] = useState(false);
 
     useEffect(()=>{
-        if(id){
+        if(pipelineId){
             findPipeline();
         }
-    },[id])
+    },[pipelineId])
 
+    /**
+     * 获取流水线信息
+     */
     const findPipeline = () =>{
-        // 获取单个流水线信息
-        findOnePipeline(id).then(res=>{
+        findOnePipeline(pipelineId).then(res=>{
             if(res.data){
                 const data = res.data;
                 if(data?.user?.status===0){
@@ -46,9 +48,9 @@ const PipelineAside= (props)=>{
                     return;
                 }
                 // 获取流水线权限
-                getInitProjectPermissions(userId,id,data?.power===1)
+                getInitProjectPermissions(userId,pipelineId,data?.power===1)
                 // 当前流水线打开
-                updateOpen(id).then()
+                updateOpen(pipelineId).then()
             }
         })
     }
@@ -64,7 +66,7 @@ const PipelineAside= (props)=>{
                 </div>
             }
             <ChangeRootUser
-                domainId={id}
+                domainId={pipelineId}
                 visible={visible}
                 setVisible={setVisible}
                 onRefresh={findPipeline}

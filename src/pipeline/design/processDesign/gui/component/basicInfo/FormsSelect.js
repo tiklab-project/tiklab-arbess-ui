@@ -14,19 +14,18 @@ import {pipeline_task_update} from "../../../../../../common/utils/Constant";
 
 const FormsSelect = props => {
 
-    const {taskStore,name,rules,label,isSpin,children,...res} = props
+    const {taskStore,name,rules,label,isSpin,children,...res} = props;
 
     const {taskPermissions} = taskStore;
 
     const taskUpdate = taskPermissions?.includes(pipeline_task_update);
 
     //是否显示下拉图标
-    const [showArrow,setShoeArrow] = useState(false)
+    const [showArrow,setShoeArrow] = useState(false);
     //下拉框聚焦
-    const [bordered,setBordered] = useState(false)
+    const [bordered,setBordered] = useState(false);
 
-    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty />
-
+    const notFoundContent = isSpin ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} /> : <ListEmpty />;
     const placeholder = res.placeholder || label;
 
     return (

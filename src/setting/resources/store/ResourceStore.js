@@ -41,9 +41,9 @@ class ResourceStore {
         param.append("fileList",value.fileList)
         const data = await Axios.post("/disk/cleanDisk",param)
         if(data.code===0){
-            message.info("清理成功")
+            message.success("清理成功")
         } else {
-            message.info("清理失败")
+            message.error("清理失败")
         }
         return data
     }

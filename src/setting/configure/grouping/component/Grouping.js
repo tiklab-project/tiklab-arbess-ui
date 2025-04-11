@@ -12,7 +12,7 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import ListAction from "../../../../common/component/list/ListAction";
 import Profile from "../../../../common/component/profile/Profile";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import GroupingModal from "./GroupingModal";
 import groupingStore from "../store/GroupingStore";
 import "../../../common/Common.scss";
@@ -143,7 +143,7 @@ const Grouping = props =>{
                             {title:'分组'}
                         ]}
                     >
-                        <Btn
+                        <Button
                             type={'primary'}
                             title={"添加分组"}
                             onClick={createEnv}

@@ -10,7 +10,7 @@ import {Dropdown, Table} from "antd";
 import {DeleteOutlined, PlusOutlined} from "@ant-design/icons";
 import hostStore from "../store/HostStore";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import Page from "../../../../common/component/page/Page";
 import SearchInput from "../../../../common/component/search/SearchInput";
 
@@ -204,8 +204,8 @@ const HostGroupAddHost = (props) => {
                 />
             </div>
             <div className='host-group-host-add-btn'>
-                <Btn onClick={()=>setHostAddVisible(false)} title={"取消"} isMar={true}/>
-                <Btn onClick={onOk} title={"确定"} type={"primary"}/>
+                <Button onClick={()=>setHostAddVisible(false)} title={"取消"} isMar={true}/>
+                <Button onClick={onOk} title={"确定"} type={"primary"}/>
             </div>
         </div>
     )
@@ -225,7 +225,7 @@ const HostGroupAddHost = (props) => {
                     getPopupContainer={e=>e.parentElement}
                     overlayStyle={{width:300}}
                 >
-                    <Btn type={"link-nopadding"} title={"添加主机"}/>
+                    <Button type={"link-nopadding"} title={"添加主机"}/>
                 </Dropdown>
             </div>
             <div>

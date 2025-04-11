@@ -12,7 +12,7 @@ import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import ListAction from "../../../../common/component/list/ListAction";
 import Profile from "../../../../common/component/profile/Profile";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import EnvModal from "./EnvModal";
 import envStore from "../store/EnvStore";
 import "../../../common/Common.scss";
@@ -142,7 +142,7 @@ const Env = props =>{
                             {title:'环境'}
                         ]}
                     >
-                        <Btn
+                        <Button
                             type={'primary'}
                             title={"添加环境"}
                             onClick={createEnv}

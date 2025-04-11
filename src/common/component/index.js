@@ -1,12 +1,12 @@
 /**
- * @Description: 公共组件，注: ce不要直接使用index.js抛出的公共组件，可能影响打包或者发包
+ * @Description: 公共组件，注: 不要直接使用index.js抛出的公共组件，可能影响打包或者发包
  * @Author: gaomengyuan
  * @Date: 2025/3/20
  * @LastEditors: gaomengyuan
  * @LastEditTime: 2025/3/20
  */
 import BreadCrumb from "./breadcrumb/BreadCrumb";
-import Btn from "./btn/Btn";
+import Button from "./button/Button";
 import Drawer from "./drawer/Drawer";
 import echarts from "./echarts/Echarts";
 import TaskMirror from "./editor/CodeMirror";
@@ -23,7 +23,7 @@ import Tabs from "./tabs/Tabs";
 
 export {
     BreadCrumb,
-    Btn,
+    Button,
     Drawer,
     echarts,
     TaskMirror,

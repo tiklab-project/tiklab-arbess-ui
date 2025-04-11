@@ -6,15 +6,15 @@
  * @LastEditTime: 2025/3/11
  */
 import React,{useState,useEffect} from "react";
-import {Col, Row, Table} from "antd";
+import {Col, Row, Space, Table, Tooltip} from "antd";
 import {inject,observer} from "mobx-react";
-import PostprocessAddEdit from "./PostprocessAddEdit";
-import {TaskIcon, taskTitle} from "../../processDesign/gui/component/TaskCommon";
-import Btn from "../../../../common/component/btn/Btn";
+import PostprocessAddEdit, {messageTitle} from "./PostprocessAddEdit";
+import Button from "../../../../common/component/button/Button";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import "./Postprocess.scss";
 import {pipeline_task_update} from "../../../../common/utils/Constant";
+import {sendTypeIcon} from "tiklab-message-ui/es/utils/Client";
 
 const Postprocess = props =>{
 
@@ -88,19 +88,41 @@ const Postprocess = props =>{
             title: "名称",
             dataIndex: "postName",
             key: "postName",
-            width:"60%",
+            width:"40%",
         },
         {
-            title: "类型",
-            dataIndex: "taskType",
-            key: "taskType",
-            width:"30%",
-            render:(text,record)=> (
-                <>
-                    <TaskIcon type={text} width={20} height={20}/>
-                    <span style={{paddingLeft:5}}>{ taskTitle(text) }</span>
-                </>
-            )
+            title: "发送方式",
+            dataIndex: ["task","task"],
+            key: ["task","task"],
+            width:"25%",
+            render:(text)=> {
+                const {typeList = []} = text || {};
+                return typeList?.length > 0 ?
+                    <Space>
+                        {
+                            typeList.map(code=>(
+                                <Tooltip title={messageTitle[code]} key={code}>
+                                    <img
+                                        src={sendTypeIcon[code]}
+                                        alt={messageTitle[code]}
+                                        style={{width:20,height:20}}
+                                    />
+                                </Tooltip>
+                            ))
+                        }
+                    </Space>
+                    : '--'
+            }
+        },
+        {
+            title: "通知人员",
+            dataIndex: ["task","task"],
+            key: ["task","task"],
+            width:"25%",
+            render:(text)=> {
+                const {userList = []} = text || {};
+                return userList?.length > 0 ? userList.length : '0'
+            }
         },
         taskUpdate ? {
             title: "操作",
@@ -133,7 +155,7 @@ const Postprocess = props =>{
             >
                 <div className="post-pose-up">
                     <div className="post-pose-up-num">共{postprocessData && postprocessData.length?postprocessData.length:0}条</div>
-                    { taskUpdate && <Btn title={"添加"} onClick={addPostprocess}/> }
+                    { taskUpdate && <Button title={"添加"} onClick={addPostprocess}/> }
                     <PostprocessAddEdit
                         {...props}
                         findPost={findPost}
@@ -157,4 +179,4 @@ const Postprocess = props =>{
     )
 }
 
-export default inject("pipelineStore","postprocessStore","taskStore")(observer(Postprocess))
+export default inject("postprocessStore","taskStore")(observer(Postprocess))

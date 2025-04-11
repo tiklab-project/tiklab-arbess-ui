@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/2/8
  */
 import React from "react";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import ToolModal from "./ToolModal";
 
 const ToolAddBtn = (props) => {
@@ -25,7 +25,7 @@ const ToolAddBtn = (props) => {
 
     return (
         <>
-            <Btn
+            <Button
                 onClick={addTool}
                 type={scmType? "row":"primary"}
                 title={scmType? "添加":"添加工具"}

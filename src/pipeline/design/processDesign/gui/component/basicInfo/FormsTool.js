@@ -9,9 +9,9 @@ import React, {useEffect, useState} from "react";
 import FormsSelect from "./FormsSelect";
 import {Divider, Select} from "antd";
 import {inject, observer} from "mobx-react";
-import toolStore from "../../../../../../setting/configure/tool/store/ToolStore";
-import ToolAddBtn from "../../../../../../setting/configure/tool/components/ToolAddBtn";
-import {scmTitle} from "../../../../../../setting/configure/tool/components/ToolCommon";
+import toolStore from "../../../../../../setting/integration/tool/store/ToolStore";
+import ToolAddBtn from "../../../../../../setting/integration/tool/components/ToolAddBtn";
+import {scmNameSuffix, scmTitle} from "../../../../../../setting/integration/tool/components/ToolCommon";
 
 const FormsTool = (props) => {
 
@@ -44,7 +44,7 @@ const FormsTool = (props) => {
     }
 
     //名称
-    const nameSuffix = `tool${scmTitle[scmType]}`;
+    const nameSuffix = `tool${scmNameSuffix[scmType]}`;
     //标签
     const label = `${scmTitle[scmType]}版本`;
 

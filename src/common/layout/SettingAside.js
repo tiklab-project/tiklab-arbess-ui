@@ -96,16 +96,6 @@ const applicationRouters =  [
                 title:"主机组",
             },
             {
-                id:"/setting/tool",
-                title:"工具",
-                purviewCode:"pipeline_env",
-            },
-            {
-                id:"/setting/server",
-                title:"服务",
-                purviewCode:"resources_server",
-            },
-            {
                 id:"/setting/k8s",
                 title:"Kubernetes集群",
                 purviewCode:"resources_server",
@@ -117,6 +107,16 @@ const applicationRouters =  [
         title:"集成与开放",
         icon: <MacCommandOutlined />,
         children: [
+            {
+                id:"/setting/tool",
+                title:"工具集成",
+                purviewCode:"pipeline_env",
+            },
+            {
+                id:"/setting/server",
+                title:"服务集成",
+                purviewCode:"resources_server",
+            },
             {
                 id:"/setting/openApi",
                 title: "openApi",

@@ -17,7 +17,7 @@ class VariableStore{
     createVariable = async value =>{
         const data = await Axios.post("/pipelineVariable/createVariable",value)
         if(data.code===0){
-            message.info("添加成功")
+            message.success("添加成功")
         }
         return data
     }
@@ -31,7 +31,7 @@ class VariableStore{
         param.append("varId",value)
         const data = await Axios.post("/pipelineVariable/deleteVariable",param)
         if(data.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
         }
         return data
     }
@@ -45,7 +45,7 @@ class VariableStore{
     updateVariable = async value =>{
         const data = await Axios.post("/pipelineVariable/updateVariable",value)
         if(data.code===0){
-            message.info("更新成功")
+            message.success("更新成功")
         }
         return data
     }

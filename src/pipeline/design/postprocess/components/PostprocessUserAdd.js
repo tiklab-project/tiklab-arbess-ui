@@ -1,16 +1,17 @@
 import React,{useEffect,useState} from "react";
 import {Table, Dropdown} from "antd";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import Page from "../../../../common/component/page/Page";
 import SearchInput from "../../../../common/component/search/SearchInput";
 import "./PostprocessUserAdd.scss";
+import {inject,observer} from "mobx-react";
 
 const PostprocessUserAdd = props =>{
 
     const {pipelineStore,yUserList,setYUserList,type} = props
 
-    const {pipeline,findDmUserPage} = pipelineStore
+    const {pipeline,findDmUserPage} = pipelineStore;
 
     // 消息通知人员下拉框
     const [userAddVisible,setUserAddVisible] = useState(false)
@@ -63,7 +64,7 @@ const PostprocessUserAdd = props =>{
                 ...yUserList,
                 userList:yUserList.userList.concat(addUser)
             })
-        }else {
+        } else {
             setYUserList(yUserList.concat(addUser))
         }
         setUserAddVisible(false)
@@ -78,7 +79,7 @@ const PostprocessUserAdd = props =>{
         let newArr = []
         if(type){
             newArr = yUserList && yUserList.userList
-        }else {
+        } else {
             newArr = yUserList
         }
         return newArr && newArr.some(item=>item.user.id===record.user.id)
@@ -204,8 +205,8 @@ const PostprocessUserAdd = props =>{
                 />
             </div>
             <div className='user-add-btn'>
-                <Btn onClick={()=>setUserAddVisible(false)} title={"取消"} isMar={true}/>
-                <Btn onClick={onOk} title={"确定"} type={"primary"}/>
+                <Button onClick={()=>setUserAddVisible(false)} title={"取消"} isMar={true}/>
+                <Button onClick={onOk} title={"确定"} type={"primary"}/>
             </div>
         </div>
     )
@@ -219,7 +220,7 @@ const PostprocessUserAdd = props =>{
             getPopupContainer={e => e.parentElement}
             onVisibleChange={visible => setUserAddVisible(visible)}
         >
-            <Btn
+            <Button
                 type={"link-nopadding"}
                 title={"添加成员"}
             />
@@ -227,4 +228,4 @@ const PostprocessUserAdd = props =>{
     )
 }
 
-export default PostprocessUserAdd
+export default inject('pipelineStore')(observer(PostprocessUserAdd))

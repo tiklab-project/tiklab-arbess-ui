@@ -60,9 +60,9 @@ export class PipelineStore {
         }
         const res = await Axios.post("/pipeline/createPipeline",param);
         if(res.code===0){
-            message.info("创建成功")
+            message.success("创建成功")
         } else {
-            message.info("创建失败")
+            message.error("创建失败")
         }
         return res
     }
@@ -78,9 +78,9 @@ export class PipelineStore {
         param.append("pipelineId",value)
         const res = await Axios.post("/pipeline/deletePipeline",param);
         if(res.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
         } else {
-            message.info("删除失败")
+            message.error("删除失败")
         }
         return res
     }
@@ -94,9 +94,9 @@ export class PipelineStore {
     updatePipeline = async values =>{
         const res = await Axios.post("/pipeline/updatePipeline",values);
         if(res.code===0){
-            message.info("更新成功")
+            message.success("更新成功")
         } else{
-            message.info("更新失败")
+            message.error("更新失败")
         }
         return res;
     }

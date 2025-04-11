@@ -8,7 +8,7 @@
 import React,{useState} from "react";
 import {Spin, Steps, Row, Col} from "antd";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import PipelineAddMould from "./PipelineAddMould";
 import PipelineAddInfo from "./PipelineAddInfo";
@@ -129,17 +129,17 @@ const PipelineAdd = props =>{
                        {
                            current===1 &&
                            <div className="steps-bottom">
-                               <Btn
+                               <Button
                                    onClick={()=>props.history.push("/pipeline")}
                                    title={"取消"}
                                    isMar={true}
                                />
-                               <Btn
+                               <Button
                                    onClick={()=>setCurrent(0)}
                                    title={"上一步"}
                                    isMar={true}
                                />
-                               <Btn
+                               <Button
                                    type={"primary"}
                                    onClick={()=>createPip()}
                                    title={"确定"}

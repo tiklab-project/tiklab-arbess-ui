@@ -9,7 +9,7 @@ import React,{useState,useRef} from "react";
 import {Col, Row} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../../common/component/btn/Btn";
+import Button from "../../../../../common/component/button/Button";
 import PipelineDrawer from "../../../../../common/component/drawer/Drawer";
 import {taskTitle, TaskIcon} from "./TaskCommon";
 import {
@@ -56,11 +56,11 @@ const TaskAdd = props =>{
             title:"源码",
             desc:[
                 {type: git},
+                {type: gitpuk},
                 {type: gitee},
                 {type: github},
                 {type: gitlab},
                 {type: svn},
-                {type: gitpuk},
                 {type: pri_gitlab}
             ]
         },
@@ -91,22 +91,6 @@ const TaskAdd = props =>{
             ]
         },
         {
-            id:"upload",
-            title: "上传",
-            desc: [
-                {type: upload_hadess},
-                {type: upload_ssh},
-            ]
-        },
-        {
-            id:"download",
-            title: "下载",
-            desc: [
-                {type: download_hadess},
-                {type: download_ssh},
-            ]
-        },
-        {
             id:"deploy",
             title: "部署",
             desc:[
@@ -120,6 +104,10 @@ const TaskAdd = props =>{
             title: "工具",
             desc: [
                 {type: script},
+                {type: upload_hadess},
+                {type: upload_ssh},
+                {type: download_hadess},
+                {type: download_ssh},
             ]
         }
     ]
@@ -137,7 +125,7 @@ const TaskAdd = props =>{
             }).then(res=>{
                 setTaskFormValue(res,item.type)
             })
-        }else {
+        } else {
             createStage({
                 taskType:item.type,
                 pipelineId:pipeline.id,
@@ -216,7 +204,7 @@ const TaskAdd = props =>{
         >
             <div className="task-add-up">
                 <div className="wrapper-head-title">选择任务组</div>
-                <Btn onClick={()=>setNewStageDrawer(false)} title={<CloseOutlined />} type="text"/>
+                <Button onClick={()=>setNewStageDrawer(false)} title={<CloseOutlined />} type="text"/>
             </div>
             <div className="task-add-bottom">
                 <Row className="gui-drawer-content">
@@ -247,8 +235,10 @@ const TaskAdd = props =>{
                                             {
                                                 group.desc && group.desc.map((item,index)=>{
                                                     return(
-                                                        <div key={index} className={`group-desc ${taskBanList.includes(item.type) ? 'group-desc-ban' : ''}`}
-                                                             onClick={()=> taskBanList.includes(item.type) ? undefined : addTask(item)}
+                                                        <div
+                                                            key={index}
+                                                            className={`group-desc ${taskBanList.includes(item.type) ? 'group-desc-ban' : ''}`}
+                                                            onClick={()=>taskBanList.includes(item.type) ? undefined : addTask(item)}
                                                         >
                                                             <div className='group-desc-icon'>
                                                                 <TaskIcon

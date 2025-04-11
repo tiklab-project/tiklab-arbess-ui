@@ -9,7 +9,7 @@ import React,{useEffect,useState} from "react";
 import {inject,observer} from "mobx-react";
 import {Input, Popconfirm, Select, Form} from "antd";
 import {PlusCircleOutlined, DeleteOutlined, CaretDownOutlined,CaretRightOutlined} from "@ant-design/icons";
-import Btn from "../../../../../../common/component/btn/Btn";
+import Button from "../../../../../../common/component/button/Button";
 import ListEmpty from "../../../../../../common/component/list/ListEmpty";
 import {Validation} from "../../../../../../common/utils/Client";
 import "./Variable.scss";
@@ -178,8 +178,8 @@ const Variable = props => {
                     <Input/>
                 </Form.Item>
                 <div className="inputs-variable-btn">
-                    <Btn onClick={()=>onCancel()} title={"取消"} isMar={true}/>
-                    <Btn onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
+                    <Button onClick={()=>onCancel()} title={"取消"} isMar={true}/>
+                    <Button onClick={()=>onOk(item)} title={"保存"} type={"primary"}/>
                 </div>
             </Form>
         )
@@ -231,7 +231,7 @@ const Variable = props => {
                     <span style={{paddingRight:5}}>变量</span>
                     <span style={{fontSize:13}}>({variableData && variableData.length?variableData.length:0}个)</span>
                 </div>
-                <Btn
+                <Button
                     title={"添加变量"}
                     type={"link-nopadding"}
                     onClick={()=>addInput()}

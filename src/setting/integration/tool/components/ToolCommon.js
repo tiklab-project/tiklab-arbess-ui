@@ -34,9 +34,19 @@ export const scmList = [
 export const scmTitle = {
     [toolJdk]: 'JDK',
     [toolGit]: 'Git',
-    [toolSvn]: 'Svn',
+    [toolSvn]: 'SVN',
     [toolMaven]: 'Maven',
     [toolNode]: 'Node',
+    [toolGo]: 'Go',
+};
+
+//工具类型
+export const scmNameSuffix = {
+    [toolJdk]: 'Jdk',
+    [toolGit]: 'Git',
+    [toolSvn]: 'Svn',
+    [toolMaven]: 'Maven',
+    [toolNode]: 'Nodejs',
     [toolGo]: 'Go',
 };
 

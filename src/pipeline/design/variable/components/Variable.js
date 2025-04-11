@@ -8,7 +8,7 @@
 import React,{useState,useEffect} from "react";
 import {Row, Col, Table} from "antd";
 import {inject,observer} from "mobx-react";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import VariableAddEdit from "./VariableAddEdit";
@@ -115,7 +115,7 @@ const Variable = props =>{
             >
                 <div className="variable-up">
                     <div className="variable-up-num">共{variableData && variableData.length?variableData.length:0}条</div>
-                    { taskUpdate && <Btn title={"添加"} onClick={addVariable}/> }
+                    { taskUpdate && <Button title={"添加"} onClick={addVariable}/> }
                     <VariableAddEdit
                         {...props}
                         findVariable={findVariable}

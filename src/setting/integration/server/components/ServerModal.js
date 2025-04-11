@@ -27,9 +27,9 @@ import {
 
 export const serverTitle = {
     [serverGitee]: 'Gitee',
-    [serverGithub]: 'Github',
-    [serverGitlab]: 'Gitlab',
-    [serverPriGitlab]: '自建Gitlab',
+    [serverGithub]: 'GitHub',
+    [serverGitlab]: 'GitLab',
+    [serverPriGitlab]: '自建GitLab',
     [serverSonar]: 'Sonar',
     [serverNexus]: 'Nexus',
     [serverGitpuk]: 'GitPuk',

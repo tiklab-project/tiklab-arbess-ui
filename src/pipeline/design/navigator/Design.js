@@ -14,7 +14,7 @@ import historyStore from "../../history/store/HistoryStore";
 import variableStore from "../variable/store/VariableStore";
 import postprocessStore from "../postprocess/store/PostprocessStore";
 import triggerStore from "../trigger/store/TriggerStore";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import HistoryRunDetail from "../../history/components/HistoryRunDetail";
 import DesignAgent from "./DesignAgent";
@@ -144,25 +144,25 @@ const Design = props =>{
         const {state} = pipeline;
         if(state===2){
             return (
-                <Btn type={"primary"} title={"运行中"}/>
+                <Button type={"primary"} title={"运行中"}/>
             )
         }
         if(stageMustField?.length>0){
             return (
-                <Btn type={"disabled"} title={"运行"}/>
+                <Button type={"disabled"} title={"运行"}/>
             )
         }
         if(!pipelinePermissions?.includes('pipeline_task_run')){
             return (
                 <Tooltip title={'当前没有运行权限，请联系管理员分配'}>
                     <span>
-                        <Btn title={"运行"}/>
+                        <Button title={"运行"}/>
                     </span>
                 </Tooltip>
             )
         }
         return (
-            <Btn type={"primary"} title={"运行"} onClick={run}/>
+            <Button type={"primary"} title={"运行"} onClick={run}/>
         )
     }
 

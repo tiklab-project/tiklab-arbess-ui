@@ -7,9 +7,9 @@
  */
 import React from "react";
 import {Space} from "antd";
-import "./Btn.scss";
+import "./Button.scss";
 
-const Btn = ({icon,type,title,onClick,isMar,children}) =>{
+const Button = ({icon,type,title,onClick,isMar,children}) =>{
 
     return (
         <div className={`arbess-btn ${type ? `arbess-btn-${type}`:"" } ${isMar? "arbess-btn-mar":""}`} onClick={onClick}>
@@ -21,4 +21,4 @@ const Btn = ({icon,type,title,onClick,isMar,children}) =>{
     )
 }
 
-export default Btn
+export default Button

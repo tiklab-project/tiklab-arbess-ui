@@ -8,7 +8,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import {Skeleton, Spin} from "antd";
 import {CloseOutlined} from "@ant-design/icons";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import PipelineDrawer from "../../../common/component/drawer/Drawer";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import {getTime, runStatusIcon, runStatusText} from "./HistoryCommon";
@@ -197,7 +197,7 @@ const HistoryRunDetail = (props) => {
                             <span className='bread-center-desc'>{getTime(setTime)}</span>
                         </div>
                     </div>
-                    {historyItem?.runStatus === "run" && <Btn onClick={execCease}>终止</Btn>}
+                    {historyItem?.runStatus === "run" && <Button onClick={execCease}>终止</Button>}
                 </div>
             </div>
             <div className="str-run-detail-center">

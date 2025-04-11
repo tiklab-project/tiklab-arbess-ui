@@ -49,7 +49,7 @@ class TaskStore {
             this.taskFresh = !this.taskFresh
         }
         if(data.code===58001){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -122,7 +122,7 @@ class TaskStore {
             }
         }
         if(data.code===58001){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -136,7 +136,7 @@ class TaskStore {
         params.append("taskId",value)
         const data = await Axios.post("/tasks/deleteTask",params)
         if(data.code===0){
-            message.info("删除成功")
+            message.success("删除成功")
             this.taskFresh = !this.taskFresh
         }
         return data
@@ -176,7 +176,7 @@ class TaskStore {
                 formType:'task',
             }
         } else {
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }

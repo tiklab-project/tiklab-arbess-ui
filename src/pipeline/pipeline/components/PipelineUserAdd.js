@@ -7,7 +7,7 @@
  */
 import React,{useEffect, useState} from "react";
 import {Table} from "antd";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import ListEmpty from "../../../common/component/list/ListEmpty";
 import Page from "../../../common/component/page/Page";
 import SearchInput from "../../../common/component/search/SearchInput";
@@ -195,8 +195,8 @@ const PipelineUserAdd = props =>{
                 />
             </div>
             <div className='pipeline-user-add-btn'>
-                <Btn onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
-                <Btn onClick={onOk} title={"确定"} type={"primary"}/>
+                <Button onClick={()=>setVisible(false)} title={"取消"} isMar={true}/>
+                <Button onClick={onOk} title={"确定"} type={"primary"}/>
             </div>
         </div>
     )

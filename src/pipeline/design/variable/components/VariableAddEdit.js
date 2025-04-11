@@ -164,7 +164,7 @@ const VariableAddEdit = props =>{
                     {/*                            </Form.Item>*/}
                     {/*                         ))}*/}
                     {/*                        <Form.Item>*/}
-                    {/*                            <Btn*/}
+                    {/*                            <Button*/}
                     {/*                                type="link-nopadding"*/}
                     {/*                                title="添加可选项"*/}
                     {/*                                onClick={() => add()}*/}

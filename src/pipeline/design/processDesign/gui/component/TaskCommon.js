@@ -34,6 +34,7 @@ import {
     mvn,
     nodejs,
     build_docker,
+    build_go,
     docker,
     k8s,
     liunx,
@@ -45,7 +46,7 @@ import {
     upload_nexus,
     download_hadess,
     download_ssh,
-    download_nexus, build_go,
+    download_nexus,
 } from '../../../../../common/utils/Constant';
 
 /**
@@ -58,11 +59,11 @@ export const taskTitle = type =>{
     switch (type){
         case git:  return "通用Git"
         case gitee: return "Gitee"
-        case github: return "Github"
-        case gitlab: return "Gitlab"
-        case pri_gitlab:  return "自建Gitlab"
-        case svn:  return "Svn"
-        case gitpuk:  return "GitPuk"
+        case github: return "GitHub"
+        case gitlab: return "GitLab"
+        case pri_gitlab:  return "自建GitLab"
+        case svn:  return "SVN"
+        case gitpuk:  return "自建GitPuk"
         case maventest: return "Maven单元测试"
         case testhubo: return "TestHubo自动化测试"
         case mvn: return "Maven构建"
@@ -73,12 +74,12 @@ export const taskTitle = type =>{
         case docker: return "Docker部署"
         case k8s: return "Kubernetes部署"
         case sonar: return "SonarQuebe"
-        case spotbugs: return "spotBugs-Java代码扫描"
+        case spotbugs: return "SpotBugs-Java代码扫描"
         case upload_hadess: return "Hadess上传"
-        case upload_ssh: return "Ssh上传"
+        case upload_ssh: return "SSH上传"
         case upload_nexus: return "Nexus上传"
         case download_hadess: return "Hadess下载"
-        case download_ssh: return "Ssh下载"
+        case download_ssh: return "SSH下载"
         case download_nexus: return "Nexus下载"
         case script: return "执行脚本"
         case message: return "消息通知"
@@ -159,18 +160,16 @@ export const HeadlineTitle = type =>{
         case build_docker:
         case build_go:
             return '构建'
-        case upload_hadess:
-        case upload_ssh:
-        case upload_nexus:
-            return '上传'
-        case download_hadess:
-        case download_ssh:
-        case download_nexus:
-            return '下载'
         case liunx:
         case docker:
             return '部署'
         case script:
+        case upload_hadess:
+        case upload_ssh:
+        case upload_nexus:
+        case download_hadess:
+        case download_ssh:
+        case download_nexus:
             return '工具'
         default :
             return "阶段名称"

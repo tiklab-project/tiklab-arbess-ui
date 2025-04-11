@@ -6,8 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React from "react";
-import {PlusOutlined} from "@ant-design/icons";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import AuthModal from "./AuthModal";
 
 const AuthAddBtn = props =>{
@@ -26,10 +25,10 @@ const AuthAddBtn = props =>{
 
     return(
         <>
-            <Btn
+            <Button
                 onClick={addAuthBtn}
                 type={isConfig?"row":"primary"}
-                title={isConfig?"添加":"添加认证"}
+                title={isConfig?"添加" :"添加认证"}
             />
             <AuthModal
                 visible={visible}

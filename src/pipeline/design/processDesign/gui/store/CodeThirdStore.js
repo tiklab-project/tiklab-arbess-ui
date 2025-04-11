@@ -16,7 +16,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/gittok/findStoreHouseList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -48,7 +48,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/gitee/findStoreHouseList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -80,7 +80,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/github/findStoreHouseList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -112,7 +112,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/gitlab/findStoreHouseList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -144,7 +144,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/pri/v4/gitlab/findStoreHouseList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }
@@ -162,7 +162,7 @@ class CodeThirdStore {
         }
         const data = await Axios.post("/code/third/pri/v4/gitlab/findHouseBranchList",params)
         if(data.code!==0){
-            message.info(data.msg)
+            message.error(data.msg)
         }
         return data
     }

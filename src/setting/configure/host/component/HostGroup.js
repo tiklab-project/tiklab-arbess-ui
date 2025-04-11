@@ -9,7 +9,7 @@ import React,{useEffect,useState} from "react";
 import {Col, Row, Space, Table} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import hostGroupStore from "../store/HostGroupStore";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import HostGroupAdd from "./HostGroupAdd";
@@ -146,7 +146,7 @@ const HostGroup = (props) => {
                             {title:'主机组'}
                         ]}
                     >
-                        <Btn
+                        <Button
                             type={"primary"}
                             title={"添加主机组"}
                             onClick={addHostGroup}

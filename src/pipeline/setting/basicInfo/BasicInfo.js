@@ -18,7 +18,7 @@ import {inject,observer} from "mobx-react";
 import PipelineAddInfo from "../../pipeline/components/PipelineAddInfo";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import Modals from "../../../common/component/modal/Modal";
-import Btn from "../../../common/component/btn/Btn";
+import Button from "../../../common/component/button/Button";
 import "./BasicInfo.scss";
 
 const BasicInfo = props =>{
@@ -97,13 +97,13 @@ const BasicInfo = props =>{
                     <div style={{color:"#ff0000",paddingBottom:5,fontSize:13}}>
                         此操作无法恢复！请慎重操作！
                     </div>
-                    <Btn
+                    <Button
                         onClick={()=>setOpenOrClose(2)}
                         title={"取消"}
                         isMar={true}
                     />
                     <PrivilegeProjectButton code={"pipeline_delete"} domainId={pipeline && pipeline.id}>
-                        <Btn
+                        <Button
                             onClick={()=>setDelVisible(true)}
                             type={"dangerous"}
                             title={"删除"}

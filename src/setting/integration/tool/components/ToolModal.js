@@ -10,9 +10,9 @@ import {Form, Input, Select, Upload} from "antd";
 import {Validation} from "../../../../common/utils/Client";
 import Modals from "../../../../common/component/modal/Modal";
 import toolStore from "../store/ToolStore";
-import {scmList, scmPlaceholder, scmTitle,} from "./ToolCommon";
+import {scmList, scmPlaceholder, scmTitle} from "./ToolCommon";
 import {getUser} from "tiklab-core-ui";
-import Btn from "../../../../common/component/btn/Btn";
+import Button from "../../../../common/component/button/Button";
 
 const ToolModal = props =>{
 
@@ -192,7 +192,7 @@ const ToolModal = props =>{
                                                 return file.name.endsWith('.tar.gz');
                                             }}
                                         >
-                                            {fileList.length < 1 && <Btn>上传</Btn>}
+                                            {fileList.length < 1 && <Button>上传</Button>}
                                         </Upload>
                                     </Form.Item>
                                     {

@@ -8,12 +8,12 @@
 import React,{useState,useEffect} from "react";
 import {inject,observer} from "mobx-react";
 import {Select, Divider} from "antd";
-import ServerAddBtn from "../../../../../../setting/configure/server/components/ServerAddBtn";
+import ServerAddBtn from "../../../../../../setting/integration/server/components/ServerAddBtn";
 import HostAddBtn from "../../../../../../setting/configure/host/component/HostAddBtn";
 import K8sAddBtn from "../../../../../../setting/configure/k8s/components/K8sAddBtn";
 import hostStore from "../../../../../../setting/configure/host/store/HostStore";
 import hostGroupStore from "../../../../../../setting/configure/host/store/HostGroupStore";
-import serverStore from "../../../../../../setting/configure/server/store/ServerStore";
+import serverStore from "../../../../../../setting/integration/server/store/ServerStore";
 import k8sStore from "../../../../../../setting/configure/k8s/store/K8sStore";
 import FormsSelect from "./FormsSelect";
 import {

@@ -388,7 +388,7 @@ const Server = props =>{
                 <div className="arbess-home-limited">
                     <BreadCrumb
                         crumbs={[
-                            {title:'服务'}
+                            {title:'服务集成'}
                         ]}
                     >
                         <ServerAddBtn
