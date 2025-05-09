@@ -22,11 +22,6 @@ const PipelineSetting = props =>{
             purviewCode:"pipeline_seting",
         },
         {
-            id:`/pipeline/${pipelineId}/setting/message`,
-            title:"消息通知方案",
-            purviewCode:"pip_message_notice",
-        },
-        {
             id:`/pipeline/${pipelineId}/setting/user`,
             title:"成员",
             purviewCode:"pipeline_user",
@@ -35,6 +30,11 @@ const PipelineSetting = props =>{
             id:`/pipeline/${pipelineId}/setting/role`,
             title:"权限",
             purviewCode:"pipeline_auth",
+        },
+        {
+            id:`/pipeline/${pipelineId}/setting/message`,
+            title:"消息",
+            purviewCode:"pip_message_notice",
         },
     ]
 

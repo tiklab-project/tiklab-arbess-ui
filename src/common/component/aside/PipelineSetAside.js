@@ -55,7 +55,7 @@ const PipelineSetAside = props =>{
             <div key={item.id} className='project-nav-aside-ul'>
                 <div className="project-nav-aside-li" onClick={()=>select(item.id)} style={{paddingLeft: deep}}>
                     <div>{item.title}</div>
-                    <div className="system-aside-item-icon">
+                    <div>
                         {
                             item.children ?
                                 (isExpandedTree(item.id)?

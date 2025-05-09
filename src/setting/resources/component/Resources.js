@@ -8,12 +8,10 @@
 import React, {useEffect, useState} from "react";
 import {message, Row, Col, Radio, Space, Spin} from 'antd';
 import {disableFunction,applySubscription} from "tiklab-core-ui";
-import Modals from "../../../common/component/modal/Modal";
 import BreadCrumb from "../../../common/component/breadcrumb/BreadCrumb";
 import resourceStore from "../store/ResourceStore";
-import pipFeature from "../../../assets/images/pip_feature.png";
-import pipFeature1 from "../../../assets/images/pip_feature1.png";
 import "./Resources.scss";
+import EnhanceModal from "../../../common/component/modal/EnhanceModal";
 
 const Resources = props => {
 
@@ -172,31 +170,24 @@ const Resources = props => {
                                 </div>
                             </div>
                             <div className='resources-info-item'>
-                                <Modals
+                                <EnhanceModal
+                                    type={'resources'}
                                     visible={featureModal}
-                                    okText={'订阅'}
-                                    title={'增强功能'}
-                                    onCancel={()=>setFeatureModal(false)}
-                                    onOk={upGradation}
-                                >
-                                    <div className='resources-info-enhance-modal'>
-                                        <div className='resources-info-enhance-modal-img'>
-                                            <img src={pipFeature1} width={'100%'} alt={''}/>
-                                        </div>
-                                        <div className='resources-info-enhance-modal-desc'>订阅开启增强功能</div>
-                                    </div>
-                                </Modals>
+                                    setVisible={setFeatureModal}
+                                />
                                 <div className='resources-item-title'>日志保存时长</div>
                                 <Radio.Group value={saveDur?.logCache} onChange={e => changeCathe(e,'logCache')}>
                                     <Radio value={7}>7天</Radio>
                                     <Radio value={15}>
                                         <Space size='small'>
-                                            15天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                            15天
+                                            {/*{disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}*/}
                                         </Space>
                                     </Radio>
                                     <Radio value={30}>
                                         <Space size={'small'}>
-                                            30天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                            30天
+                                            {/*{disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}*/}
                                         </Space>
                                     </Radio>
                                 </Radio.Group>
@@ -207,12 +198,14 @@ const Resources = props => {
                                     <Radio value={7}>7天</Radio>
                                     <Radio value={15}>
                                         <Space size='small'>
-                                            15天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                            15天
+                                            {/*{disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}*/}
                                         </Space>
                                     </Radio>
                                     <Radio value={30}>
                                         <Space size='small'>
-                                            30天 {disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}
+                                            30天
+                                            {/*{disable&&<img src={pipFeature} alt={''} width={16} height={16}/>}*/}
                                         </Space>
                                     </Radio>
                                 </Radio.Group>

@@ -44,9 +44,6 @@ const TestMaven=AsyncComponent(()=>import("./pipeline/test/maven/component/TestM
 const TestScan=AsyncComponent(()=>import("./pipeline/test/scan/component/Scan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
-const Statistics=AsyncComponent(()=>import("./pipeline/statistics/navigator/Statistics"))
-const StatisticsOperate=AsyncComponent(()=>import("./pipeline/statistics/operate/Operate"))
-const StatisticsResult=AsyncComponent(()=>import("./pipeline/statistics/result/Result"))
 
 /**
  * 系统设置
@@ -156,10 +153,6 @@ export {
     TestScan,
     TestHubo,
     TestMaven,
-
-    Statistics,
-    StatisticsOperate,
-    StatisticsResult,
 
     PipelineSetting,
     BasicInfo,

@@ -16,37 +16,52 @@ import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import agentStore from "../store/AgentStore";
 import "../../../common/Common.scss";
 import {UserSwitchOutlined} from "@ant-design/icons";
+import Button from "../../../../common/component/button/Button";
+import {disableFunction} from "tiklab-core-ui";
+import EnhanceModal from "../../../../common/component/modal/EnhanceModal";
 
 const pageSize = 15;
 
 const Agent = (props) => {
 
+    const {AgentAddComponent} = props;
+
     const {findAgentPage,deleteAgent,updateDefaultAgent} = agentStore;
+
+    const disable = disableFunction();
 
     const pageParam = {
         pageSize:pageSize,
         currentPage: 1,
     }
 
-    //agent列表
-    const [agentList,setAgentList]=useState([]);
+    //agent数据
+    const [agentData,setAgentData] = useState({});
     //agent请求数据
-    const [agentRequest,setAgentRequest]=useState({pageParam})
-    //agent分页数据
-    const [agentPage,setAgentPage]=useState({});
+    const [agentRequest,setAgentRequest]=useState({pageParam});
+    //添加弹出框
+    const [visible,setVisible] = useState(false);
+    //特性弹出框
+    const [featureModal,setFeatureModal] = useState(false);
 
     useEffect(()=>{
         //获取agent
-        findAgentPage(agentRequest).then(res=>{
+        findAgent()
+    },[agentRequest]);
+
+    /**
+     * 获取Agent
+     */
+    const findAgent = () =>{
+        findAgentPage({
+            ...agentRequest,
+            displayType: 'yes',
+        }).then(res=>{
             if(res.code===0){
-                setAgentList(res.data.dataList);
-                setAgentPage({
-                    totalPage: res.data.totalPage,
-                    totalRecord: res.data.totalRecord,
-                })
+                setAgentData(res.data)
             }
         })
-    },[agentRequest]);
+    }
 
     /**
      * 换页
@@ -80,10 +95,21 @@ const Agent = (props) => {
     const delAgent = (id) => {
         deleteAgent(id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(agentPage.totalRecord,pageSize,agentRequest.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(agentData.totalRecord,pageSize,agentRequest.pageParam.currentPage)
                 changPage(current)
             }
         })
+    }
+
+    /**
+     * 添加
+     */
+    const addAgent = () =>{
+        if(disable){
+            setFeatureModal(true)
+        } else {
+            setVisible(true)
+        }
     }
 
     const columns = [
@@ -145,10 +171,14 @@ const Agent = (props) => {
                            />
                        </Tooltip>
                    }
-                   <ListAction
-                       del={record?.connect ? undefined:()=>delAgent(record.id)}
-                       isMore={record?.connect ? false : true}
-                   />
+                   {
+                       record?.connect ? null : (
+                           <ListAction
+                               del={()=>delAgent(record.id)}
+                               isMore={true}
+                           />
+                       )
+                   }
                </Space>
             )
         },
@@ -169,11 +199,30 @@ const Agent = (props) => {
                         crumbs={[
                             {title:'Agent'}
                         ]}
+                    >
+                        <Button
+                            type={'primary'}
+                            onClick={addAgent}
+                        >添加</Button>
+                    </BreadCrumb>
+                    {
+                        AgentAddComponent &&
+                        <AgentAddComponent
+                            visible={visible}
+                            setVisible={setVisible}
+                            findAgent={findAgent}
+                            findAgentPage={findAgentPage}
+                        />
+                    }
+                    <EnhanceModal
+                        type={'configure'}
+                        visible={featureModal}
+                        setVisible={setFeatureModal}
                     />
                     <div className="auth-content">
                         <Table
                             columns={columns}
-                            dataSource={agentList}
+                            dataSource={agentData?.dataList || []}
                             rowKey={record=>record.id}
                             pagination={false}
                             locale={{emptyText: <ListEmpty />}}
@@ -181,7 +230,7 @@ const Agent = (props) => {
                         <Page
                             currentPage={agentRequest.pageParam.currentPage}
                             changPage={changPage}
-                            page={agentPage}
+                            page={agentData}
                         />
                     </div>
                 </div>

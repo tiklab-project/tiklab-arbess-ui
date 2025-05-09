@@ -11,7 +11,6 @@ import {SystemNav,PrivilegeButton} from "tiklab-privilege-ui";
 import {applyJump, disableFunction} from 'tiklab-core-ui';
 import {inject,observer} from "mobx-react";
 import  {ExportOutlined} from "@ant-design/icons";
-import feature from '../../../assets/images/pip_feature.png';
 import "./SettingAside.scss";
 
 const templateRouter = [
@@ -163,10 +162,10 @@ const SettingAside = props =>  {
                         !!data.isUnify && !authConfig?.authType &&
                         <span className='aside-second-link'><ExportOutlined /></span>
                     }
-                    {
-                        data.isEnhance && disable &&
-                        <img src={feature} alt="增强功能" width={16} height={16}/>
-                    }
+                    {/*{*/}
+                    {/*    data.isEnhance && disable &&*/}
+                    {/*    <img src={feature} alt="增强功能" width={16} height={16}/>*/}
+                    {/*}*/}
                 </li>
             </PrivilegeButton>
         )

@@ -15,12 +15,12 @@ import {
  */
 export const runStatusText = type =>{
     switch (type) {
-        case "error":return  "运行失败"
-        case "success":return  "运行成功"
-        case "halt":return  "运行终止"
-        case "run":return  "运行中"
-        case "wait":return "等待中"
-        case "suspend":return "暂停中"
+        case "error": return "运行失败"
+        case "success": return "运行成功"
+        case "halt": return "运行终止"
+        case "run": return "运行中"
+        case "wait": return "等待中"
+        case "suspend": return "暂停中"
     }
 }
 

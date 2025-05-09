@@ -174,7 +174,8 @@ const ToolModal = props =>{
                                             action={uploadUrl + '/scm/file/upload'}
                                             name={"uploadFile"}
                                             headers={{
-                                                ticket: user.ticket
+                                                ticket: user.ticket,
+                                                tenant: user.tenant,
                                             }}
                                             accept={'.gz'}
                                             maxCount={1}

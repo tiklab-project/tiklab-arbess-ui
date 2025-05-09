@@ -28,8 +28,8 @@ const PipelineAside = (props) => {
 
     const match = useRouteMatch("/pipeline/:id");
 
+    //流水线id
     const id = match?.params.id;
-
     //最近打开的流水线
     const [recentlyPipeline,setRecentlyPipeline] = useState([]);
     //最近打开的流水线下拉框
@@ -60,6 +60,7 @@ const PipelineAside = (props) => {
             id:`/pipeline/${id}/statistics`,
             title: "统计",
             icon: <RadarChartOutlined />,
+            isEnhance: true,
         },
     ]
 

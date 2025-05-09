@@ -79,19 +79,21 @@ const PipelineUserAdd = props =>{
      * @param record
      */
     const onSelectRow = record => {
-        if(!disabledOpt(record)){
-            // 如果已经选中 -- 取消选中
-            if (selectedRowKeys.indexOf(record.id) >= 0) {
-                selectedRowKeys.splice(selectedRowKeys.indexOf(record.id), 1)
-                addUser.splice(addUser.indexOf(record.id),1)
-            } else {
-                // 如果没有选中 -- 选中
-                selectedRowKeys.push(record.id)
-                addUser.push({...record, roleType: 0})
-            }
-            setSelectedRowKeys([...selectedRowKeys])
-            setAddUser([...addUser])
+        if (disabledOpt(record)) return;
+        const { id } = record;
+        const keysCopy = [...selectedRowKeys];
+        const usersCopy = [...addUser];
+        const keyIndex = keysCopy.indexOf(id);
+        if (keyIndex >= 0) {
+            keysCopy.splice(keyIndex, 1);
+            const userIndex = usersCopy.findIndex(user => user.id === id);
+            if (userIndex >= 0) usersCopy.splice(userIndex, 1);
+        } else {
+            keysCopy.push(id);
+            usersCopy.push(record);
         }
+        setSelectedRowKeys(keysCopy);
+        setAddUser(usersCopy);
     }
 
     /**

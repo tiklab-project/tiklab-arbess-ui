@@ -21,7 +21,9 @@ const DesignAgent = (props) => {
 
     useEffect(()=>{
         //获取agent列表
-        findAgentList().then(res=>{
+        findAgentList({
+            displayType:'yes'
+        }).then(res=>{
             if(res.code===0){
                 setAgentList(res.data)
                 const defaultAgent = res?.data.find(item=>item.businessType==='default')

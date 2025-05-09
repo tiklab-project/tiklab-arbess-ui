@@ -9,7 +9,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Row, Col, Spin, Select} from "antd";
 import {RightOutlined} from "@ant-design/icons";
 import echarts from "../../../common/component/echarts/Echarts";
-import statisticsStore from "../../statistics/common/StatisticsStore";
+import statisticsStore from "../store/StatisticsStore";
 import overviewStore from "../store/OverviewStore";
 import historyStore from "../../history/store/HistoryStore";
 import DynamicList from "../../../common/component/list/DynamicList";

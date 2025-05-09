@@ -65,7 +65,7 @@ const Scan = (props) => {
     const del = record => {
         deleteSpotbugs(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(scanData.totalRecord,pageSize,scanParam.pageParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(scanData.totalRecord,pageSize,scanParam.currentPage)
                 changPage(current)
             }
         })

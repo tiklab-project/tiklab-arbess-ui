@@ -7,7 +7,7 @@
  */
 import React, {useEffect, useState} from "react";
 import {
-    BellOutlined,
+    BellOutlined, CarryOutOutlined,
     ClockCircleOutlined,
     HomeOutlined,
     LeftCircleOutlined,
@@ -19,9 +19,10 @@ import {
 import PortalMessage from "./PortalMessage";
 import {inject, observer} from "mobx-react";
 import PipelineAside from "./PipelineAside";
-import {getUser, productTitle,productImg,productWhiteImg} from "tiklab-core-ui";
+import {getUser, productTitle, productImg, productWhiteImg, disableFunction} from "tiklab-core-ui";
 import {renderRoutes} from "react-router-config";
 import Profile from "../component/profile/Profile";
+import EnhanceModal from "../component/modal/EnhanceModal";
 import menuBlack from '../../assets/images/menu-black.png';
 import menuWhite from '../../assets/images/menu-white.png';
 import './Portal.scss';
@@ -44,7 +45,14 @@ const firstRouters=[
         to:"/history",
         title:"历史",
         icon: <ClockCircleOutlined />,
-    }
+    },
+    {
+        key:"/release",
+        to: "/release",
+        title:"发布计划",
+        icon: <CarryOutOutlined />,
+        isEnhance: true,
+    },
 ]
 
 const Portal = props =>{
@@ -54,6 +62,7 @@ const Portal = props =>{
     const {getSystemPermissions} = systemRoleStore;
 
     const path = props.location.pathname;
+    const disable = disableFunction();
 
     //是否折叠
     const [isExpand,setIsExpand] = useState(false);
@@ -63,6 +72,8 @@ const Portal = props =>{
     const [unread,setUnread] = useState(0);
     //主题色
     const [themeType,setThemeType] = useState('default');
+    //特性弹出框
+    const [featureModal,setFeatureModal] = useState(false);
 
     useEffect(()=>{
         getSystemPermissions(getUser().userId);
@@ -81,6 +92,18 @@ const Portal = props =>{
     const changeTheme = type => {
         setThemeType(type)
         localStorage.setItem('theme',type)
+    }
+
+    /**
+     * 跳转
+     */
+    const onSelect = item =>{
+        const {isEnhance,to} = item;
+        if(disable && isEnhance){
+            setFeatureModal(true);
+            return;
+        }
+        history.push(to);
     }
 
     //设置图标
@@ -127,13 +150,18 @@ const Portal = props =>{
                         firstRouters.map(item=>(
                             <div key={item.key}
                                  className={`aside-item ${path.indexOf(item.key)===0 ? "aside-select":""}`}
-                                 onClick={()=>history.push(item.to)}
+                                 onClick={()=>onSelect(item)}
                             >
                                 <div className="aside-item-icon">{item.icon}</div>
                                 <div className="aside-item-title">{item.title}</div>
                             </div>
                         ))
                     }
+                    <EnhanceModal
+                        type={'release'}
+                        visible={featureModal}
+                        setVisible={setFeatureModal}
+                    />
                 </div>
                 <div className="aside-bottom">
                     {

@@ -20,6 +20,7 @@ import SearchSelect from "./search/SearchSelect";
 import SearchInput from "./search/SearchInput";
 import SearchPicker from "./search/SearchPicker";
 import Tabs from "./tabs/Tabs";
+import EnhanceModal from "./modal/EnhanceModal";
 
 export {
     BreadCrumb,
@@ -37,4 +38,5 @@ export {
     SearchInput,
     SearchPicker,
     Tabs,
+    EnhanceModal,
 }

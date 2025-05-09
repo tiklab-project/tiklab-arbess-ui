@@ -1,0 +1,80 @@
+.arbess-enhance-modal {
+  .ant-modal-body{
+    padding: 0;
+  }
+  .ant-modal-close-x{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+  .enhance-free {
+    display: flex;
+    .enhance-free-introduce {
+      width: 30%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      .enhance-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .enhance-title-desc{
+        margin-bottom: 5px;
+      }
+      .enhance-desc {
+        font-size: 12px;
+        color: #999;
+      }
+      .enhance-desc-box {
+        flex: 1;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        .enhance-desc-item {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          height: 40px;
+          padding: 0 20px;
+          cursor: pointer;
+          border-radius: 10px;
+          margin: 10px 0;
+        }
+        .enhance-desc-active-item {
+          background: #f4f5f6;
+        }
+        .enhance-desc-item:hover {
+          background: #f4f5f6;
+        }
+      }
+      .enhance-desc-buy {
+        border-radius: 4px;
+        text-align: center;
+        cursor: pointer;
+        padding: 6px 0;
+        margin-top: 10px;
+        font-size: 13px;
+        color: #666;
+      }
+      .enhance-desc-guid{
+        border-radius: 4px;
+        background-color: var(--tiklab-blue);
+        color: white;
+        text-align: center;
+        cursor: pointer;
+        padding: 6px 0;
+      }
+    }
+    .enhance-free-image {
+      height: auto;
+      background-color: #f4f5f6;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 40px;
+      img {
+        border-radius: 5px;
+      }
+    }
+  }
+}

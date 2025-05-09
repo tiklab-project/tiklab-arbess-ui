@@ -8,7 +8,7 @@
 import React,{useEffect,useState,useRef} from "react";
 import {Col, Row, Spin, Table, Select} from "antd";
 import homePageStore from "../store/HomePageStore";
-import statisticsStore from "../../pipeline/statistics/common/StatisticsStore";
+import statisticsStore from "../../pipeline/overview/store/StatisticsStore";
 import ListEmpty from "../../common/component/list/ListEmpty";
 import ListIcon from "../../common/component/list/ListIcon";
 import echarts from "../../common/component/echarts/Echarts";

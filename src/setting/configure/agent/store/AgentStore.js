@@ -9,8 +9,8 @@ class AgentStore {
      * @returns {Promise<unknown>}
      */
     @action
-    findAgentList = async () =>{
-        return await Axios.post("/agent/findAgentList",{});
+    findAgentList = async value =>{
+        return await Axios.post("/agent/findAgentList",value);
     }
 
     /**

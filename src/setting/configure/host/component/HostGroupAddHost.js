@@ -105,13 +105,12 @@ const HostGroupAddHost = (props) => {
      */
     const onSelectRow = record => {
         if(!disabledOpt(record)){
-            // 如果已经选中 -- 取消选中
             if (selectedRowKeys.indexOf(record.hostId) >= 0) {
+                // 取消选中
                 setYHostList(yHostList.filter(item=>item.hostId!==record.hostId))
                 selectedRowKeys.splice(selectedRowKeys.indexOf(record.hostId), 1)
-            }
-            // 如果没有选中 -- 选中
-            else {
+            } else {
+                // 选中
                 yHostList.push(record)
                 selectedRowKeys.push(record.hostId)
             }

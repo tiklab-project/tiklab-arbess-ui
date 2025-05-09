@@ -86,28 +86,20 @@ const History = props =>{
      * 获取历史列表
      */
     const findInstance = () => {
-        if(route.path==='/history'){
-            findUserInstance(params).then(Res=>{
-                if(Res.code===0){
-                    if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        return
-                    }
+        const apiCall = route.path==='/history'
+            ? findUserInstance(params)
+            : findPipelineInstance({ ...params, pipelineId: match.params.id });
+        apiCall.then(Res=>{
+            if(Res.code===0){
+                if(!Res.data || Res.data.dataList.length<1 ){
+                    return
+                }
+                const runStatus = Res.data.dataList[0].runStatus;
+                if(runStatus==='run' || runStatus==='wait'){
                     findInter()
                 }
-            }).finally(()=>setIsLoading(false))
-        } else {
-            findPipelineInstance({
-                ...params,
-                pipelineId:match.params.id,
-            }).then(Res=>{
-                if(Res.code===0){
-                    if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        return
-                    }
-                    findInter()
-                }
-            }).finally(()=>setIsLoading(false))
-        }
+            }
+        }).finally(()=>setIsLoading(false))
     }
 
     /**
@@ -115,26 +107,20 @@ const History = props =>{
      */
     const findInter = () => {
         clearInterval(intervalRef.current);
-        if(route.path==='/history'){
-            intervalRef.current = setInterval(()=>{
-                findUserInstance(params).then(Res=>{
-                    if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        clearInterval(intervalRef.current)
-                    }
-                })
-            },1000)
-        } else {
-            intervalRef.current = setInterval(()=>{
-                findPipelineInstance({
-                    ...params,
-                    pipelineId:match.params.id,
-                }).then(Res=>{
-                    if(!Res.data || Res.data.dataList.length<1 || Res.data.dataList[0].runStatus!=="run"){
-                        clearInterval(intervalRef.current)
-                    }
-                })
-            },1000)
-        }
+        intervalRef.current = setInterval(()=>{
+            const apiCall = route.path==='/history'
+                ? findUserInstance(params)
+                : findPipelineInstance({ ...params, pipelineId: match.params.id });
+            apiCall.then(Res=>{
+                if(!Res.data || Res.data.dataList.length<1 ){
+                    clearInterval(intervalRef.current)
+                }
+                const runStatus = Res.data.dataList[0].runStatus;
+                if(runStatus!=='run' && runStatus!=='wait'){
+                    clearInterval(intervalRef.current)
+                }
+            })
+        },1000)
     }
 
     /**

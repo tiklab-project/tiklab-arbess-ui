@@ -35,10 +35,6 @@ import {
     TestHubo,
     TestMaven,
 
-    Statistics,
-    StatisticsOperate,
-    StatisticsResult,
-
     PipelineSetting,
     BasicInfo,
     DomainMessageNotice,
@@ -233,22 +229,6 @@ const routers=[
                             {
                                 path:"/pipeline/:id/test/maven",
                                 component: TestMaven,
-                                exact: true,
-                            },
-                        ]
-                    },
-                    {
-                        path:"/pipeline/:id/statistics",
-                        component: Statistics,
-                        routes:[
-                            {
-                                path:"/pipeline/:id/statistics/operate",
-                                component: StatisticsOperate,
-                                exact: true,
-                            },
-                            {
-                                path:"/pipeline/:id/statistics/result",
-                                component: StatisticsResult,
                                 exact: true,
                             },
                         ]
