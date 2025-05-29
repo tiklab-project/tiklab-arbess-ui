@@ -160,11 +160,11 @@ const ToolModal = props =>{
                                                     if (files?.some(f => f.status === 'error')) {
                                                         return Promise.reject('存在上传失败的文件');
                                                     }
-                                                    // 检查文件格式
-                                                    const invalidFiles = files?.filter(file => !file.name?.endsWith('.tar.gz'));
-                                                    if (invalidFiles?.length > 0) {
-                                                        return Promise.reject('只能上传 .tar.gz 格式的文件');
-                                                    }
+                                                    // // 检查文件格式
+                                                    // const invalidFiles = files?.filter(file => !file.name?.endsWith('.tar.gz'));
+                                                    // if (invalidFiles?.length > 0) {
+                                                    //     return Promise.reject('只能上传 .tar.gz 格式的文件');
+                                                    // }
                                                     return Promise.resolve();
                                                 }
                                             }
@@ -177,7 +177,7 @@ const ToolModal = props =>{
                                                 ticket: user.ticket,
                                                 tenant: user.tenant,
                                             }}
-                                            accept={'.gz'}
+                                            // accept={'.gz'}
                                             maxCount={1}
                                             fileList={fileList}
                                             onChange={({ fileList }) => {
@@ -189,9 +189,9 @@ const ToolModal = props =>{
                                                     })
                                                 }
                                             }}
-                                            beforeUpload={(file) => {
-                                                return file.name.endsWith('.tar.gz');
-                                            }}
+                                            // beforeUpload={(file) => {
+                                            //     return file.name.endsWith('.tar.gz');
+                                            // }}
                                         >
                                             {fileList.length < 1 && <Button>上传</Button>}
                                         </Upload>

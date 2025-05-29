@@ -118,22 +118,15 @@
 |------------|----------|
 | basicInfo  | 流水线基础信息  |
 
-## 5.3、statistics
-流水线统计
-
-| 文件      | 说明      |
-|---------|---------|
-| operate | 流水线运行统计 |
-| result  | 流水线结果统计 |
-
 ## 5.3、test
 流水线测试
 
-| 文件       | 说明            |
-|----------|---------------|
-| maven    | 单元测试          |
-| scan     | 代码扫描          |
-| testhubo | testhubo自动化测试 |
+| 文件         | 说明            |
+|------------|---------------|
+| maven      | 单元测试          |
+| spotbugs   | Java代码扫描      |
+| sonarQube  | sonarQube代码扫描 |
+| testhubo   | testhubo自动化测试 |
 
 # 6、setting
 系统设置模块
@@ -166,13 +159,29 @@
 |----------|--------------|
 | agent    | Agent        |
 | auth     | 认证配置         |
-| env      | 流水线分组        |
+| env      | 流水线应用        |
 | grouping | 流水线环境        |
 | host     | 主机配置         |
 | k8s      | Kubernetes集群 |
 | tool     | 工具配置         |
 | server   | 服务配置         |
 
+## 6.2、configure
+资源配置
+
+| 文件       | 说明           |
+|----------|--------------|
+| host     | 主机配置         |
+| k8s      | Kubernetes集群 |
+
+## 6.2、integration
+集成与开发
+
+| 文件       | 说明      |
+|----------|---------|
+| openApi  | openApi |
+| server   | 服务集成    |
+| tool     | 工具集成    |
 
 # 7、配置文件
 | 文件            | 说明           |

@@ -25,8 +25,9 @@ export const build_go = 'build_go'; //GO构建
 export const liunx = 'liunx'; //主机部署
 export const docker = 'docker'; //Docker部署
 export const k8s = 'k8s'; //Kubernetes部署
-export const sonar = 'sonar'; //SonarQuebe
+export const sonar = 'sonar'; //SonarQubeScan
 export const spotbugs = 'spotbugs'; //spotBugs-Java代码扫描
+export const sourcefare = 'sourcefare'; //sourceFare代码扫描
 export const upload_hadess= 'upload_hadess'; //hadess上传
 export const upload_ssh= 'upload_ssh'; //ssh上传
 export const upload_nexus= 'upload_nexus'; //nexus上传
@@ -59,8 +60,23 @@ export const toolSvn = 'svn';
 export const toolMaven = 'maven';
 export const toolNode = 'nodejs';
 export const toolGo = 'go';
+export const toolK8s = 'k8s';
+export const toolSonarScanner = 'sonar-scanner';
+export const toolSourceFareScanner = 'sourcefare-scanner';
 
 /**
  * 权限
  */
 export const pipeline_task_update = 'pipeline_task_update'; //流水线运行
+
+
+/**
+ * 运行状态
+ */
+export const runError = "error";
+export const runSuccess = "success";
+export const runHalt = "halt";
+export const runRun = "run";
+export const runWait = "wait";
+export const runSuspend = "suspend";
+export const runTimeout = "timeout";

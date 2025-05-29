@@ -5,8 +5,17 @@ import {
     CloseCircleOutlined,
     ExclamationCircleOutlined,
     LoadingOutlined, MinusCircleOutlined,
-    PlayCircleOutlined
+    PlayCircleOutlined, FieldTimeOutlined,
 } from "@ant-design/icons";
+import {
+    runError,
+    runSuccess,
+    runHalt,
+    runRun,
+    runWait,
+    runSuspend,
+    runTimeout
+} from "../../../common/utils/Constant";
 
 /**
  * 运行状态说明
@@ -15,12 +24,13 @@ import {
  */
 export const runStatusText = type =>{
     switch (type) {
-        case "error": return "运行失败"
-        case "success": return "运行成功"
-        case "halt": return "运行终止"
-        case "run": return "运行中"
-        case "wait": return "等待中"
-        case "suspend": return "暂停中"
+        case runError: return "运行失败"
+        case runSuccess: return "运行成功"
+        case runHalt: return "运行终止"
+        case runRun: return "运行中"
+        case runWait: return "等待中"
+        case runSuspend: return "暂停中"
+        case runTimeout: return "运行超时"
     }
 }
 
@@ -31,18 +41,20 @@ export const runStatusText = type =>{
  */
 export const runStatusIcon = type =>{
     switch(type){
-        case "error" :
+        case runError :
             return  <CloseCircleOutlined style={{color:"red"}}/>
-        case "success" :
+        case runSuccess :
             return  <CheckCircleOutlined style={{color:"var(--tiklab-blue)"}}/>
-        case "halt":
-            return  <ExclamationCircleOutlined/>
-        case "run":
-            return  <Spin indicator={<LoadingOutlined spin />} />
-        case "wait":
-            return  <PlayCircleOutlined />
-        case 'suspend':
-            return <MinusCircleOutlined />
+        case runHalt:
+            return  <ExclamationCircleOutlined style={{color:"black"}}/>
+        case runRun:
+            return  <Spin indicator={<LoadingOutlined spin style={{color:"black"}}/>} />
+        case runWait:
+            return  <PlayCircleOutlined style={{color:"black"}}/>
+        case runSuspend:
+            return <MinusCircleOutlined style={{color:"black"}}/>
+        case runTimeout:
+            return <FieldTimeOutlined style={{color:"orange", fontSize:16}}/>
     }
 }
 

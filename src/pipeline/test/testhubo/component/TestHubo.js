@@ -16,16 +16,16 @@ import ListAction from "../../../../common/component/list/ListAction";
 import testhuboStore from "../store/TestHuboStore";
 import "./TestHubo.scss";
 
-const pageSize = 15;
+const pageSize = 10;
 
 const TestHubo = props => {
 
     const {match:{params}} = props
 
-    const {findAllRelevance,deleteRelevance} = testhuboStore;
+    const {findRelevancePage,deleteRelevance} = testhuboStore;
 
     //加载状态
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
     //测试数据
     const [testData,setTestData] = useState({});
     const pageParam= {
@@ -38,8 +38,9 @@ const TestHubo = props => {
     })
 
     useEffect(()=>{
+        setIsLoading(true);
         //获取测试列表
-        findAllRelevance({
+        findRelevancePage({
             pipelineId:params.id,
             ...param
         }).then(Res=>{
@@ -57,7 +58,7 @@ const TestHubo = props => {
         if(item.status===2){
             return message.info("当前测试报告详情已删除")
         }
-        return applyJump(`${item.url}/#/plan/${item.testonId}/instance`)
+        return applyJump(`${item.url}`)
     }
 
     /**

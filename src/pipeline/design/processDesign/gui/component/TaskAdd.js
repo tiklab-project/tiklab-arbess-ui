@@ -34,7 +34,7 @@ import {
     upload_hadess,
     upload_ssh,
     download_hadess,
-    download_ssh, build_go,
+    download_ssh, build_go, sourcefare,
 } from '../../../../../common/utils/Constant';
 import "./TaskAdd.scss";
 
@@ -61,7 +61,7 @@ const TaskAdd = props =>{
                 {type: github},
                 {type: gitlab},
                 {type: svn},
-                {type: pri_gitlab}
+                {type: pri_gitlab},
             ]
         },
         {
@@ -69,7 +69,8 @@ const TaskAdd = props =>{
             title: "代码扫描",
             desc: [
                 {type: sonar},
-                {type: spotbugs}
+                {type: spotbugs},
+                {type: sourcefare},
             ]
         },
         {
@@ -77,7 +78,7 @@ const TaskAdd = props =>{
             title:"测试",
             desc:[
                 {type: maventest},
-                {type: testhubo}
+                {type: testhubo},
             ]
         },
         {
@@ -192,7 +193,8 @@ const TaskAdd = props =>{
         setTaskType(ids.id)
     }
 
-    const taskBanList = [upload_hadess,upload_ssh,download_hadess,download_ssh];
+    const taskBanList = [];
+    // const taskBanList = [upload_hadess,upload_ssh,download_hadess,download_ssh];
 
     return (
         <PipelineDrawer

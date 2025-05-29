@@ -72,7 +72,7 @@ const PipelineAside = (props) => {
                 }
             })
         }
-    }, [id]);
+    }, [id,pipeline?.name]);
 
     /**
      * 切换流水线

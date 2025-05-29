@@ -27,6 +27,7 @@ import historyStore from "../store/HistoryStore";
 import pipelineStore from "../../pipeline/store/PipelineStore";
 import pip_trigger from "../../../assets/images/svg/pip_trigger.svg";
 import "./History.scss";
+import {runRun, runWait} from "../../../common/utils/Constant";
 
 const pageSize = 13;
 
@@ -95,7 +96,7 @@ const History = props =>{
                     return
                 }
                 const runStatus = Res.data.dataList[0].runStatus;
-                if(runStatus==='run' || runStatus==='wait'){
+                if(runStatus===runRun || runStatus===runWait){
                     findInter()
                 }
             }
@@ -116,7 +117,7 @@ const History = props =>{
                     clearInterval(intervalRef.current)
                 }
                 const runStatus = Res.data.dataList[0].runStatus;
-                if(runStatus!=='run' && runStatus!=='wait'){
+                if(runStatus!==runRun && runStatus!==runWait){
                     clearInterval(intervalRef.current)
                 }
             })

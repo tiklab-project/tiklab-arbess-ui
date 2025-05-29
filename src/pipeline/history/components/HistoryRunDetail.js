@@ -15,6 +15,7 @@ import {getTime, runStatusIcon, runStatusText} from "./HistoryCommon";
 import HistoryDetail from "./HistoryDetail";
 import historyStore from "../store/HistoryStore";
 import "./HistoryRunDetail.scss";
+import {runError, runHalt, runRun, runSuccess, runTimeout} from "../../../common/utils/Constant";
 
 const HistoryRunDetail = (props) => {
 
@@ -25,7 +26,7 @@ const HistoryRunDetail = (props) => {
     const runInterRef = useRef(null);
 
     //获取当前历史运行状态
-    const isRun = historyItem?.runStatus === "run";
+    const isRun = historyItem?.runStatus === runRun;
     //流水线信息
     const pipeline = historyItem && historyItem.pipeline;
     //运行数据
@@ -87,8 +88,10 @@ const HistoryRunDetail = (props) => {
                     const statesList = data?.map(item => item.stageState) || [];
                     if(statesList?.length){
                         // 检查是否包含指定状态
-                        const hasCriticalState = statesList.includes('error') || statesList.includes('halt');
-                        const lastStateSuccess = statesList.at(-1) === 'success';
+                        const hasCriticalState = [runError, runHalt, runTimeout].some(state =>
+                            statesList.includes(state)
+                        );
+                        const lastStateSuccess = statesList.at(-1) === runSuccess;
                         if (hasCriticalState || lastStateSuccess) {
                             clearInterval(runInterRef.current);
                             setTimeout(() => findTask("end"), 1000);
@@ -120,7 +123,7 @@ const HistoryRunDetail = (props) => {
         setExecLoading(true);
         clearInterval(runInterRef.current);
         execStop(pipeline.id).then(res=>{
-            setTimeout(()=>findTask("end"),1000)
+            setTimeout(()=>findTask("end"),3000)
         })
     }
 

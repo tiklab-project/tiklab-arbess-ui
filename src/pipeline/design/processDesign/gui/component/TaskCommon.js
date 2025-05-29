@@ -47,6 +47,7 @@ import {
     download_hadess,
     download_ssh,
     download_nexus,
+    sourcefare,
 } from '../../../../../common/utils/Constant';
 
 /**
@@ -73,8 +74,9 @@ export const taskTitle = type =>{
         case liunx: return "主机部署"
         case docker: return "Docker部署"
         case k8s: return "Kubernetes部署"
-        case sonar: return "SonarQuebe"
-        case spotbugs: return "SpotBugs-Java代码扫描"
+        case sonar: return "SonarQube"
+        case spotbugs: return "Java代码扫描"
+        case sourcefare: return "sourceFare代码扫描"
         case upload_hadess: return "Hadess上传"
         case upload_ssh: return "SSH上传"
         case upload_nexus: return "Nexus上传"
@@ -101,9 +103,9 @@ export const TaskIcon = props =>{
             case gitee: return pip_gitee
             case github: return pip_github
             case gitlab: return pip_gitlab
-            case pri_gitlab:  return pip_gitlab
-            case svn:  return pip_svn
-            case gitpuk:  return productImg.gitpuk
+            case pri_gitlab: return pip_gitlab
+            case svn: return pip_svn
+            case gitpuk: return productImg.gitpuk
             case maventest: return pip_ceshi
             case testhubo: return productImg.testhubo
             case mvn: return maven
@@ -115,6 +117,7 @@ export const TaskIcon = props =>{
             case k8s: return pip_k8s
             case sonar: return pip_sonar
             case spotbugs: return pip_spotbugs
+            case sourcefare: return productImg.sourcefare
             case upload_hadess : return productImg.hadess
             case upload_ssh : return pip_ssh
             case upload_nexus : return pip_nexus
@@ -151,6 +154,7 @@ export const HeadlineTitle = type =>{
             return '源码'
         case sonar:
         case spotbugs:
+        case sourcefare:
             return '代码扫描'
         case maventest:
         case testhubo:

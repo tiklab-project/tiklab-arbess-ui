@@ -49,7 +49,7 @@ const firstRouters=[
     {
         key:"/release",
         to: "/release",
-        title:"发布计划",
+        title:"发布",
         icon: <CarryOutOutlined />,
         isEnhance: true,
     },

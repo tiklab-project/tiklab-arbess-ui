@@ -13,7 +13,7 @@ import {
     SafetyCertificateOutlined,
     SoundOutlined,
     TeamOutlined,
-    ScheduleOutlined,
+    ScheduleOutlined, CreditCardOutlined,
 } from "@ant-design/icons";
 import Aside from "../component/aside/SettingAside";
 import {SecurityEnhance} from "tiklab-security-ui";
@@ -77,22 +77,29 @@ const applicationRouters =  [
         ]
     },
     {
-        id:"configure",
+        id: "configure",
         title:"流水线配置",
-        icon:<DeploymentUnitOutlined />,
+        icon: <DeploymentUnitOutlined />,
         children:[
             {
-                id:"/setting/agent",
-                title:"Agent",
-            },
-            {
                 id:"/setting/grouping",
-                title:"分组",
+                title:"应用",
             },
             {
                 id:"/setting/env",
                 title:"环境",
             },
+            {
+                id:"/setting/agent",
+                title:"Agent",
+            },
+        ]
+    },
+    {
+        id: "resource",
+        title:"资源配置",
+        icon: <CreditCardOutlined />,
+        children: [
             {
                 id:"/setting/host",
                 title:"主机",
@@ -211,7 +218,7 @@ const Setting = props =>  {
             <SecurityEnhance
                 visible={securityVisible}
                 setVisible={setSecurityVisible}
-                bgroup={'sward'}
+                bgroup={'arbess'}
                 list={[
                     {id:'ipRoster',title:'IP黑白名单',icon:ipRoster}
                 ]}
@@ -219,7 +226,7 @@ const Setting = props =>  {
             <LicenceEnhance
                 visible={licenceVisible}
                 setVisible={setLicenceVisible}
-                bgroup={'sward'}
+                bgroup={'arbess'}
                 list={[
                     {id:'logo',title:'自定义Logo',icon:customLogo}
                 ]}

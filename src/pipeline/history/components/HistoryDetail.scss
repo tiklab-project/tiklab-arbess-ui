@@ -4,6 +4,7 @@ $wait-color: rgba(0, 0, 0, 0.18);
 $halt-color:  #444444;
 $error-color:  #ff0000;
 $suspend-color:  #ff0000;
+$timeout-color:  #ff9b00;
 
 .str-detail{
     height: 100%;
@@ -122,6 +123,9 @@ $suspend-color:  #ff0000;
         }
         &-wait{
             color: $wait-color;
+        }
+        &-timeout{
+            color: $timeout-color;
         }
     }
 }

@@ -90,7 +90,7 @@ const PipelineUserAdd = props =>{
             if (userIndex >= 0) usersCopy.splice(userIndex, 1);
         } else {
             keysCopy.push(id);
-            usersCopy.push(record);
+            usersCopy.push({...record,roleType: 0});
         }
         setSelectedRowKeys(keysCopy);
         setAddUser(usersCopy);
@@ -117,8 +117,7 @@ const PipelineUserAdd = props =>{
         if(selected){
             row = Array.from(new Set([...selectedRowKeys,...newArr]))
             user = Array.from(new Set([...addUser,...newUser]))
-        }
-        else {
+        } else {
             row = selectedRowKeys.filter(item=>!newArr.includes(item))
             user = addUser.filter(item=>!newArr.includes(item.id))
         }

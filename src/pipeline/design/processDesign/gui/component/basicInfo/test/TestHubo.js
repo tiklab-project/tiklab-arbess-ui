@@ -1,3 +1,10 @@
+/**
+ * @Description: TestHubo接口测试
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/5/16
+ */
 import React,{useState} from "react";
 import {Select} from "antd";
 import {observer} from "mobx-react";
@@ -5,24 +12,20 @@ import FormsAuth from "../FormsAuth";
 import FormsSelect from "../FormsSelect";
 import testHuboStore from "../../../../../../test/testhubo/store/TestHuboStore";
 
-/**
- * TestHubo接口测试
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const TestHubo = props => {
 
-    const {taskStore} = props
+    const {taskStore} = props;
 
-    const {updateTask,dataItem} = taskStore
-    const {findTestSpace,findTestEnv,findTestPlan} = testHuboStore
+    const {updateTask,dataItem} = taskStore;
+    const {findTestHuboRepositoryList,findTestHuboPlanList,findTestHuboEnvList} = testHuboStore;
 
-    // 推送地址获取加载状态
+    //推送地址获取加载状态
     const [isSpin,setSpin] = useState(false);
-
+    //测试空间
     const [testSpace,setTestSpace] = useState([]);
+    //测试环境
     const [testEnv,setTestEnv] = useState([]);
+    //测试计划
     const [testPlan,setTestPlan] = useState([]);
 
     /**
@@ -35,15 +38,17 @@ const TestHubo = props => {
         switch (type) {
             case 'testSpace':
                 setSpin(true)
-                findTestSpace(authId).then(res=>{
+                findTestHuboRepositoryList({
+                    authId
+                }).then(res=>{
                     if(res.code===0){
                         setTestSpace(res.data)
                     }
                 }).finally(()=>setSpin(false))
                 return;
             case 'testPlan':
-                findTestPlan({
-                    rpyId:dataItem.task?.testSpace?.id,
+                findTestHuboPlanList({
+                    repositoryId:dataItem.task?.testSpace?.id,
                     authId:authId,
                 }).then(res=>{
                     if(res.code===0){
@@ -52,10 +57,9 @@ const TestHubo = props => {
                 })
                 return;
             default:
-                findTestEnv({
-                    rpyId:dataItem.task?.testSpace?.id,
+                findTestHuboEnvList({
+                    repositoryId:dataItem.task?.testSpace?.id,
                     authId:authId,
-                    env:type
                 }).then(res=>{
                     if(res.code===0){
                         setTestEnv(res.data)
@@ -69,19 +73,6 @@ const TestHubo = props => {
      */
     const onChange = (value,type) => {
         updateTask({[type]: {id:value}})
-    }
-
-    /**
-     * 验证API环境 & APP环境 & WEB环境不能同时为空
-     */
-    const validatorEnv = (rule, value) => {
-        const task = dataItem?.task
-        const apiEnvValue = task?.apiEnv?.name
-        const appEnvValue = task?.appEnv?.name
-        if (!apiEnvValue && !appEnvValue) {
-            return Promise.reject(new Error('API环境、APP环境不能同时为空'));
-        }
-        return Promise.resolve();
     }
 
     return (
@@ -119,12 +110,12 @@ const TestHubo = props => {
             </FormsSelect>
 
             <FormsSelect
-                rules={[{validator: validatorEnv}]}
-                name={["apiEnv","name"]}
-                label={"API环境"}
+                rules={[{required:true, message:"测试环境不能为空"}]}
+                name={["testEnv","name"]}
+                label={"测试环境"}
                 isSpin={false}
-                onFocus={()=>onFocus('api')}
-                onChange={value=>onChange(value,'apiEnv')}
+                onFocus={()=>onFocus('testEnv')}
+                onChange={value=>onChange(value,'testEnv')}
             >
                 {
                     testEnv && testEnv.map(item=>{
@@ -132,22 +123,6 @@ const TestHubo = props => {
                     })
                 }
             </FormsSelect>
-
-            <FormsSelect
-                rules={[{validator: validatorEnv}]}
-                name={["appEnv","name"]}
-                label={"APP环境"}
-                isSpin={false}
-                onFocus={()=>onFocus('app')}
-                onChange={value=>onChange(value,'appEnv')}
-            >
-                {
-                    testEnv && testEnv.map(item=>{
-                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
-                    })
-                }
-            </FormsSelect>
-
 
         </>
     )

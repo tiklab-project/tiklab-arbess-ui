@@ -1,5 +1,5 @@
 /**
- * @Description: SonarQuebe代码扫描
+ * @Description: spotBugs-Java代码扫描
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan
@@ -15,10 +15,13 @@ import {toolJdk, toolMaven} from "../../../../../../../common/utils/Constant";
 
 const ScanSpotbugs = props =>{
 
-    const {taskStore} = props
+    const {taskStore} = props;
 
-    const {updateTask} = taskStore
+    const {updateTask} = taskStore;
 
+    /**
+     * 更新spotbugs扫描数据
+     */
     const changSpotbugs = (value,type) =>{
         updateTask({[type]:value})
     }

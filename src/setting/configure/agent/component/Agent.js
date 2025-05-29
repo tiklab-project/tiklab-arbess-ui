@@ -20,7 +20,7 @@ import Button from "../../../../common/component/button/Button";
 import {disableFunction} from "tiklab-core-ui";
 import EnhanceModal from "../../../../common/component/modal/EnhanceModal";
 
-const pageSize = 15;
+const pageSize = 13;
 
 const Agent = (props) => {
 

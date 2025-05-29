@@ -13,9 +13,6 @@ import {
     LockOutlined,
     UnlockOutlined,
     MinusCircleOutlined,
-    CloseCircleOutlined,
-    CheckCircleOutlined,
-    ExclamationCircleOutlined
 } from "@ant-design/icons";
 import {observer} from "mobx-react";
 import historyStore from "../../history/store/HistoryStore";
@@ -30,6 +27,7 @@ import pip_xingxing from "../../../assets/images/svg/pip_xingxing.svg";
 import pip_xingxing_kong from "../../../assets/images/svg/pip_xingxing-kong.svg";
 import pip_more from "../../../assets/images/svg/pie_more.svg";
 import "./PipelineTable.scss";
+import {runStatusIcon} from "../../history/components/HistoryCommon";
 
 const PipelineTable = props =>{
 
@@ -200,21 +198,6 @@ const PipelineTable = props =>{
      */
     const goPipelineTask = (text,record) => props.history.push(`/pipeline/${record.id}/history`)
 
-    const renIcon = buildStatus => {
-        switch (buildStatus) {
-            case "error" :
-                return  <CloseCircleOutlined style={{color:"#FF0000"}}/>
-            case "success" :
-                return  <CheckCircleOutlined style={{color:"#0063FF"}}/>
-            case "halt":
-                return  <ExclamationCircleOutlined style={{color:"#222222"}}/>
-            case "run":
-                return  <Spin indicator={<LoadingOutlined style={{color:"#222222"}} spin />} />
-            case "wait":
-                return  <PlayCircleOutlined style={{color:"#222222"}}/>
-        }
-    }
-
     const columns = [
         {
             title: "流水线名称",
@@ -242,7 +225,7 @@ const PipelineTable = props =>{
                         { text || '无构建' }
                         { number &&
                             <span className='pipeline-number' onClick={() => goInstance(record)}># {number}
-                                <span className='pipeline-number-desc'>{renIcon(buildStatus)}</span>
+                                <span className='pipeline-number-desc'>{runStatusIcon(buildStatus)}</span>
                             </span>
                         }
                     </span>

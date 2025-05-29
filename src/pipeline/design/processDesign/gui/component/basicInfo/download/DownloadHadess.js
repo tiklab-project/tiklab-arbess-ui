@@ -11,7 +11,6 @@ import FormsInput from "../FormsInput";
 import FormsSelect from "../FormsSelect";
 import {Select} from "antd";
 
-
 const DownloadHadess = (props) => {
 
     return (
@@ -21,12 +20,6 @@ const DownloadHadess = (props) => {
                 name={"artifactName"}
                 label={"制品名称"}
                 placeholder={"制品名称"}
-                isRequire={true}
-            />
-            <FormsInput
-                name={"artifactType"}
-                label={"制品类型"}
-                placeholder={"制品类型"}
                 isRequire={true}
             />
             <FormsInput

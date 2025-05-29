@@ -13,20 +13,20 @@ import Page from "../../../../common/component/page/Page";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListAction from "../../../../common/component/list/ListAction";
 import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
-import scanStore from "../store/ScanStore";
-import ScanDetails from "./ScanDetails";
-import "./Scan.scss";
+import spotbugsScanStore from "../store/SpotbugsScanStore";
+import SpotbugsScanDetails from "./SpotbugsScanDetails";
+import "./SpotbugsScan.scss";
 
 const pageSize = 15;
 
-const Scan = (props) => {
+const SpotbugsScan = (props) => {
 
     const {match:{params}} = props;
 
-    const {spotbugsScan,deleteSpotbugs} = scanStore;
+    const {spotbugsScan,deleteSpotbugs} = spotbugsScanStore;
 
     //加载状态
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading,setIsLoading] = useState(false);
     //代码扫描数据
     const [scanData,setScanData] = useState({});
     const pageParam = {
@@ -39,6 +39,7 @@ const Scan = (props) => {
     const [detailObj,setDetailObj] = useState(null);
 
     useEffect(()=>{
+        setIsLoading(true)
         //获取代码扫描
         spotbugsScan({
             pipelineId:params.id,
@@ -65,7 +66,7 @@ const Scan = (props) => {
     const del = record => {
         deleteSpotbugs(record.id).then(res=>{
             if(res.code===0){
-                const current = deleteSuccessReturnCurrenPage(scanData.totalRecord,pageSize,scanParam.currentPage)
+                const current = deleteSuccessReturnCurrenPage(scanData.totalRecord,pageSize,scanData.currentPage)
                 changPage(current)
             }
         })
@@ -143,7 +144,7 @@ const Scan = (props) => {
 
     if(detailObj){
         return (
-            <ScanDetails
+            <SpotbugsScanDetails
                 detailObj={detailObj}
                 setDetailObj={setDetailObj}
             />
@@ -163,7 +164,8 @@ const Scan = (props) => {
                 <div className="arbess-home-limited">
                     <BreadCrumb
                         crumbs={[
-                            {title:'代码扫描'}
+                            {title:'代码扫描'},
+                            {title:'Java'}
                         ]}
                     />
                     <Spin spinning={isLoading}>
@@ -189,4 +191,4 @@ const Scan = (props) => {
     )
 }
 
-export default observer(Scan)
+export default observer(SpotbugsScan)

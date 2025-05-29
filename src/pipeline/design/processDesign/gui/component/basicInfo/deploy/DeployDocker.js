@@ -1,14 +1,15 @@
+/**
+ * @Description: docker部署
+ * @Author: gaomengyuan
+ * @Date:
+ * @LastEditors: gaomengyuan
+ * @LastEditTime: 2025/5/16
+ */
 import React from "react";
 import FormsMirror from "../FormsMirror";
 import FormsAuth from "../FormsAuth";
 import FormsInput from "../FormsInput";
 
-/**
- * docker部署
- * @param props
- * @returns {JSX.Element}
- * @constructor
- */
 const DeployDocker = props =>{
 
     return(

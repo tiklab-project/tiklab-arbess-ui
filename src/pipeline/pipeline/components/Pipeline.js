@@ -49,16 +49,16 @@ const Pipeline = props =>{
     const [pipPage,setPipPage] = useState({});
     //环境管理列表
     const [envList,setEnvList] = useState([]);
-    //分组管理列表
+    //应用管理列表
     const [groupList,setGroupList] = useState([]);
 
     useEffect(()=>{
-        // 获取环境和分组管理
+        // 获取环境和应用管理
         getEnvOrGroup()
     },[])
 
     /**
-     * 获取环境和分组管理
+     * 获取环境和应用管理
      */
     const getEnvOrGroup = () => {
         findEnvList().then(res=>{
@@ -213,7 +213,7 @@ const Pipeline = props =>{
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
                                 style={{width:150}}
-                                placeholder={"分组"}
+                                placeholder={"应用"}
                                 onChange={value=>screen(value,"groupId")}
                             >
                                 <Select.Option value={'all'} key={'all'}>全部</Select.Option>

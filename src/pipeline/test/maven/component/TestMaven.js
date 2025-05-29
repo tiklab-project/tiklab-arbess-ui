@@ -26,7 +26,7 @@ const TestMaven = props => {
     const {findMavenTestPage,deleteMavenTest} = mavenTestStore;
 
     //加载状态
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading,setIsLoading] = useState(false)
     //测试数据
     const [testData,setTestData] = useState({});
     const pageParam= {
@@ -41,6 +41,7 @@ const TestMaven = props => {
     const [mavenTestObj,setMavenTestObj] = useState(null);
 
     useEffect(()=>{
+        setIsLoading(true)
         // 获取测试列表
         findMavenTestPage({
             pipelineId:params.id,

@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Col, Row, Space, Table} from "antd";
+import {Col, Row, Space, Spin, Table, Tag} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
 import ListIcon from "../../../../common/component/list/ListIcon";
@@ -17,18 +17,19 @@ import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
 import K8sAddBtn from "./K8sAddBtn";
 import "../../../common/Common.scss";
 import k8sStore from "../store/K8sStore";
+import K8sDetail from "./K8sDetail";
 
-const pageSize = 15;
+const pageSize = 13;
 
 const K8s = props => {
 
-    const {findAuthHostK8sPage,deleteAuthHostK8s} = k8sStore;
+    const {findKubectlPage,deleteKubectl} = k8sStore;
 
     //k8s数据
     const [k8sData,setK8sData] = useState({});
     //k8s弹出框
     const [visible,setVisible] = useState(false);
-    //k8s弹出框数据
+    //k8s详情数据
     const [formValue,setFormValue] = useState(null);
     const pageParam = {
         pageSize:pageSize,
@@ -38,6 +39,10 @@ const K8s = props => {
     const [requestParams,setRequestParams] = useState({
         pageParam,
     });
+    //加载
+    const [spinning,setSpinning] = useState(false);
+    //k8s详情状态
+    const [detailVisible,setDetailVisible] = useState(false);
 
     useEffect(()=>{
         // 获取k8s
@@ -48,10 +53,13 @@ const K8s = props => {
      * 获取k8s
      */
     const findAuth = () => {
-        findAuthHostK8sPage(requestParams).then(r=>{
+        setSpinning(true)
+        findKubectlPage(requestParams).then(r=>{
             if(r.code===0){
                 setK8sData(r.data)
             }
+        }).finally(()=>{
+            setSpinning(false)
         })
     }
 
@@ -82,13 +90,20 @@ const K8s = props => {
      * @param record
      */
     const delK8s = (record) => {
-        deleteAuthHostK8s(record.hostId).then(r=>{
+        deleteKubectl(record.id).then(r=>{
             if(r.code===0){
-                findAuth()
                 const page = deleteSuccessReturnCurrenPage(k8sData.totalRecord,pageSize,requestParams.pageParam.currentPage)
                 changPage(page)
             }
         })
+    }
+
+    /**
+     * 详情
+     */
+    const goDetail = (record) => {
+        setFormValue(record);
+        setDetailVisible(true);
     }
 
     const column = [
@@ -96,11 +111,11 @@ const K8s = props => {
             title:"名称",
             dataIndex:"name",
             key:"name",
-            width:"18%",
+            width:"16%",
             ellipsis:true,
-            render:text => {
+            render:(text,record) => {
                 return (
-                    <span>
+                    <span className='k8s-table-name' onClick={()=>goDetail(record)}>
                         <ListIcon text={text}/>
                         <span>{text}</span>
                     </span>
@@ -108,32 +123,33 @@ const K8s = props => {
             }
         },
         {
-            title:"IP地址",
-            dataIndex: "ip",
-            key: "ip",
-            width:"15%",
+            title:"集群地址",
+            dataIndex: ['k8sVersion','serverAddress'],
+            key: "serverAddress",
+            width:"20%",
             ellipsis:true,
         },
         {
-            title:"端口",
-            dataIndex: "port",
-            key: "port",
-            width:"8%",
+            title:"集群状态",
+            dataIndex: "connect",
+            key: "connect",
+            width:"13%",
             ellipsis:true,
+            render: text=>text?<Tag color={'blue'}>正常</Tag>:<Tag color={'red'}>无法连接</Tag>
         },
         {
-            title:"认证类型",
-            dataIndex:"authType",
-            key:"authType",
-            width:"18%",
+            title:"集群节点数量",
+            dataIndex: "allNodes",
+            key: "allNodes",
+            width:"10%",
             ellipsis:true,
-            render: text => text===1?"username&password":"私钥"
+            render: text=> text?.length ? <span className='k8s-table-node'>{text.length}</span> : '--'
         },
         {
             title:"创建人",
             dataIndex:["user","nickname"],
             key:"user",
-            width:"13%",
+            width:"15%",
             ellipsis:true,
             render:(text,record) => {
                 return (
@@ -148,7 +164,7 @@ const K8s = props => {
             title:"创建时间",
             dataIndex:"createTime",
             key:"createTime",
-            width:"20%",
+            width:"18%",
             ellipsis:true,
         },
         {
@@ -168,6 +184,17 @@ const K8s = props => {
             }
         }
     ]
+
+    // if(detailVisible){
+    //     return (
+    //         <K8sDetail
+    //             visible={detailVisible}
+    //             setVisible={setDetailVisible}
+    //             formValue={formValue}
+    //             setFormValue={setFormValue}
+    //         />
+    //     )
+    // }
 
     return (
         <Row className="auth">
@@ -193,20 +220,28 @@ const K8s = props => {
                         findAuth={findAuth}
                     />
                 </BreadCrumb>
-                <div className="auth-content">
-                    <Table
-                        columns={column}
-                        dataSource={k8sData?.dataList || []}
-                        rowKey={record=>record.hostId}
-                        pagination={false}
-                        locale={{emptyText: <ListEmpty />}}
-                    />
-                    <Page
-                        currentPage={requestParams.pageParam.currentPage}
-                        changPage={changPage}
-                        page={k8sData}
-                    />
-                </div>
+                <Spin spinning={spinning}>
+                    <div className="auth-content">
+                        <Table
+                            columns={column}
+                            dataSource={k8sData?.dataList || []}
+                            rowKey={record=>record.id}
+                            pagination={false}
+                            locale={{emptyText: <ListEmpty />}}
+                        />
+                        <Page
+                            currentPage={requestParams.pageParam.currentPage}
+                            changPage={changPage}
+                            page={k8sData}
+                        />
+                    </div>
+                </Spin>
+                <K8sDetail
+                    visible={detailVisible}
+                    setVisible={setDetailVisible}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                />
             </Col>
         </Row>
     )

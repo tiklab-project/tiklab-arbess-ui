@@ -5,54 +5,63 @@ import {message} from "antd";
 class TestHuboStore {
 
     /**
-     * 获取testhubo测试空间
+     * 获取testhubo仓库
      * @param value
      * @returns {Promise<unknown>}
      */
     @action
-    findTestSpace = async value =>{
-        const param = new FormData()
-        param.append('authId',value)
-        const data = await Axios.post('/testOnAuthorize/findAllRepository',param)
-        if(data.code!==0){
-            message.error(data.msg)
-        }
-        return data
+    findTestHuboRepositoryList = async value =>{
+        return await Axios.post('/testHubo/message/findRepositoryList', value)
     }
 
     /**
-     * 获取testhubo测试环境
+     * 获取testhubo仓库
      * @param value
      * @returns {Promise<unknown>}
      */
     @action
-    findTestEnv = async value =>{
-        const param = new FormData()
-        param.append('authId',value.authId)
-        param.append('rpyId',value.rpyId)
-        param.append('env',value.env)
-        const data = await Axios.post('/testOnAuthorize/findAllEnv',param)
-        if(data.code!==0){
-            message.error(data.msg)
-        }
-        return data
+    findTestHuboRepositoryPage = async value =>{
+        return await Axios.post('/testHubo/message/findRepositoryPage', value)
     }
 
     /**
-     * 获取testhubo测试计划
+     * 获取testhubo计划
      * @param value
      * @returns {Promise<unknown>}
      */
     @action
-    findTestPlan = async value =>{
-        const param = new FormData()
-        param.append('authId',value.authId)
-        param.append('rpyId',value.rpyId)
-        const data = await Axios.post('/testOnAuthorize/findAllTestPlan',param)
-        if(data.code!==0){
-            message.error(data.msg)
-        }
-        return data
+    findTestHuboPlanList = async value =>{
+        return await Axios.post('/testHubo/message/findTestPlanList', value)
+    }
+
+    /**
+     * 获取testhubo计划
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findTestHuboPlanPage = async value =>{
+        return await Axios.post('/testHubo/message/findTestPlanPage', value)
+    }
+
+    /**
+     * 获取testhubo环境
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findTestHuboEnvList = async value =>{
+        return await Axios.post('/testHubo/message/findEnvList', value)
+    }
+
+    /**
+     * 获取testhubo环境
+     * @param value
+     * @returns {Promise<unknown>}
+     */
+    @action
+    findTestHuboEnvPage = async value =>{
+        return await Axios.post('/testHubo/message/findEnvPage', value)
     }
 
     /**
@@ -61,8 +70,8 @@ class TestHuboStore {
      * @returns {Promise<unknown>}
      */
     @action
-    findAllRelevance = async value =>{
-        const data = await Axios.post('/testOnRelevance/findAllRelevancePage',value)
+    findRelevancePage = async value =>{
+        const data = await Axios.post('/testOnRelevance/findRelevancePage',value)
         return data
     }
 

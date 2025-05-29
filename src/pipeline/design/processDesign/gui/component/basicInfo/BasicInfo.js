@@ -12,7 +12,7 @@ import {WhetherChange} from "../TaskCommon";
 import CodeGit from "./code/CodeGit";
 import CodeSvn from "./code/CodeSvn";
 import CodeThird from "./code/CodeThird";
-import ScanSonarQuebe from "./scan/ScanSonarQuebe";
+import ScanSonarQube from "./scan/ScanSonarQube";
 import ScanSpotbugs from "./scan/ScanSpotbugs";
 import TestMvnUnit from "./test/TestMvnUnit";
 import TestHubo from "./test/TestHubo";
@@ -44,10 +44,10 @@ import {
     script,
     upload_hadess,
     upload_ssh,
-    upload_nexus,
     download_hadess,
     download_ssh,
-    download_nexus, build_go,
+    build_go,
+    sourcefare,
 } from "../../../../../../common/utils/Constant";
 import ToolScript from "./tool/ToolScript";
 import UploadHadess from "./upload/UploadHadess";
@@ -55,6 +55,7 @@ import UploadSsh from "./upload/UploadSsh";
 import DownloadHadess from "./download/DownloadHadess";
 import DownloadSsh from "./download/DownloadSsh";
 import BuildGo from "./build/BuildGo";
+import ScanSourceFare from "./scan/ScanSourceFare";
 
 const BasicInfo = props => {
 
@@ -125,9 +126,11 @@ const BasicInfo = props => {
             case k8s:
                 return <DeployK8s {...props}/>
             case sonar:
-                return <ScanSonarQuebe {...props}/>
+                return <ScanSonarQube {...props}/>
             case spotbugs:
                 return <ScanSpotbugs {...props}/>
+            case sourcefare:
+                return <ScanSourceFare {...props} />
             case upload_hadess:
                 return <UploadHadess {...props}/>
             case upload_ssh:

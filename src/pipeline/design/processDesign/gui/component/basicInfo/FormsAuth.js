@@ -43,7 +43,7 @@ const FormsAuth = props =>{
     const {findAuthServerList} = serverStore;
     const {findAuthHostList} = hostStore;
     const {findHostGroupList} = hostGroupStore;
-    const {findAuthHostK8sList} = k8sStore;
+    const {findKubectlList} = k8sStore;
     const {updateTask, dataItem: {taskType = ''} = {}} = taskStore;
 
     //弹出框
@@ -120,7 +120,7 @@ const FormsAuth = props =>{
      * 获取K8s
      */
     const findK8sHost = () => {
-        findAuthHostK8sList({}).then(res=>{
+        findKubectlList({}).then(res=>{
             if(res.code===0){
                 setList(res.data)
             }
@@ -202,10 +202,11 @@ const FormsAuth = props =>{
             case liunx:
             case docker:
                 return item?.groupId ? item.groupId : item.hostId
-            case k8s:
             case upload_ssh:
             case download_ssh:
                 return item.hostId
+            case k8s:
+                return item.id
         }
     }
 
@@ -265,13 +266,14 @@ const FormsAuth = props =>{
             case pri_gitlab:
             case github:
                 return `${item.name}(${item.accessToken})`;
-            case k8s:
             case upload_ssh:
             case download_ssh:
                 return `${item.name}(${item.ip})`
             case liunx:
             case docker:
                 return item.groupName ? `${item.groupName}(主机组)` : `${item.name}(${item.ip})`;
+            case k8s:
+                return `${item.name}(${item.k8sVersion?.serverAddress})`
             default:
                 return '';
         }

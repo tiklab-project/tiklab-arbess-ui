@@ -132,7 +132,7 @@ const SettingHome = props => {
                     <div className='home-config-item' onClick={()=>goPath('grouping')}>
                         <div className='home-left'>
                             <div className='home-icon'><InsertRowBelowOutlined /></div>
-                            <div className='home-label'>分组</div>
+                            <div className='home-label'>应用</div>
                         </div>
                         <div className='home-info'>{count?.groupNumber || 0}</div>
                     </div>
@@ -150,13 +150,13 @@ const SettingHome = props => {
                         </div>
                         <div className='home-info'>{count?.hostNumber || 0}</div>
                     </div>
-                    <div className='home-config-item' onClick={()=>goPath('auth')}>
-                        <div className='home-left'>
-                            <div className='home-icon'><VerifiedOutlined /></div>
-                            <div className='home-label'>认证</div>
-                        </div>
-                        <div className='home-info'>{count?.authNumber || 0}</div>
-                    </div>
+                    {/*<div className='home-config-item' onClick={()=>goPath('auth')}>*/}
+                    {/*    <div className='home-left'>*/}
+                    {/*        <div className='home-icon'><VerifiedOutlined /></div>*/}
+                    {/*        <div className='home-label'>认证</div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className='home-info'>{count?.authNumber || 0}</div>*/}
+                    {/*</div>*/}
                     <div className='home-config-item' onClick={()=>goPath('tool')}>
                         <div className='home-left'>
                             <div className='home-icon'><ToolOutlined /></div>

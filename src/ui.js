@@ -41,7 +41,8 @@ const HistoryInstance=AsyncComponent(()=>import("./pipeline/history/components/H
 const Test=AsyncComponent(()=>import("./pipeline/test/navigator/Test"))
 const TestHubo=AsyncComponent(()=>import("./pipeline/test/testhubo/component/TestHubo"))
 const TestMaven=AsyncComponent(()=>import("./pipeline/test/maven/component/TestMaven"))
-const TestScan=AsyncComponent(()=>import("./pipeline/test/scan/component/Scan"))
+const TestSpotbugs=AsyncComponent(()=>import("./pipeline/test/spotbugs/component/SpotbugsScan"))
+const TestSonarQube=AsyncComponent(()=>import("./pipeline/test/sonarQube/component/SonarQubeScan"))
 const PipelineSetting=AsyncComponent(()=>import("./pipeline/setting/navigator/PipelineSetting"))
 const BasicInfo=AsyncComponent(()=>import("./pipeline/setting/basicInfo/BasicInfo"))
 
@@ -150,7 +151,8 @@ export {
     HistoryInstance,
 
     Test,
-    TestScan,
+    TestSpotbugs,
+    TestSonarQube,
     TestHubo,
     TestMaven,
 

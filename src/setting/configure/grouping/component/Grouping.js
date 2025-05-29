@@ -1,5 +1,5 @@
 /**
- * @Description: 流水线分组管理
+ * @Description: 流水线应用管理
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan
@@ -21,7 +21,7 @@ const Grouping = props =>{
 
     const {findGroupList,deleteGroup} = groupingStore
 
-    //分组管理列表
+    //应用管理列表
     const [groupList,setGroupList] = useState([])
     //弹出框状态
     const [visible,setVisible] = useState(false)
@@ -34,7 +34,7 @@ const Grouping = props =>{
     },[])
 
     /**
-     * 获取分组管理
+     * 获取应用管理
      */
     const findGrouping = () =>{
         findGroupList().then(res=>{
@@ -45,7 +45,7 @@ const Grouping = props =>{
     }
 
     /**
-     * 添加分组弹出框
+     * 添加应用弹出框
      */
     const createEnv = () => {
         setVisible(true)
@@ -53,7 +53,7 @@ const Grouping = props =>{
     }
 
     /**
-     * 编辑分组管理
+     * 编辑应用管理
      * @param record
      */
     const editAuth = record => {
@@ -62,7 +62,7 @@ const Grouping = props =>{
     }
 
     /**
-     * 删除分组管理
+     * 删除应用管理
      * @param record
      */
     const delAuth = record => {
@@ -140,12 +140,12 @@ const Grouping = props =>{
                 <div className='arbess-home-limited'>
                     <BreadCrumb
                         crumbs={[
-                            {title:'分组'}
+                            {title:'应用'}
                         ]}
                     >
                         <Button
                             type={'primary'}
-                            title={"添加分组"}
+                            title={"添加应用"}
                             onClick={createEnv}
                         />
                     </BreadCrumb>

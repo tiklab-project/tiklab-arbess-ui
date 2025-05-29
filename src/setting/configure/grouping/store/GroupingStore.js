@@ -5,7 +5,7 @@ import {message} from "antd";
 class GroupingStore {
 
     /**
-     * 添加分组管理
+     * 添加应用管理
      * @param values
      * @returns {Promise<*>}
      */
@@ -25,7 +25,7 @@ class GroupingStore {
     }
 
     /**
-     * 删除分组管理
+     * 删除应用管理
      * @param value
      * @returns {Promise<*>}
      */
@@ -43,7 +43,7 @@ class GroupingStore {
     }
 
     /**
-     * 更新分组管理
+     * 更新应用管理
      * @param value
      * @returns {Promise<*>}
      */
@@ -59,7 +59,7 @@ class GroupingStore {
     }
 
     /**
-     * 获取分组管理
+     * 获取应用管理
      * @returns {Promise<unknown>}
      */
     @action
@@ -68,7 +68,7 @@ class GroupingStore {
     }
 
     /**
-     * 获取分组管理
+     * 获取应用管理
      * @returns {Promise<unknown>}
      */
     @action

@@ -6,7 +6,7 @@
  * @LastEditTime: 2025/3/12
  */
 import React,{useState,useEffect} from "react";
-import {Table, Row, Col, Space} from "antd";
+import {Table, Row, Col, Space, Spin, Select} from "antd";
 import toolStore from "../store/ToolStore";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
@@ -14,31 +14,87 @@ import ListAction from "../../../../common/component/list/ListAction";
 import ListIcon from "../../../../common/component/list/ListIcon";
 import "../../../common/Common.scss";
 import ToolAddBtn from "./ToolAddBtn";
-import {scmTitle,scmImage} from "./ToolCommon";
+import {scmTitle, scmImage, scmList} from "./ToolCommon";
+import Page from "../../../../common/component/page/Page";
+import {deleteSuccessReturnCurrenPage} from "../../../../common/utils/Client";
+import SearchInput from "../../../../common/component/search/SearchInput";
+import SearchSelect from "../../../../common/component/search/SearchSelect";
+
+const pageSize = 13;
 
 const Tool = props =>{
 
-    const {findAllPipelineScm,deletePipelineScm} = toolStore
+    const {findPipelineScmPage,deletePipelineScm} = toolStore
 
+    const pageParam = {
+        pageSize:pageSize,
+        currentPage: 1,
+    }
     //弹出框
     const [visible,setVisible] = useState(false)
     //工具数据
     const [toolData,setToolData] = useState([])
     //表单数据
     const [formValue,setFormValue] = useState(null)
+    //请求数据
+    const [requestParams,setRequestParams] = useState({
+        pageParam,
+    });
+    //加载
+    const [spinning,setSpinning] = useState(false)
 
     useEffect(()=>{
         // 初始化工具配置
         findAllScm()
-    },[])
+    },[requestParams])
 
     /**
      * 获取所有工具配置
      */
     const findAllScm = () =>{
-        findAllPipelineScm().then(res=>{
-            if(res.code===0 && res.data){
+        setSpinning(true)
+        findPipelineScmPage(requestParams).then(res=>{
+            if(res.code===0){
                 setToolData(res.data)
+            }
+        }).finally(()=>{
+            setSpinning(false)
+        })
+    }
+
+    /**
+     * 模糊查询
+     */
+    const onSearch = (e) => {
+        setRequestParams({
+            ...requestParams,
+            pageParam,
+            name: e.target.value
+        })
+    }
+
+    /**
+     * 切换类型
+     * @param value
+     */
+    const changeTool = (value) => {
+        const {scmType,...rest} = requestParams;
+        setRequestParams({
+            ...rest,
+            pageParam,
+            ...(value !== 'all' && { scmType: value }),
+        })
+    }
+
+    /**
+     * 换页
+     */
+    const changPage = page=>{
+        setRequestParams({
+            ...requestParams,
+            pageParam: {
+                pageSize: pageSize,
+                currentPage: page
             }
         })
     }
@@ -50,7 +106,8 @@ const Tool = props =>{
     const delTool = record => {
         deletePipelineScm(record.scmId).then(res=>{
             if(res.code===0){
-                findAllScm()
+                const page = deleteSuccessReturnCurrenPage(toolData.totalRecord,pageSize,requestParams.pageParam.currentPage)
+                changPage(page)
             }
         })
     }
@@ -140,15 +197,40 @@ const Tool = props =>{
                             findAllScm={findAllScm}
                         />
                     </BreadCrumb>
-                    <div className="auth-content">
-                        <Table
-                            columns={columns}
-                            dataSource={toolData}
-                            rowKey={record=>record.scmId}
-                            pagination={false}
-                            locale={{emptyText: <ListEmpty />}}
+                    <div className="auth-select">
+                        <SearchInput
+                            placeholder="搜索名称"
+                            style={{ width: 190 }}
+                            onPressEnter={onSearch}
                         />
+                        <SearchSelect
+                            placeholder="工具类型"
+                            style={{width:150}}
+                            onChange={changeTool}
+                        >
+                            {
+                                ['all',...scmList].map(id=>(
+                                    <Select.Option value={id} key={id}>{id==='all'? '全部' : scmTitle[id]}</Select.Option>
+                                ))
+                            }
+                        </SearchSelect>
                     </div>
+                    <Spin spinning={spinning}>
+                        <div className="auth-content">
+                            <Table
+                                columns={columns}
+                                dataSource={toolData?.dataList || []}
+                                rowKey={record=>record.scmId}
+                                pagination={false}
+                                locale={{emptyText: <ListEmpty />}}
+                            />
+                            <Page
+                                currentPage={requestParams.pageParam.currentPage}
+                                changPage={changPage}
+                                page={toolData}
+                            />
+                        </div>
+                    </Spin>
                 </div>
             </Col>
         </Row>

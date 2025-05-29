@@ -31,7 +31,8 @@ import {
     HistoryInstance,
 
     Test,
-    TestScan,
+    TestSpotbugs,
+    TestSonarQube,
     TestHubo,
     TestMaven,
 
@@ -217,8 +218,13 @@ const routers=[
                         component: Test,
                         routes:[
                             {
-                                path:"/pipeline/:id/test/scan",
-                                component: TestScan,
+                                path:"/pipeline/:id/test/spotbugs",
+                                component: TestSpotbugs,
+                                exact: true,
+                            },
+                            {
+                                path:"/pipeline/:id/test/sonar",
+                                component: TestSonarQube,
                                 exact: true,
                             },
                             {

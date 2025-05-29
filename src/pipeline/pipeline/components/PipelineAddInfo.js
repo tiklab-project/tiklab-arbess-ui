@@ -40,11 +40,11 @@ const PipelineAddInfo = props =>{
     const [yUserList,setYUserList] = useState(baseInfo?.userList || []);
     //环境管理列表
     const [envList,setEnvList] = useState([]);
-    //分组管理列表
+    //应用管理列表
     const [groupList,setGroupList] = useState([]);
 
     useEffect(()=>{
-        // 获取环境和分组管理
+        // 获取环境和应用管理
         findEnvAndGroup();
         if(set){
             // 初始化权限
@@ -58,7 +58,7 @@ const PipelineAddInfo = props =>{
     },[]);
 
     /**
-     * 获取环境和分组管理
+     * 获取环境和应用管理
      */
     const findEnvAndGroup = () => {
         findEnvList().then(res=>{
@@ -284,8 +284,8 @@ const PipelineAddInfo = props =>{
                     <Form.Item label={"流水线名称"} name="name" rules={rules}>
                         <Input allowClear placeholder={'流水线名称'}/>
                     </Form.Item>
-                    <Form.Item label={"流水线分组"} name={['group','id']}>
-                        <Select placeholder={'流水线分组'}>
+                    <Form.Item label={"流水线应用"} name={['group','id']}>
+                        <Select placeholder={'流水线应用'}>
                             {
                                 groupList && groupList.map(item=>(
                                     <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>
@@ -323,8 +323,8 @@ const PipelineAddInfo = props =>{
                 <Form.Item label={"流水线名称"} name="name" rules={rules}>
                     <Input allowClear style={{width:'50%'}} placeholder={'流水线名称'}/>
                 </Form.Item>
-                <Form.Item label={"流水线分组"} name={['group','id']}>
-                    <Select style={{width:'50%'}} placeholder={'流水线分组'}>
+                <Form.Item label={"流水线应用"} name={['group','id']}>
+                    <Select style={{width:'50%'}} placeholder={'流水线应用'}>
                         {
                             groupList && groupList.map(item=>(
                                 <Select.Option value={item.id} key={item.id}>{item.groupName}</Select.Option>

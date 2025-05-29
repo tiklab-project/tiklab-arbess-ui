@@ -1,0 +1,57 @@
+.sonarquebe{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  .sonarquebe-table{
+    padding-top: var(--tiklab-padding-item);
+    .data-item-name{
+      font-weight: var(--tiklab-font-weight-bold);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      max-width: 95%;
+      display: inline-block;
+      vertical-align: middle;
+      &:hover{
+        cursor: pointer;
+        color: var(--tiklab-blue);
+      }
+    }
+    .data-item-count{
+      display: flex;
+      align-items: center;
+      padding-top: 5px;
+      color: var(--tiklab-gray-500);
+      font-size: 13px;
+      .data-item-pass{
+        max-width: 25%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+      }
+      .data-item-fail{
+        max-width: 25%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+      }
+      .count-key{
+        padding-right: 5px;
+      }
+    }
+    .fail-text{
+      color: #f06f6f;
+      padding-left: 5px;
+    }
+    .success-text{
+      color: var(--tiklab-blue);
+      padding-left: 5px;
+    }
+    .warn-text{
+      padding-left: 5px;
+    }
+  }
+}

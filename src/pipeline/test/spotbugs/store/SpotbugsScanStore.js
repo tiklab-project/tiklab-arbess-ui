@@ -1,7 +1,7 @@
 import {action} from "mobx";
 import {Axios} from "tiklab-core-ui";
 
-export class ScanStore {
+export class SpotbugsScanStore {
 
     /**
      * 查询代码扫描
@@ -42,4 +42,4 @@ export class ScanStore {
 
 }
 
-export default new ScanStore();
+export default new SpotbugsScanStore();

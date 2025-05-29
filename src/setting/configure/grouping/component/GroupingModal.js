@@ -1,5 +1,5 @@
 /**
- * @Description: 流水线分组管理添加编辑弹出框
+ * @Description: 流水线应用管理添加编辑弹出框
  * @Author: gaomengyuan
  * @Date:
  * @LastEditors: gaomengyuan

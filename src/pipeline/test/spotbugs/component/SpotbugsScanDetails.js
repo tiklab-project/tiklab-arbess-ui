@@ -9,14 +9,14 @@ import React,{useState,useEffect} from "react";
 import {Table,Row,Col} from "antd";
 import BreadCrumb from "../../../../common/component/breadcrumb/BreadCrumb";
 import ListEmpty from "../../../../common/component/list/ListEmpty";
-import scanStore from "../store/ScanStore";
-import "./Scan.scss";
+import spotbugsScanStore from "../store/SpotbugsScanStore";
+import "./SpotbugsScan.scss";
 
-const ScanDetails = (props) => {
+const SpotbugsScanDetails = (props) => {
 
     const {detailObj,setDetailObj} = props
 
-    const {findBugs} = scanStore;
+    const {findBugs} = spotbugsScanStore;
 
     //扫描bug列表
     const [bugsList,setBugsList] = useState([]);
@@ -79,7 +79,8 @@ const ScanDetails = (props) => {
                     <BreadCrumb
                         crumbs={[
                             {title:'代码扫描',click:()=>backScan()},
-                            {title:detailObj?.id}
+                            {title:'Java'},
+                            {title: detailObj?.id},
                         ]}
                     />
                     <div className="scan-overview">
@@ -134,4 +135,4 @@ const ScanDetails = (props) => {
     )
 }
 
-export default ScanDetails
+export default SpotbugsScanDetails
